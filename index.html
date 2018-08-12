@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>Vue 测试实例</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="http://101.132.125.165:8081/arcgis_js_api/library/4.7/esri/css/main.css" />
     <script src="js/vue.js"></script>
+    <script src="http://101.132.125.165:8081/arcgis_js_api/library/4.7/init.js"></script>
 </head>
 <body>
-<h1>静夜思</h1>
-<p>窗前明月光，</p>
-<p>疑是地上霜。</p>
-<p>举头望明月，</p>
-<p>低头思故乡。</p>
+<div id="app">
+    <div class="left">
+        <p>{{ basemap }}</p>
+        <a v-bind:href="message"><p>{{ message }}</p></a>
+        <input v-model="message"><br>
+        <button v-on:click="reverseMessage">反转字符串</button><br>
+        {{ ok ? 'YES' : 'NO' }}<br>
+        <div v-bind:id="'list-' + id">菜鸟教程</div>
+        <label for="r1">修改颜色</label><input type="checkbox" v-model="class1" id="r1"><br>
+        <label for="r1">Yes or No</label><input type="checkbox" v-model="ok" id="r2"><br>
+        <label for="r1">可见不可见</label><input type="checkbox" v-model="seen" id="r3"><br>
+        <label for="r1">卫星</label><input type="checkbox" v-model="mapType" id="r4">
+        <br><br>
+        <div v-bind:class="{'class1': class1}">
+            directiva v-bind:class
+        </div>
+        <p v-if="seen">现在你看到我了</p>
+        <ul>
+            <li v-for="food in foodlist">{{food.name}}：￥{{food.discount?food.price * food.discount:food.price}}</li>
+        </ul>
+    </div>
+    <div id = "map" class="right"></div>
+</div>
+<script src="js/main.js" ></script>
 </body>
 </html>
