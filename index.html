@@ -20,8 +20,17 @@
         <label for="r1">修改颜色</label><input type="checkbox" v-model="class1" id="r1"><br>
         <label for="r1">Yes or No</label><input type="checkbox" v-model="ok" id="r2"><br>
         <label for="r1">可见不可见</label><input type="checkbox" v-model="seen" id="r3"><br>
-        <label for="r1">卫星</label><input type="checkbox" v-model="mapType" id="r4">
-        <br><br>
+        <label>
+            男
+            <input v-model="sex" value="male" type="radio">
+        </label>
+        <label>
+            女
+            <input v-model="sex" value="female" type="radio">
+        </label>
+        <br>
+        {{sex}}
+        <br>
         <div v-bind:class="{'class1': class1}">
             directiva v-bind:class
         </div>

@@ -25,21 +25,11 @@ require(["esri/Map", "esri/views/MapView", "dojo/domReady!"], function(Map, MapV
             message: 'RUNOOB',
             id : 1,
             seen: true,
-            mapType: false,
-            basemap: this.mapType?'satellite':'streets'
+            sex: 'female'
         },
         methods: {
             reverseMessage: function () {
                 this.message = this.message.split('').reverse().join('')
-            },
-            mouted:function(){
-                var myMap = new Map({
-                    basemap: this.basemap
-                });
-                var view = new MapView({
-                    container: 'map',
-                    map: myMap
-                });
             }
         }
     });
