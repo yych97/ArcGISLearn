@@ -11,10 +11,9 @@
 <body>
 <div id="app">
     <div class="left">
-        <p>{{ basemap }}</p>
         <a v-bind:href="message"><p>{{ message }}</p></a>
         <input v-model="message"><br>
-        <button v-on:click="reverseMessage">反转字符串</button><br>
+        <button v-on:click="reverseMessage">点击跳转到该网页</button><br>
         {{ ok ? 'YES' : 'NO' }}<br>
         <div v-bind:id="'list-' + id">菜鸟教程</div>
         <label for="r1">修改颜色</label><input type="checkbox" v-model="class1" id="r1"><br>
@@ -38,6 +37,14 @@
         <ul>
             <li v-for="food in foodlist">{{food.name}}：￥{{food.discount?food.price * food.discount:food.price}}</li>
         </ul>
+        <div>你来自哪里？</div>
+        <select v-model="dest" multiple>
+            <option value="1">松江</option>
+            <option value="2">青浦</option>
+        </select>{{dest}}
+        <div v-if="role == 'admin' || role == 'super_admin'">管理员你好</div>
+        <div v-else-if="role == 'hr'">待查看简历列表<br>...</div>
+        <div v-else>你没有权限访问此页面</div>
     </div>
     <div id = "map" class="right"></div>
 </div>

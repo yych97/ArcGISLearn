@@ -25,12 +25,21 @@ require(["esri/Map", "esri/views/MapView", "dojo/domReady!"], function(Map, MapV
             message: 'RUNOOB',
             id : 1,
             seen: true,
-            sex: 'female'
+            sex: 'female',
+            dest: [],
+            role: 'hr'
         },
         methods: {
             reverseMessage: function () {
-                this.message = this.message.split('').reverse().join('')
+                window.location.href = this.message;
             }
         }
     });
+    var map = new Map({
+        basemap: "streets"
+    })
+    var mapview = new MapView({
+        map: map,
+        container: "map"
+    })
 });
