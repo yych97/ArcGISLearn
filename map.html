@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>map</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://101.132.125.165:8081/arcgis_js_api/library/4.7/esri/css/main.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="http://101.132.125.165:8081/arcgis_js_api/library/4.7/init.js"></script>
+</head>
+<body style="height: 100%">
+<nav class="navbar navbar-default" role="navigation" style="height: 5%; margin-bottom: 1px">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">菜鸟教程</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">iOS</a></li>
+                <li><a href="#">SVN</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Java
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">jmeter</a></li>
+                        <li><a href="#">EJB</a></li>
+                        <li><a href="#">Jasper Report</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">分离的链接</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">另一个分离的链接</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fiuled" id="map" style="height: 95%"></div>
+<script>
+    require(["esri/Map", "esri/views/MapView", "dojo/domReady!"], function(Map, MapView) {
+        var map = new Map({
+            basemap: "streets"
+        })
+        var mapview = new MapView({
+            map: map,
+            container: "map"
+        })
+    });
+</script>
+</body>
+</html>
