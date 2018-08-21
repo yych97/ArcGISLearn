@@ -1,8 +1,21 @@
+/*class样式*/
 html{
     height: 100%;
 }
 body{
     height: 100%;
+}
+.container-fluid {
+    padding-right: 15px;
+}
+.container-map {
+    padding-right: 0px;
+    height: 94.9%;
+    width: 100%
+}
+.row-map{
+    height: 100%;
+    width: 100%
 }
 body > nav{
     height: 5%;
@@ -11,12 +24,18 @@ body > nav{
     margin-bottom: 0.1%;
     background-color: #ffd42b
 }
-/*#map{*/
-    /*height: 94.9%;*/
-/*}*/
 .navbar-default .navbar-nav>li>a {
     color: #000000;
 }
 .navbar-default .navbar-brand {
     color: #000000;
+}
+
+/*id样式*/
+#map{
+    height: 100%
+}
+#app{
+    height: 100%;
+    overflow: scroll
 }

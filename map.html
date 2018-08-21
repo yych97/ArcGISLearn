@@ -9,16 +9,18 @@
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="js/vue.js"></script>
     <script src="http://101.132.125.165:8081/arcgis_js_api/library/4.7/init.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
+    <div class="container-fluid" id="app-nav">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">诗意中国</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
+                <!--图层控制下拉框-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         图层控制
@@ -27,32 +29,39 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#">初唐
-                                <input name="layers" type="checkbox" class="pull-right" value="初唐">
+                                <input name="time-layers" type="checkbox" class="pull-right" value="初唐">
                             </a>
                         </li>
                         <li>
                             <a href="#">盛唐
-                                <input name="layers" type="checkbox" class="pull-right" value="盛唐">
+                                <input name="time-layers" type="checkbox" class="pull-right" value="盛唐" checked>
                             </a>
                         </li>
                         <li>
                             <a href="#">中唐
-                                <input name="layers" type="checkbox" class="pull-right" value="中唐">
+                                <input name="time-layers" type="checkbox" class="pull-right" value="中唐">
                             </a>
                         </li>
                         <li>
                             <a href="#">晚唐
-                                <input name="layers" type="checkbox" class="pull-right" value="晚唐">
+                                <input name="time-layers" type="checkbox" class="pull-right" value="晚唐">
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#">全部
-                                <input name="all" type="checkbox" class="pull-right" value="全部">
+                            <a href="#">普通地图
+                                <input name="type-layers" type="checkbox" class="pull-right" value="路网图">
+                            </a>
+                            <a href="#">卫星图
+                                <input name="type-layers" type="checkbox" class="pull-right" value="卫星图">
+                            </a>
+                            <a href="#">地形图
+                                <input name="type-layers" type="checkbox" class="pull-right" value="地形图" checked>
                             </a>
                         </li>
                     </ul>
                 </li>
+                <!--地点下拉框-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         地点
@@ -65,6 +74,42 @@
                         <li><a data-toggle="modal" data-target="#places" href="">全部地点</a></li>
                     </ul>
                 </li>
+                <!--时期下拉框-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        时期
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">初唐
+                                <input name="time" type="checkbox" class="pull-right" value="初唐">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">盛唐
+                                <input name="time" type="checkbox" class="pull-right" value="盛唐">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">中唐
+                                <input name="time" type="checkbox" class="pull-right" value="中唐">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">晚唐
+                                <input name="time" type="checkbox" class="pull-right" value="晚唐">
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">全部
+                                <input name="all" type="checkbox" class="pull-right" value="全部">
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--作者下拉框-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         作者
@@ -78,6 +123,7 @@
                         <li><a data-toggle="modal" data-target="#authors" href="">全部作者</a></li>
                     </ul>
                 </li>
+                <!--分类下拉框-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         分类
@@ -94,12 +140,17 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" v-if="visitor.logined == false">
                 <li>
                     <a data-toggle="modal" data-target="#register" href="">注册</a>
                 </li>
                 <li>
                     <a data-toggle="modal" data-target="#login" href="">登录</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" v-else>
+                <li>
+                    <a href="">Welcome {{visitor.username}}!</a>
                 </li>
             </ul>
             <!-- 注册窗口 -->
@@ -214,75 +265,62 @@
         </div>
     </div>
 </nav>
-<div class="row" style="height: 94.9%; width: 100%">
-    <div id="map" class="col-md-9" style="height: 100%"></div>
-    <div class="col-md-3" style="height: 100%; overflow: scroll">
-        <div class="panel">
-            <div class="page-header">作者简介</div>
-            <div>
-                <span><strong>李白</strong></span>
-            </div>
-            <div class="thumbnail">
-                <ul class="list">
-                    <li><span>别称： </span>李十二、李翰林 、李供奉、李拾遗、诗仙</li>
-                    <li><span>字号： </span>字太白、号青莲居士，又号谪仙人</li>
-                    <li><span>出生日期： </span>701年（长安元年）</li>
-                    <li><span>逝世日期： </span>762年（宝应元年）</li>
-                    <li><span>出生地： </span>绵州昌隆县（今四川省江油市）</li>
-                </ul>
-                <a class="btn-default" href="">加入收藏</a>
-            </div>
-            <!-- end .product-info -->
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
-                <li><a data-toggle="tab" href="#reviews-tab">评论</a></li>
-            </ul>
-            <!-- end .product-info-tabs -->
-            <div class="tab-content">
-                <!-- #description-tab -->
-                <div id="description-tab" class="tab-pane fade in active">
-                    <p>是唐代伟大的浪漫主义诗人，被后人誉为“诗仙”。与杜甫并称为“李杜”，为了与另两位诗人李商隐与杜牧即“小李杜”区别，杜甫与李白又合称“大李杜”。其人爽朗大方，爱饮酒作诗，喜交友。</p>
-                    <p>李白有《李太白集》传世，诗作中多以醉时写的，代表作有《望庐山瀑布》、《行路难》、《蜀道难》、《将进酒》、《越女词》、《早发白帝城》等多首。</p>
-                    <p>李白所作词赋，宋人已有传记（如文莹《湘山野录》卷上），就其开创意义及艺术成就而言，“李白词”享有极为崇高的地位。 </p>
-                    <p><a href="https://baike.so.com/doc/5340576-5576019.html">更多信息</a></p>
+<div class="container container-map">
+    <div class="row row-map">
+        <div id="map" class="col-md-9"></div>
+        <div id="app" class="col-md-3">
+            <div class="panel">
+                <div class="page-header">作者简介</div>
+                <div>
+                    <span><strong>{{author.name}}</strong></span>
                 </div>
-                <!-- #reviews-tab -->
-                <div id="reviews-tab" class="tab-pane fade">
-                    <div class="review clearfix">
-                        <ul class="meta list-unstyled">
-                            <li class="name">shq</li>
-                        </ul>
-                        <!-- end .meta -->
-                        <div class="content">
-                            <div>
-                                <p>唐天宝年间，汪伦听说大诗人李白旅居南陵叔父李冰阳家，便写信邀请李白到家中做客。信上说：“先生好游乎？此处有十里桃花。先生好饮乎？此处有万家酒店。”李白素好饮酒，又闻有如此美景，欣然应邀而至，却未见信中所言盛景。汪伦盛情款待，搬出用桃花潭水酿成的美酒与李白同饮，并笑着告诉李白：“桃花者，十里外潭水名也，并无十里桃花。万家者，开酒店的主人姓万，并非有万家酒店。”李白听后大笑不止，并不以为被愚弄，反而被汪伦的盛情所感动，适逢春风桃李花开日，群山无处不飞红，加之潭水深碧，清澈晶莹，翠峦倒映，汪伦留李白连住数日，每日以美酒相待，别时送名马八匹、官锦十端。李白在东园古渡乘舟欲往万村，登旱路去庐山，汪伦在古岸阁上设宴为李白饯行，并拍手踏脚，歌唱民间的《踏歌》相送。李白深深感激汪伦的盛意，作《赠汪伦》诗一首： 李白乘舟将欲行，忽闻岸上踏歌声。 桃花潭水深千尺，不及汪伦送我情。</p>
+                <div class="thumbnail">
+                    <ul class="list">
+                        <li><span>别称： </span>{{author.biechen}}</li>
+                        <li><span>字号： </span>{{author.hao}}</li>
+                        <li><span>出生日期： </span>{{author.birth}}</li>
+                        <li><span>逝世日期： </span>{{author.death}}</li>
+                        <li><span>出生地： </span>{{author.home}}</li>
+                    </ul>
+                    <button type="button" class="btn-warning" href="">加入收藏</button>
+                </div>
+                <!-- end .product-info -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
+                    <li><a data-toggle="tab" href="#reviews-tab">评论</a></li>
+                </ul>
+                <!-- end .product-info-tabs -->
+                <div class="tab-content">
+                    <!-- #description-tab -->
+                    <div id="description-tab" class="tab-pane fade in active">
+                        <p v-for="description in author.descriptions">{{description}}</p>
+                        <p><a v-bind:href="author.baikelink">更多信息</a></p>
+                    </div>
+                    <!-- #reviews-tab -->
+                    <div id="reviews-tab" class="tab-pane fade">
+                        <div class="review clearfix" v-for="comment in author.comments">
+                            <ul class="meta list-unstyled">
+                                <li class="name">{{comment.username}}</li>
+                            </ul>
+                            <!-- end .meta -->
+                            <div class="content">
+                                <div>
+                                    <p>{{comment.content}}</p>
+                                </div>
                             </div>
+                            <!-- end .content -->
                         </div>
-                        <!-- end .content -->
-                    </div>
-                    <!-- end .review -->
-                    <div class="review review-tab clearfix">
-                        <ul class="meta list-unstyled">
-                            <li class="name">lyy</li>
-                        </ul>
-                        <!-- end .meta -->
-                        <div class="content">
-                            <div>
-                                <p>李白离开东鲁，便从任城乘船，沿运河到了润州。由于急着去会稽会见元丹丘，也就没有多滞留。到了会稽，李白首先去凭吊过世的贺知章。不久，孔巢父也到了会稽，于是李白和元丹丘、孔巢父畅游禹穴、兰亭等历史遗迹，泛舟镜湖，往来剡溪等处，当然也少不了在繁华都市会稽流连忘返。</p>
-                            </div>
+                        <!-- end .review -->
+                        <div class="add-review">
+                            <form>
+                                <div class="form-group light-inputs">
+                                    <textarea rows="3" placeholder="您想要添加的信息 ..." required></textarea>
+                                </div>
+                                <button type="submit" class="button">提交</button>
+                            </form>
                         </div>
-                        <!-- end .content -->
+                        <!-- end .add-review -->
                     </div>
-                    <!-- end .review -->
-                    <div class="add-review">
-                        <form>
-                            <div class="form-group light-inputs">
-                                <textarea rows="3" placeholder="您想要添加的信息 ..." required></textarea>
-                            </div>
-                            <button type="submit" class="button">提交</button>
-                        </form>
-                    </div>
-                    <!-- end .add-review -->
                 </div>
             </div>
         </div>
@@ -290,4 +328,5 @@
 </div>
 </body>
 <script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/vue-map.js"></script>
 </html>
