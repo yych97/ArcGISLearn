@@ -10,318 +10,269 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script src="js/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="http://101.132.125.165:8081/arcgis_js_api/library/4.7/init.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid" id="app-nav">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">诗意中国</a>
-        </div>
-        <div>
-            <ul class="nav navbar-nav">
-                <!--图层控制下拉框-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        图层控制
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">初唐
-                                <input name="time-layers" type="checkbox" class="pull-right" value="初唐">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">盛唐
-                                <input name="time-layers" type="checkbox" class="pull-right" value="盛唐" checked>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">中唐
-                                <input name="time-layers" type="checkbox" class="pull-right" value="中唐">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">晚唐
-                                <input name="time-layers" type="checkbox" class="pull-right" value="晚唐">
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">普通地图
-                                <input name="type-layers" type="checkbox" class="pull-right" value="路网图">
-                            </a>
-                            <a href="#">卫星图
-                                <input name="type-layers" type="checkbox" class="pull-right" value="卫星图">
-                            </a>
-                            <a href="#">地形图
-                                <input name="type-layers" type="checkbox" class="pull-right" value="地形图" checked>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!--地点下拉框-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        地点
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">长安</a></li>
-                        <li><a href="#">洛阳</a></li>
-                        <li class="divider"></li>
-                        <li><a data-toggle="modal" data-target="#places" href="">全部地点</a></li>
-                    </ul>
-                </li>
-                <!--时期下拉框-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        时期
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">初唐
-                                <input name="time" type="checkbox" class="pull-right" value="初唐">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">盛唐
-                                <input name="time" type="checkbox" class="pull-right" value="盛唐">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">中唐
-                                <input name="time" type="checkbox" class="pull-right" value="中唐">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">晚唐
-                                <input name="time" type="checkbox" class="pull-right" value="晚唐">
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">全部
-                                <input name="all" type="checkbox" class="pull-right" value="全部">
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!--作者下拉框-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        作者
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">李白</a></li>
-                        <li><a href="#">白居易</a></li>
-                        <li><a href="#">杜甫</a></li>
-                        <li class="divider"></li>
-                        <li><a data-toggle="modal" data-target="#authors" href="">全部作者</a></li>
-                    </ul>
-                </li>
-                <!--分类下拉框-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        分类
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"></a></li>
-                        <li><a href="#">诗名</a></li>
-                        <li><a href="#">Jasper Report</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">分离的链接</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">另一个分离的链接</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" v-if="visitor.logined == false">
-                <li>
-                    <a data-toggle="modal" data-target="#register" href="">注册</a>
-                </li>
-                <li>
-                    <a data-toggle="modal" data-target="#login" href="">登录</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" v-else>
-                <li>
-                    <a href="">Welcome {{visitor.username}}!</a>
-                </li>
-            </ul>
-            <!-- 注册窗口 -->
-            <div id="register" class="modal fade" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-title">
-                            <h1 class="text-center">注册</h1>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-group" action="">
-                                <div class="form-group">
-                                    <label for="">用户名</label>
-                                    <input class="form-control" type="text" placeholder="6-15位字母或数字">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">密码</label>
-                                    <input class="form-control" type="password" placeholder="至少6位字母或数字">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">再次输入密码</label>
-                                    <input class="form-control" type="password" placeholder="至少6位字母或数字">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">邮箱</label>
-                                    <input class="form-control" type="email" placeholder="例如:123@123.com">
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-primary" type="submit">提交</button>
-                                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
-                                </div>
-                                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+<div id="app">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">诗意中国</a>
             </div>
-            <!-- 登录窗口 -->
-            <div id="login" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-title">
-                            <h1 class="text-center">登录</h1>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-group" action="">
-                                <div class="form-group">
-                                    <label for="">用户名</label>
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">密码</label>
-                                    <input class="form-control" type="password" placeholder="">
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-primary" type="submit">登录</button>
-                                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
-                                </div>
-                                <a href="" data-toggle="modal" data-dismiss="modal"
-                                   data-target="#register">还没有账号？点我注册</a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 地点窗口 -->
-            <div id="places" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-title">
-                            <h2 class="text-center">全部地点</h2>
-                        </div>
-                        <div class="modal-body">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 作者窗口 -->
-            <div id="authors" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-title">
-                            <h2 class="text-center">全部作者</h2>
-                        </div>
-                        <div class="modal-body">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-<div class="container container-map">
-    <div class="row row-map">
-        <div id="map" class="col-md-9"></div>
-        <div id="app" class="col-md-3">
-            <div class="panel">
-                <div class="page-header">作者简介</div>
-                <div>
-                    <span><strong>{{author.name}}</strong></span>
-                </div>
-                <div class="thumbnail">
-                    <ul class="list">
-                        <li><span>别称： </span>{{author.biechen}}</li>
-                        <li><span>字号： </span>{{author.hao}}</li>
-                        <li><span>出生日期： </span>{{author.birth}}</li>
-                        <li><span>逝世日期： </span>{{author.death}}</li>
-                        <li><span>出生地： </span>{{author.home}}</li>
-                    </ul>
-                    <button type="button" class="btn-warning" href="">加入收藏</button>
-                </div>
-                <!-- end .product-info -->
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
-                    <li><a data-toggle="tab" href="#reviews-tab">评论</a></li>
+            <div>
+                <ul class="nav navbar-nav">
+                    <!--图层控制下拉框-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            图层控制
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">初唐
+                                    <input name="time-layers" type="checkbox" class="pull-right" value="初唐">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">盛唐
+                                    <input name="time-layers" type="checkbox" class="pull-right" value="盛唐" checked>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">中唐
+                                    <input name="time-layers" type="checkbox" class="pull-right" value="中唐">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">晚唐
+                                    <input name="time-layers" type="checkbox" class="pull-right" value="晚唐">
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">普通地图
+                                    <input name="type-layers" type="checkbox" class="pull-right" value="路网图">
+                                </a>
+                                <a href="#">卫星图
+                                    <input name="type-layers" type="checkbox" class="pull-right" value="卫星图">
+                                </a>
+                                <a href="#">地形图
+                                    <input name="type-layers" type="checkbox" class="pull-right" value="地形图" checked>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--时期下拉框-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            时期
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">初唐
+                                    <input name="time" type="checkbox" class="pull-right" value="初唐">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">盛唐
+                                    <input name="time" type="checkbox" class="pull-right" value="盛唐">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">中唐
+                                    <input name="time" type="checkbox" class="pull-right" value="中唐">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">晚唐
+                                    <input name="time" type="checkbox" class="pull-right" value="晚唐">
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">全部
+                                    <input name="all" type="checkbox" class="pull-right" value="全部">
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--地点下拉框-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            地点
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">长安</a></li>
+                            <li><a href="#">洛阳</a></li>
+                            <li class="divider"></li>
+                            <li><a data-toggle="modal" data-target="#places" href="">全部地点</a></li>
+                        </ul>
+                    </li>
+                    <!--作者下拉框-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            作者
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><router-link to="/author/libai" href="#">李白</router-link></li>
+                            <li><router-link to="/author/baijuyi" href="#">白居易</router-link></li>
+                            <li><router-link to="/author/dufu" href="#">杜甫</router-link></li>
+                            <li class="divider"></li>
+                            <li><a data-toggle="modal" data-target="#authors" href="">全部作者</a></li>
+                        </ul>
+                    </li>
+                    <!--分类下拉框-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            分类
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"></a></li>
+                            <li><a href="#">诗名</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
                 </ul>
-                <!-- end .product-info-tabs -->
-                <div class="tab-content">
-                    <!-- #description-tab -->
-                    <div id="description-tab" class="tab-pane fade in active">
-                        <p v-for="description in author.descriptions">{{description}}</p>
-                        <p><a v-bind:href="author.baikelink">更多信息</a></p>
-                    </div>
-                    <!-- #reviews-tab -->
-                    <div id="reviews-tab" class="tab-pane fade">
-                        <div class="review clearfix" v-for="comment in author.comments">
-                            <ul class="meta list-unstyled">
-                                <li class="name">{{comment.username}}</li>
-                            </ul>
-                            <!-- end .meta -->
-                            <div class="content">
-                                <div>
-                                    <p>{{comment.content}}</p>
-                                </div>
+                <ul class="nav navbar-nav navbar-right" v-if="visitor.logined == false">
+                    <li>
+                        <a data-toggle="modal" data-target="#register" href="">注册</a>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" data-target="#login" href="">登录</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" v-else>
+                    <li>
+                        <a href="">Welcome {{visitor.username}}!</a>
+                    </li>
+                </ul>
+                <!-- 注册窗口 -->
+                <div id="register" class="modal fade" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
                             </div>
-                            <!-- end .content -->
+                            <div class="modal-title">
+                                <h1 class="text-center">注册</h1>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-group" action="">
+                                    <div class="form-group">
+                                        <label for="">用户名</label>
+                                        <input class="form-control" type="text" placeholder="6-15位字母或数字">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">密码</label>
+                                        <input class="form-control" type="password" placeholder="至少6位字母或数字">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">再次输入密码</label>
+                                        <input class="form-control" type="password" placeholder="至少6位字母或数字">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">邮箱</label>
+                                        <input class="form-control" type="email" placeholder="例如:123@123.com">
+                                    </div>
+                                    <div class="text-right">
+                                        <button class="btn btn-primary" type="submit">提交</button>
+                                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                                    </div>
+                                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
+                                </form>
+                            </div>
                         </div>
-                        <!-- end .review -->
-                        <div class="add-review">
-                            <form>
-                                <div class="form-group light-inputs">
-                                    <textarea rows="3" placeholder="您想要添加的信息 ..." required></textarea>
-                                </div>
-                                <button type="submit" class="button">提交</button>
-                            </form>
-                        </div>
-                        <!-- end .add-review -->
                     </div>
                 </div>
+                <!-- 登录窗口 -->
+                <div id="login" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-title">
+                                <h1 class="text-center">登录</h1>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-group" action="">
+                                    <div class="form-group">
+                                        <label for="">用户名</label>
+                                        <input class="form-control" type="text" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">密码</label>
+                                        <input class="form-control" type="password" placeholder="">
+                                    </div>
+                                    <div class="text-right">
+                                        <button class="btn btn-primary" type="submit">登录</button>
+                                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                                    </div>
+                                    <a href="" data-toggle="modal" data-dismiss="modal"
+                                       data-target="#register">还没有账号？点我注册</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 地点窗口 -->
+                <div id="places" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-title">
+                                <h2 class="text-center">全部地点</h2>
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 作者窗口 -->
+                <div id="authors" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-title">
+                                <h2 class="text-center">全部作者</h2>
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container container-map">
+        <div class="row row-map">
+            <div id="map" class="col-md-9"></div>
+            <div id="side" class="col-md-3">
+                <router-view></router-view>
             </div>
         </div>
     </div>
