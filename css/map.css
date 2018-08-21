@@ -1,0 +1,22 @@
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
+body > nav{
+    height: 5%;
+}
+.navbar-default{
+    margin-bottom: 0.1%;
+    background-color: #ffd42b
+}
+#map{
+    height: 94.9%;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #000000;
+}
+.navbar-default .navbar-brand {
+    color: #000000;
+}

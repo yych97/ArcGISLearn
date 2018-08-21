@@ -1,32 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>map</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="http://101.132.125.165:8081/arcgis_js_api/library/4.7/esri/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="http://101.132.125.165:8081/arcgis_js_api/library/4.7/esri/css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/map.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script src="http://101.132.125.165:8081/arcgis_js_api/library/4.7/init.js"></script>
 </head>
-<body style="height: 100%">
-<nav class="navbar navbar-default" role="navigation" style="height: 5%; margin-bottom: 1px">
+<body>
+<nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">菜鸟教程</a>
+            <a class="navbar-brand" href="#">诗意中国</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">iOS</a></li>
-                <li><a href="#">SVN</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Java
+                        地点
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">jmeter</a></li>
-                        <li><a href="#">EJB</a></li>
+                        <li><a href="#">长安</a></li>
+                        <li><a href="#">洛阳</a></li>
+                        <li class="divider"></li>
+                        <li><a data-toggle="modal" data-target="#places" href="">全部地点</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        作者
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">李白</a></li>
+                        <li><a href="#">白居易</a></li>
+                        <li><a href="#">杜甫</a></li>
+                        <li class="divider"></li>
+                        <li><a data-toggle="modal" data-target="#authors" href="">全部作者</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        分类
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"></a></li>
+                        <li><a href="#">诗名</a></li>
                         <li><a href="#">Jasper Report</a></li>
                         <li class="divider"></li>
                         <li><a href="#">分离的链接</a></li>
@@ -35,20 +59,127 @@
                     </ul>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a data-toggle="modal" data-target="#register" href="">注册</a>
+                </li>
+                <li>
+                    <a data-toggle="modal" data-target="#login" href="">登录</a>
+                </li>
+            </ul>
+            <!-- 注册窗口 -->
+            <div id="register" class="modal fade" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-title">
+                            <h1 class="text-center">注册</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-group" action="">
+                                <div class="form-group">
+                                    <label for="">用户名</label>
+                                    <input class="form-control" type="text" placeholder="6-15位字母或数字">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">密码</label>
+                                    <input class="form-control" type="password" placeholder="至少6位字母或数字">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">再次输入密码</label>
+                                    <input class="form-control" type="password" placeholder="至少6位字母或数字">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">邮箱</label>
+                                    <input class="form-control" type="email" placeholder="例如:123@123.com">
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-primary" type="submit">提交</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                                </div>
+                                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 登录窗口 -->
+            <div id="login" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-title">
+                            <h1 class="text-center">登录</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-group" action="">
+                                <div class="form-group">
+                                    <label for="">用户名</label>
+                                    <input class="form-control" type="text" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">密码</label>
+                                    <input class="form-control" type="password" placeholder="">
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-primary" type="submit">登录</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                                </div>
+                                <a href="" data-toggle="modal" data-dismiss="modal"
+                                   data-target="#register">还没有账号？点我注册</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 地点窗口 -->
+            <div id="places" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-title">
+                            <h2 class="text-center">全部地点</h2>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 作者窗口 -->
+            <div id="authors" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-title">
+                            <h2 class="text-center">全部作者</h2>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
-<div class="container-fiuled" id="map" style="height: 95%"></div>
-<script>
-    require(["esri/Map", "esri/views/MapView", "dojo/domReady!"], function(Map, MapView) {
-        var map = new Map({
-            basemap: "streets"
-        })
-        var mapview = new MapView({
-            map: map,
-            container: "map"
-        })
-    });
-</script>
+<div id="map" class="container-fiuled"></div>
 </body>
+<script type="text/javascript" src="js/map.js"></script>
 </html>
