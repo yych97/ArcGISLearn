@@ -288,11 +288,14 @@
 <!--诗人介绍模板-->
 <script type="text/x-template" id="poet-template">
     <div>
-        <!-- poet-info -->
-        <div class="panel">
+        <!--信息栏标题-->
+        <div class="panel panel-title-custom">
             <div class="text-center">
                 <h5 class="kaiti-25">作者简介{{ $route.params.id }}</h5>
             </div>
+        </div>
+        <!-- poet-info -->
+        <div class="panel">
             <div class="text-center">
                 <span class="kaiti-25"><strong>{{poet.name}}</strong></span>
             </div>
@@ -388,50 +391,79 @@
 </script>
 <!--诗歌介绍模板-->
 <script type="text/x-template" id="poem-template">
-    <div class="panel">
-        <div class="page-header">诗词信息{{ $route.params.id }}</div>
-        <div>
-            <span><strong>{{poem.title}}</strong></span>
-        </div>
-        <div class="thumbnail">
-            <ul class="list">
-                <li><span>作者：</span>{{poem.author}}</li>
-                <li><span>题材：</span>{{poem.theme}}</li>
-                <li><span>文学体裁：</span>{{poem.style}}</li>
-            </ul>
-            <button type="button" class="btn-warning" @click="getInfoByPoetId()">加入收藏</button>
-        </div>
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#content-tab">原文&注释</a></li>
-            <li><a data-toggle="tab" href="#additional-information-tab">增加信息</a></li>
-            <li><a data-toggle="tab" href="#poem-reviews-tab">评论</a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="content-tab" class="tab-pane fade in active">
-                <p>故人西辞黄鹤楼，烟花三月下扬州</p>
-                <p>孤帆远影碧空尽，唯见长江天际流</p>
-                <p>友人在黄鹤楼向我挥手告别，阳光明媚的三月他要去扬州。</p>
-                <p>他的帆影渐渐消失在碧空中，只看见滚滚长江在天边奔流。</p>
+    <div>
+        <div class="panel panel-title-custom">
+            <div class="text-center">
+                <h5 class="kaiti-25">诗词信息{{ $route.params.id }}</h5>
             </div>
-            <div id="poem-reviews-tab" class="tab-pane fade">
-                <div class="review clearfix" v-for="comment in poem.comments">
-                    <ul class="meta list-unstyled">
-                        <li class="name">{{comment.username}}</li>
-                    </ul>
-                    <div class="content">
-                        <div>
-                            <p>{{comment.content}}</p>
+        </div>
+
+        <div class="panel">
+            <div class="text-center">
+                <span class="kaiti-25"><strong>{{poem.title}}</strong></span>
+            </div>
+            <div class="table-info">
+                <table class="table cart-items light-inputs">
+                    <tbody>
+                    <tr>
+                        <td><span class="kaiti-17">作者：</span>{{poem.author}}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="kaiti-17">题材：</span>{{poem.theme}}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="kaiti-17">文学体裁：</span>{{poem.style}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pull-right">
+                                <button class="btn-warning" @click="getInfoByPoetId()">
+                                    <span class="kaiti-17">加入收藏</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#content-tab">原文&翻译</a></li>
+                <li><a data-toggle="tab" href="#poem-reviews-tab">评论</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="content-tab" class="tab-pane fade in active">
+                    <p>故人西辞黄鹤楼，烟花三月下扬州</p>
+                    <p>孤帆远影碧空尽，唯见长江天际流</p>
+                    <p>友人在黄鹤楼向我挥手告别，阳光明媚的三月他要去扬州。</p>
+                    <p>他的帆影渐渐消失在碧空中，只看见滚滚长江在天边奔流。</p>
+                </div>
+                <div id="poem-reviews-tab" class="tab-pane fade">
+                    <div class="review clearfix" v-for="comment in poem.comments">
+                        <ul class="meta list-unstyled">
+                            <li class="name">{{comment.username}}</li>
+                        </ul>
+                        <div class="content">
+                            <div>
+                                <p>{{comment.content}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="add-review">
-                    <form>
-                        <div class="form-group light-inputs">
-                            <textarea rows="3" placeholder="您想要添加的信息 ..." required></textarea>
-                        </div>
-                        <button type="submit" class="button">提交</button>
-                    </form>
+                    <div class="add-review">
+                        <form>
+                            <div class="form-group light-inputs">
+                                <textarea rows="4" cols="40" placeholder="您想要添加的信息 ..." required></textarea>
+                            </div>
+                            <div class="table-info pull-right">
+                                <button class="btn-warning">
+                                    <span class="kaiti-17">提交</span>
+                                </button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
