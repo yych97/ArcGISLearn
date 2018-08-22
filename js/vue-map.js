@@ -1,59 +1,5 @@
-// 定义模板
-const authorTemplate = `                
-                <div class="panel">
-                    <div class="page-header">作者简介{{ $route.params.id }}</div>
-                    <div>
-                        <span><strong>{{poet.name}}</strong></span>
-                    </div>
-                    <div class="thumbnail">
-                        <ul class="list">
-                            <li><span>别称： </span>{{poet.biechen}}</li>
-                            <li><span>字号： </span>{{poet.hao}}</li>
-                            <li><span>出生日期： </span>{{poet.birth}}</li>
-                            <li><span>逝世日期： </span>{{poet.death}}</li>
-                            <li><span>出生地： </span>{{poet.home}}</li>
-                        </ul>
-                        <button type="button" class="btn-warning" href="" @click="getInfoByPoetId()">加入收藏</button>
-                    </div>
-                    <!-- end .product-info -->
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
-                        <li><a data-toggle="tab" href="#reviews-tab">评论</a></li>
-                    </ul>
-                    <!-- end .product-info-tabs -->
-                    <div class="tab-content">
-                        <!-- #description-tab -->
-                        <div id="description-tab" class="tab-pane fade in active">
-                            <p v-for="description in poet.descriptions">{{description}}</p>
-                            <p><a v-bind:href="poet.baikelink">更多信息</a></p>
-                        </div>
-                        <!-- #reviews-tab -->
-                        <div id="reviews-tab" class="tab-pane fade">
-                            <div class="review clearfix" v-for="comment in poet.comments">
-                                <ul class="meta list-unstyled">
-                                    <li class="name">{{comment.username}}</li>
-                                </ul>
-                                <!-- end .meta -->
-                                <div class="content">
-                                    <div>
-                                        <p>{{comment.content}}</p>
-                                    </div>
-                                </div>
-                                <!-- end .content -->
-                            </div>
-                            <!-- end .review -->
-                            <div class="add-review">
-                                <form>
-                                    <div class="form-group light-inputs">
-                                        <textarea rows="3" placeholder="您想要添加的信息 ..." required></textarea>
-                                    </div>
-                                    <button type="submit" class="button">提交</button>
-                                </form>
-                            </div>
-                            <!-- end .add-review -->
-                        </div>
-                    </div>
-                </div>`;
+// 定义模板（最好在HTML中定义）
+const authorTemplate = ``;
 
 //定义数据
 const libai = {
@@ -98,7 +44,20 @@ const libai = {
 
 // 定义诗人(路由) 组件。
 const Poet = {
-    template: authorTemplate,
+    template: '#poet-template',
+    data: function () {
+        return libai;
+    },
+    methods:{
+        getInfoByPoetId: function(){
+            alert(this.$route.params.id);
+        }
+    }
+};
+
+// 定义诗歌(路由) 组件。
+const Poem = {
+    template: '#poem-template',
     data: function () {
         return libai;
     },
@@ -113,7 +72,8 @@ const Poet = {
 const router = new VueRouter({
     routes: [
         // 动态路径参数 以冒号开头
-        { path: '/author/:id', component: Poet }
+        { path: '/poet/:id', component: Poet },
+        { path: '/poem/:id', component: Poem }
     ]
 });
 

@@ -118,11 +118,11 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><router-link to="/author/libai" href="#">李白</router-link></li>
-                            <li><router-link to="/author/baijuyi" href="#">白居易</router-link></li>
-                            <li><router-link to="/author/dufu" href="#">杜甫</router-link></li>
+                            <li><router-link to="/poet/libai" href="#">李白</router-link></li>
+                            <li><router-link to="/poet/baijuyi" href="#">白居易</router-link></li>
+                            <li><router-link to="/poet/dufu" href="#">杜甫</router-link></li>
                             <li class="divider"></li>
-                            <li><a data-toggle="modal" data-target="#authors" href="">全部作者</a></li>
+                            <li><a data-toggle="modal" data-target="#poets" href="">全部作者</a></li>
                         </ul>
                     </li>
                     <!--分类下拉框-->
@@ -247,7 +247,7 @@
                     </div>
                 </div>
                 <!-- 作者窗口 -->
-                <div id="authors" class="modal fade">
+                <div id="poets" class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -278,6 +278,117 @@
     </div>
 </div>
 </body>
+<!--诗人介绍模板-->
+<script type="text/x-template" id="poet-template">
+    <div class="panel">
+        <div class="page-header">作者简介{{ $route.params.id }}</div>
+        <div>
+            <span><strong>{{poet.name}}</strong></span>
+        </div>
+        <div class="thumbnail">
+            <ul class="list">
+                <li><span>别称： </span>{{poet.biechen}}</li>
+                <li><span>字号： </span>{{poet.hao}}</li>
+                <li><span>出生日期： </span>{{poet.birth}}</li>
+                <li><span>逝世日期： </span>{{poet.death}}</li>
+                <li><span>出生地： </span>{{poet.home}}</li>
+            </ul>
+            <button type="button" class="btn-warning" href="" @click="getInfoByPoetId()">加入收藏</button>
+        </div>
+        <!-- end .product-info -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
+            <li><a data-toggle="tab" href="#reviews-tab">评论</a></li>
+        </ul>
+        <!-- end .product-info-tabs -->
+        <div class="tab-content">
+            <!-- #description-tab -->
+            <div id="description-tab" class="tab-pane fade in active">
+                <p v-for="description in poet.descriptions">{{description}}</p>
+                <p><a v-bind:href="poet.baikelink">更多信息</a></p>
+            </div>
+            <!-- #reviews-tab -->
+            <div id="reviews-tab" class="tab-pane fade">
+                <div class="review clearfix" v-for="comment in poet.comments">
+                    <ul class="meta list-unstyled">
+                        <li class="name">{{comment.username}}</li>
+                    </ul>
+                    <div class="content">
+                        <div>
+                            <p>{{comment.content}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-review">
+                    <form>
+                        <div class="form-group light-inputs">
+                            <textarea rows="3" placeholder="您想要添加的信息 ..." required></textarea>
+                        </div>
+                        <button type="submit" class="button">提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!--诗歌介绍模板-->
+<script type="text/x-template" id="poem-template">
+    <div class="panel">
+        <div class="page-header">作者简介{{ $route.params.id }}</div>
+        <div>
+            <span><strong>{{poet.name}}</strong></span>
+        </div>
+        <div class="thumbnail">
+            <ul class="list">
+                <li><span>别称： </span>{{poet.biechen}}</li>
+                <li><span>字号： </span>{{poet.hao}}</li>
+                <li><span>出生日期： </span>{{poet.birth}}</li>
+                <li><span>逝世日期： </span>{{poet.death}}</li>
+                <li><span>出生地： </span>{{poet.home}}</li>
+            </ul>
+            <button type="button" class="btn-warning" href="" @click="getInfoByPoetId()">加入收藏</button>
+        </div>
+        <!-- end .product-info -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
+            <li><a data-toggle="tab" href="#reviews-tab">评论</a></li>
+        </ul>
+        <!-- end .product-info-tabs -->
+        <div class="tab-content">
+            <!-- #description-tab -->
+            <div id="description-tab" class="tab-pane fade in active">
+                <p v-for="description in poet.descriptions">{{description}}</p>
+                <p><a v-bind:href="poet.baikelink">更多信息</a></p>
+            </div>
+            <!-- #reviews-tab -->
+            <div id="reviews-tab" class="tab-pane fade">
+                <div class="review clearfix" v-for="comment in poet.comments">
+                    <ul class="meta list-unstyled">
+                        <li class="name">{{comment.username}}</li>
+                    </ul>
+                    <!-- end .meta -->
+                    <div class="content">
+                        <div>
+                            <p>{{comment.content}}</p>
+                        </div>
+                    </div>
+                    <!-- end .content -->
+                </div>
+                <!-- end .review -->
+                <div class="add-review">
+                    <form>
+                        <div class="form-group light-inputs">
+                            <textarea rows="3" placeholder="您想要添加的信息 ..." required></textarea>
+                        </div>
+                        <button type="submit" class="button">提交</button>
+                    </form>
+                </div>
+                <!-- end .add-review -->
+            </div>
+        </div>
+    </div>
+</script>
+<!--JS-->
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/vue-map.js"></script>
 </html>
