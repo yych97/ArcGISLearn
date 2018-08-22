@@ -10,12 +10,27 @@ body{
 }
 .container-map {
     padding-right: 0px;
-    height: 94.9%;
+    height: 93%;
     width: 100%
 }
 .row-map{
     height: 100%;
     width: 100%
+}
+.panel{
+    background-color: #f2ecd5;
+    background-size: 100%;
+    margin-top: 10px;
+}
+.cart-box {
+    border-bottom: 1px solid #dadee2;
+    margin-top: 78px;
+}
+.table-info{
+    padding: 10px;
+}
+.tab-content{
+    padding: 20px;
 }
 body > nav{
     height: 5%;
@@ -31,6 +46,17 @@ body > nav{
     color: #000000;
 }
 
+/*字体样式*/
+.kaiti-25{
+    font-family: KaiTi;
+    font-size: 25px;
+    font-weight: 800;
+}
+.kaiti-17{
+    font-family: KaiTi;
+    font-size: 17px;
+}
+
 /*id样式*/
 #map{
     height: 100%
@@ -40,5 +66,9 @@ body > nav{
 }
 #side{
     height: 100%;
-    overflow: scroll
+    overflow: scroll;
+}
+#side::-webkit-scrollbar {display:none}
+#description-tab{
+    text-indent: 2em;
 }

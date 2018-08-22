@@ -118,9 +118,15 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><router-link to="/poet/libai" href="#">李白</router-link></li>
-                            <li><router-link to="/poet/baijuyi" href="#">白居易</router-link></li>
-                            <li><router-link to="/poet/dufu" href="#">杜甫</router-link></li>
+                            <li>
+                                <router-link to="/poet/libai" href="#">李白</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/poet/baijuyi" href="#">白居易</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/poet/dufu" href="#">杜甫</router-link>
+                            </li>
                             <li class="divider"></li>
                             <li><a data-toggle="modal" data-target="#poets" href="">全部作者</a></li>
                         </ul>
@@ -189,7 +195,8 @@
                                         <button class="btn btn-primary" type="submit">提交</button>
                                         <button class="btn btn-danger" data-dismiss="modal">取消</button>
                                     </div>
-                                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
+                                    <a href="" data-toggle="modal" data-dismiss="modal"
+                                       data-target="#login">已有账号？点我登录</a>
                                 </form>
                             </div>
                         </div>
@@ -280,63 +287,100 @@
 </body>
 <!--诗人介绍模板-->
 <script type="text/x-template" id="poet-template">
-    <div class="panel">
+    <div>
         <!-- poet-info -->
-        <div class="page-header">作者简介{{ $route.params.id }}</div>
-        <div>
-            <span><strong>{{poet.name}}</strong></span>
+        <div class="panel">
+            <div class="text-center">
+                <h5 class="kaiti-25">作者简介{{ $route.params.id }}</h5>
+            </div>
+            <div class="text-center">
+                <span class="kaiti-25"><strong>{{poet.name}}</strong></span>
+            </div>
+            <div class="table-info">
+                <table class="table cart-items light-inputs">
+                    <tbody>
+                    <tr>
+                        <td><span class="kaiti-17">别称：</span>{{poet.biechen}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="kaiti-17">字号：</span>{{poet.hao}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="kaiti-17">出生日期：</span>{{poet.birth}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="kaiti-17">逝世日期：</span>{{poet.death}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="kaiti-17">出生地：</span>{{poet.home}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pull-right">
+                                <button class="btn-warning" @click="getInfoByPoetId()">
+                                    <span class="kaiti-17">加入收藏</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="thumbnail">
-            <ul class="list">
-                <li><span>别称： </span>{{poet.biechen}}</li>
-                <li><span>字号： </span>{{poet.hao}}</li>
-                <li><span>出生日期： </span>{{poet.birth}}</li>
-                <li><span>逝世日期： </span>{{poet.death}}</li>
-                <li><span>出生地： </span>{{poet.home}}</li>
+        <!--tab-panel-->
+        <div class="panel">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
+                <li><a data-toggle="tab" href="#works-tab">作品</a></li>
+                <li><a data-toggle="tab" href="#poet-reviews-tab">评论</a></li>
             </ul>
-            <button type="button" class="btn-warning" @click="getInfoByPoetId()">加入收藏</button>
-        </div>
-        <!-- poet-info-tabs -->
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
-            <li><a data-toggle="tab" href="#works-tab">作品</a></li>
-            <li><a data-toggle="tab" href="#poet-reviews-tab">评论</a></li>
-        </ul>
 
-        <div class="tab-content">
-            <!-- #description-tab -->
-            <div id="description-tab" class="tab-pane fade in active">
-                <p v-for="description in poet.descriptions">{{description}}</p>
-                <p><a v-bind:href="poet.baikeLink">更多信息</a></p>
-            </div>
-            <!-- #works-tab -->
-            <div id="works-tab" class="tab-pane fade">
-                <ul class="list-group-item" v-for="work in poet.works">
-                    <li class="item">
-                        <router-link v-bind:to="{name:'poem',params:{id:work.titleId}}" href="#">{{work.title}}</router-link>
-                        <a class="pull-right" v-bind:href="poet.baikeLink">{{work.place}}</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- #reviews-tab -->
-            <div id="poet-reviews-tab" class="tab-pane fade">
-                <div class="review clearfix" v-for="comment in poet.comments">
-                    <ul class="meta list-unstyled">
-                        <li class="name">{{comment.username}}</li>
+            <div class="tab-content">
+                <!-- #description-tab -->
+                <div id="description-tab" class="tab-pane fade in active">
+                    <p v-for="description in poet.descriptions">{{description}}</p>
+                    <p><a v-bind:href="poet.baikeLink">更多信息</a></p>
+                </div>
+                <!-- #works-tab -->
+                <div id="works-tab" class="tab-pane fade">
+                    <ul class="list-group-item" v-for="work in poet.works">
+                        <li class="item">
+                            <router-link v-bind:to="{name:'poem',params:{id:work.titleId}}" href="#">{{work.title}}
+                            </router-link>
+                            <a class="pull-right" v-bind:href="poet.baikeLink">{{work.place}}</a>
+                        </li>
                     </ul>
-                    <div class="content">
-                        <div>
-                            <p>{{comment.content}}</p>
+                </div>
+                <!-- #reviews-tab -->
+                <div id="poet-reviews-tab" class="tab-pane fade">
+                    <div class="review clearfix" v-for="comment in poet.comments">
+                        <ul class="meta list-unstyled">
+                            <li class="name">{{comment.username}}</li>
+                        </ul>
+                        <div class="tab-pane fade in active">
+                            <div>
+                                <p>{{comment.content}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="add-review">
-                    <form>
-                        <div class="form-group light-inputs">
-                            <textarea rows="3" placeholder="您想要添加的信息 ..." required></textarea>
-                        </div>
-                        <button type="submit" class="button">提交</button>
-                    </form>
+                    <div class="add-review">
+                        <form>
+                            <div class="form-group light-inputs">
+                                <textarea rows="4" cols="40" placeholder="您想要添加的信息 ..." required></textarea>
+                            </div>
+                            <div class="table-info pull-right">
+                                <button class="btn-warning">
+                                    <span class="kaiti-17">提交</span>
+                                </button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -392,6 +436,15 @@
             </div>
         </div>
     </div>
+</script>
+<!--列表模板-->
+<script type="text/x-template" id="list-template">
+    <ul class="list-group-item" v-for="item in items">
+        <li class="item">
+            <router-link v-bind:to="{name:'poem',params:{id:item.id}}" href="#">{{item.name}}</router-link>
+            <a class="pull-right" v-bind:href="poet.baikeLink">{{work.place}}</a>
+        </li>
+    </ul>
 </script>
 <!--JS-->
 <script type="text/javascript" src="js/map.js"></script>
