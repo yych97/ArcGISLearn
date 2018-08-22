@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script src="js/vue.js"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/vue-router.js"></script>
     <script src="http://101.132.125.165:8081/arcgis_js_api/library/4.7/init.js"></script>
 </head>
 <body>
@@ -281,6 +281,7 @@
 <!--诗人介绍模板-->
 <script type="text/x-template" id="poet-template">
     <div class="panel">
+        <!-- poet-info -->
         <div class="page-header">作者简介{{ $route.params.id }}</div>
         <div>
             <span><strong>{{poet.name}}</strong></span>
@@ -293,22 +294,32 @@
                 <li><span>逝世日期： </span>{{poet.death}}</li>
                 <li><span>出生地： </span>{{poet.home}}</li>
             </ul>
-            <button type="button" class="btn-warning" href="" @click="getInfoByPoetId()">加入收藏</button>
+            <button type="button" class="btn-warning" @click="getInfoByPoetId()">加入收藏</button>
         </div>
-        <!-- end .product-info -->
+        <!-- poet-info-tabs -->
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
-            <li><a data-toggle="tab" href="#reviews-tab">评论</a></li>
+            <li><a data-toggle="tab" href="#works-tab">作品</a></li>
+            <li><a data-toggle="tab" href="#poet-reviews-tab">评论</a></li>
         </ul>
-        <!-- end .product-info-tabs -->
+
         <div class="tab-content">
             <!-- #description-tab -->
             <div id="description-tab" class="tab-pane fade in active">
                 <p v-for="description in poet.descriptions">{{description}}</p>
-                <p><a v-bind:href="poet.baikelink">更多信息</a></p>
+                <p><a v-bind:href="poet.baikeLink">更多信息</a></p>
+            </div>
+            <!-- #works-tab -->
+            <div id="works-tab" class="tab-pane fade">
+                <ul class="list-group-item" v-for="work in poet.works">
+                    <li class="item">
+                        <router-link v-bind:to="{name:'poem',params:{id:work.titleId}}" href="#">{{work.title}}</router-link>
+                        <a class="pull-right" v-bind:href="poet.baikeLink">{{work.place}}</a>
+                    </li>
+                </ul>
             </div>
             <!-- #reviews-tab -->
-            <div id="reviews-tab" class="tab-pane fade">
+            <div id="poet-reviews-tab" class="tab-pane fade">
                 <div class="review clearfix" v-for="comment in poet.comments">
                     <ul class="meta list-unstyled">
                         <li class="name">{{comment.username}}</li>
@@ -334,47 +345,42 @@
 <!--诗歌介绍模板-->
 <script type="text/x-template" id="poem-template">
     <div class="panel">
-        <div class="page-header">作者简介{{ $route.params.id }}</div>
+        <div class="page-header">诗词信息{{ $route.params.id }}</div>
         <div>
-            <span><strong>{{poet.name}}</strong></span>
+            <span><strong>{{poem.title}}</strong></span>
         </div>
         <div class="thumbnail">
             <ul class="list">
-                <li><span>别称： </span>{{poet.biechen}}</li>
-                <li><span>字号： </span>{{poet.hao}}</li>
-                <li><span>出生日期： </span>{{poet.birth}}</li>
-                <li><span>逝世日期： </span>{{poet.death}}</li>
-                <li><span>出生地： </span>{{poet.home}}</li>
+                <li><span>作者：</span>{{poem.author}}</li>
+                <li><span>题材：</span>{{poem.theme}}</li>
+                <li><span>文学体裁：</span>{{poem.style}}</li>
             </ul>
-            <button type="button" class="btn-warning" href="" @click="getInfoByPoetId()">加入收藏</button>
+            <button type="button" class="btn-warning" @click="getInfoByPoetId()">加入收藏</button>
         </div>
-        <!-- end .product-info -->
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
-            <li><a data-toggle="tab" href="#reviews-tab">评论</a></li>
+            <li class="active"><a data-toggle="tab" href="#content-tab">原文&注释</a></li>
+            <li><a data-toggle="tab" href="#additional-information-tab">增加信息</a></li>
+            <li><a data-toggle="tab" href="#poem-reviews-tab">评论</a></li>
         </ul>
-        <!-- end .product-info-tabs -->
+
         <div class="tab-content">
-            <!-- #description-tab -->
-            <div id="description-tab" class="tab-pane fade in active">
-                <p v-for="description in poet.descriptions">{{description}}</p>
-                <p><a v-bind:href="poet.baikelink">更多信息</a></p>
+            <div id="content-tab" class="tab-pane fade in active">
+                <p>故人西辞黄鹤楼，烟花三月下扬州</p>
+                <p>孤帆远影碧空尽，唯见长江天际流</p>
+                <p>友人在黄鹤楼向我挥手告别，阳光明媚的三月他要去扬州。</p>
+                <p>他的帆影渐渐消失在碧空中，只看见滚滚长江在天边奔流。</p>
             </div>
-            <!-- #reviews-tab -->
-            <div id="reviews-tab" class="tab-pane fade">
-                <div class="review clearfix" v-for="comment in poet.comments">
+            <div id="poem-reviews-tab" class="tab-pane fade">
+                <div class="review clearfix" v-for="comment in poem.comments">
                     <ul class="meta list-unstyled">
                         <li class="name">{{comment.username}}</li>
                     </ul>
-                    <!-- end .meta -->
                     <div class="content">
                         <div>
                             <p>{{comment.content}}</p>
                         </div>
                     </div>
-                    <!-- end .content -->
                 </div>
-                <!-- end .review -->
                 <div class="add-review">
                     <form>
                         <div class="form-group light-inputs">
@@ -383,7 +389,6 @@
                         <button type="submit" class="button">提交</button>
                     </form>
                 </div>
-                <!-- end .add-review -->
             </div>
         </div>
     </div>

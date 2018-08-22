@@ -4,6 +4,7 @@ const authorTemplate = ``;
 //定义数据
 const libai = {
     poet: {
+        poetId: '1',
         name: '李白',
         biechen: '李十二、李翰林 、李供奉、李拾遗、诗仙',
         hao: '字太白、号青莲居士，又号谪仙人',
@@ -18,7 +19,21 @@ const libai = {
             '代表作有《望庐山瀑布》、《行路难》、《蜀道难》、《将进酒》、《越女词》、《早发白帝城》等多首。',
             '李白所作词赋，宋人已有传记（如文莹《湘山野录》卷上），就其开创意义及艺术成就而言，“李白词”享有极为崇高的地位。'
         ],
-        baikelink: 'https://baike.so.com/doc/5340576-5576019.html',
+        baikeLink: 'https://baike.so.com/doc/5340576-5576019.html',
+        works:[
+            {
+                titleId: '1',
+                title: '黄鹤楼送孟浩然之广陵',
+                placeId: '1',
+                place: '不详'
+            },
+            {
+                titleId: '2',
+                title: '早发白帝城',
+                placeId: '2',
+                place: '不详'
+            }
+        ],
         comments: [
             {
                 username: 'shq',
@@ -41,9 +56,29 @@ const libai = {
         ]
     }
 };
+const huanghelou = {
+    poem: {
+        title: '黄鹤楼 送孟浩然之广陵',
+        author: '李白',
+        place: '不详',
+        theme: '赠别诗',
+        style: '七言绝句',
+        content:{},
+        comments:[
+            {
+                username: 'shq',
+                content: 'hhh'
+            },
+            {
+                username: 'yyc',
+                content: 'Very good!'
+            }
+        ]
+    }
+};
 
 // 定义诗人(路由) 组件。
-const Poet = {
+const poet = {
     template: '#poet-template',
     data: function () {
         return libai;
@@ -56,10 +91,10 @@ const Poet = {
 };
 
 // 定义诗歌(路由) 组件。
-const Poem = {
+const poem = {
     template: '#poem-template',
     data: function () {
-        return libai;
+        return huanghelou;
     },
     methods:{
         getInfoByPoetId: function(){
@@ -72,8 +107,8 @@ const Poem = {
 const router = new VueRouter({
     routes: [
         // 动态路径参数 以冒号开头
-        { path: '/poet/:id', component: Poet },
-        { path: '/poem/:id', component: Poem }
+        { path: '/poet/:id', name: 'poet', component: poet },
+        { path: '/poem/:id', name: 'poem', component: poem }
     ]
 });
 
