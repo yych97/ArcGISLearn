@@ -47,6 +47,9 @@ body > nav{
 }
 
 /*字体样式*/
+.kaiti{
+    font-family: KaiTi;
+}
 .kaiti-25{
     font-family: KaiTi;
     font-size: 25px;

@@ -15,10 +15,11 @@
 </head>
 <body>
 <div id="app">
+    <!--导航栏-->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">诗意中国</a>
+                <router-link class="navbar-brand" to="/" href="#">诗意中国</router-link>
             </div>
             <div>
                 <ul class="nav navbar-nav">
@@ -128,7 +129,7 @@
                                 <router-link to="/poet/dufu" href="#">杜甫</router-link>
                             </li>
                             <li class="divider"></li>
-                            <li><a data-toggle="modal" data-target="#poets" href="">全部作者</a></li>
+                            <li><router-link to="/poet" href="#">全部作者</router-link></li>
                         </ul>
                     </li>
                     <!--分类下拉框-->
@@ -138,13 +139,11 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"></a></li>
-                            <li><a href="#">诗名</a></li>
-                            <li><a href="#">Jasper Report</a></li>
+                            <li><a href="#">边塞诗</a></li>
+                            <li><a href="#">田园诗</a></li>
+                            <li><a href="#">送别诗</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">分离的链接</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">另一个分离的链接</a></li>
+                            <li><a href="#">所有分类</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -253,28 +252,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- 作者窗口 -->
-                <div id="poets" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-title">
-                                <h2 class="text-center">全部作者</h2>
-                            </div>
-                            <div class="modal-body">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>
-
+    <!--主体内容部分-->
     <div class="container container-map">
         <div class="row row-map">
             <div id="map" class="col-md-9"></div>
@@ -290,9 +271,7 @@
     <div>
         <!--信息栏标题-->
         <div class="panel panel-title-custom">
-            <div class="text-center">
-                <h5 class="kaiti-25">作者简介{{ $route.params.id }}</h5>
-            </div>
+            <h5 class="kaiti-25 text-center">作者简介{{ $route.params.id }}</h5>
         </div>
         <!-- poet-info -->
         <div class="panel">
@@ -393,9 +372,7 @@
 <script type="text/x-template" id="poem-template">
     <div>
         <div class="panel panel-title-custom">
-            <div class="text-center">
-                <h5 class="kaiti-25">诗词信息{{ $route.params.id }}</h5>
-            </div>
+            <h5 class="kaiti-25 text-center">诗词信息{{ $route.params.id }}</h5>
         </div>
 
         <div class="panel">
@@ -471,12 +448,21 @@
 </script>
 <!--列表模板-->
 <script type="text/x-template" id="list-template">
-    <ul class="list-group-item" v-for="item in items">
-        <li class="item">
-            <router-link v-bind:to="{name:'poem',params:{id:item.id}}" href="#">{{item.name}}</router-link>
-            <a class="pull-right" v-bind:href="poet.baikeLink">{{work.place}}</a>
-        </li>
-    </ul>
+    <div class="panel">
+        <ul class="list-group-item" v-for="item in list.items">
+            <li class="item">
+                <router-link v-bind:to="{name:list.type, params:{id:item.id}}" href="#">{{item.name}}</router-link>
+            </li>
+        </ul>
+    </div>
+</script>
+<!--首页模板-->
+<script type="text/x-template" id="home-template">
+    <div>
+        <div class="panel panel-title-custom">
+            <h5 class="kaiti-25 text-center">欢迎来到诗意中国</h5>
+        </div>
+    </div>
 </script>
 <!--JS-->
 <script type="text/javascript" src="js/map.js"></script>
