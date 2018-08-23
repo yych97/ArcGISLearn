@@ -147,7 +147,7 @@ const router = new VueRouter({
         // 动态路径参数 以冒号开头
         {path: '/poet/:id', name: 'poet', component: poet},
         {path: '/poem/:id', name: 'poem', component: poem},
-        {path: '/:type', name: 'list', component: list},
+        {path: '/list/:type', name: 'list', component: list},
         {path: '/', name: 'home', component: home}
     ]
 });
@@ -158,7 +158,10 @@ var wm = new Vue({
         visitor: {
             logined: false,
             username: '',
-        }
+        },
+        point_layer: '诗人',
+        base_layer: '地形图',
+        period_layer: '初唐'
     },
     router: router
 }).$mount('#app');

@@ -18,9 +18,11 @@
     <!--导航栏-->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
+            <!--导航栏标题-->
             <div class="navbar-header">
                 <router-link class="navbar-brand" to="/" href="#">诗意中国</router-link>
             </div>
+            <!--导航栏主体-->
             <div>
                 <ul class="nav navbar-nav">
                     <!--图层控制下拉框-->
@@ -31,35 +33,24 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">初唐
-                                    <input name="time-layers" type="checkbox" class="pull-right" value="初唐">
+                                <a href="#">诗人
+                                    <input v-model="point_layer" name="point_layer" type="radio" class="pull-right" value="诗人">
                                 </a>
                             </li>
                             <li>
-                                <a href="#">盛唐
-                                    <input name="time-layers" type="checkbox" class="pull-right" value="盛唐" checked>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">中唐
-                                    <input name="time-layers" type="checkbox" class="pull-right" value="中唐">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">晚唐
-                                    <input name="time-layers" type="checkbox" class="pull-right" value="晚唐">
+                                <a href="#">诗歌
+                                    <input v-model="point_layer" name="point_layer" type="radio" class="pull-right" value="诗歌">
                                 </a>
                             </li>
                             <li class="divider"></li>
                             <li>
                                 <a href="#">普通地图
-                                    <input name="type-layers" type="checkbox" class="pull-right" value="路网图">
+                                    <input v-model="base_layer" name="base_layer" type="radio" class="pull-right" value="路网图">
                                 </a>
-                                <a href="#">卫星图
-                                    <input name="type-layers" type="checkbox" class="pull-right" value="卫星图">
-                                </a>
+                            </li>
+                            <li>
                                 <a href="#">地形图
-                                    <input name="type-layers" type="checkbox" class="pull-right" value="地形图" checked>
+                                    <input v-model="base_layer" name="base_layer" type="radio" class="pull-right" value="地形图">
                                 </a>
                             </li>
                         </ul>
@@ -73,28 +64,22 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#">初唐
-                                    <input name="time" type="checkbox" class="pull-right" value="初唐">
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="初唐">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">盛唐
-                                    <input name="time" type="checkbox" class="pull-right" value="盛唐">
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="盛唐">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">中唐
-                                    <input name="time" type="checkbox" class="pull-right" value="中唐">
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="中唐">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">晚唐
-                                    <input name="time" type="checkbox" class="pull-right" value="晚唐">
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">全部
-                                    <input name="all" type="checkbox" class="pull-right" value="全部">
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="晚唐">
                                 </a>
                             </li>
                         </ul>
@@ -109,7 +94,9 @@
                             <li><a href="#">长安</a></li>
                             <li><a href="#">洛阳</a></li>
                             <li class="divider"></li>
-                            <li><a data-toggle="modal" data-target="#places" href="">全部地点</a></li>
+                            <li>
+                                <router-link to="/list/place" href="#">全部地点</router-link>
+                            </li>
                         </ul>
                     </li>
                     <!--作者下拉框-->
@@ -129,7 +116,9 @@
                                 <router-link to="/poet/dufu" href="#">杜甫</router-link>
                             </li>
                             <li class="divider"></li>
-                            <li><router-link to="/poet" href="#">全部作者</router-link></li>
+                            <li>
+                                <router-link to="/list/poet" href="#">全部作者</router-link>
+                            </li>
                         </ul>
                     </li>
                     <!--分类下拉框-->
@@ -160,7 +149,7 @@
                         <a href="">Welcome {{visitor.username}}!</a>
                     </li>
                 </ul>
-                <!-- 注册窗口 -->
+                <!-- 注册模态窗 -->
                 <div id="register" class="modal fade" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -201,7 +190,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- 登录窗口 -->
+                <!-- 登录模态窗 -->
                 <div id="login" class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -230,24 +219,6 @@
                                     <a href="" data-toggle="modal" data-dismiss="modal"
                                        data-target="#register">还没有账号？点我注册</a>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 地点窗口 -->
-                <div id="places" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-title">
-                                <h2 class="text-center">全部地点</h2>
-                            </div>
-                            <div class="modal-body">
-
                             </div>
                         </div>
                     </div>
@@ -446,14 +417,74 @@
         </div>
     </div>
 </script>
+<!--地点介绍模板-->
+<script type="text/x-template" id="place-template">
+    <div>
+        <div class="panel panel-title-custom">
+            <h5 class="kaiti-25 text-center">地点信息{{ $route.params.id }}</h5>
+        </div>
+
+        <div class="panel">
+            <div class="text-center">
+                <span class="kaiti-25"><strong>{{poem.title}}</strong></span>
+            </div>
+            <div class="table-info">
+                <table class="table cart-items light-inputs">
+                    <tbody>
+                    <tr>
+                        <td><span class="kaiti-17">作者：</span>{{poem.author}}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="kaiti-17">题材：</span>{{poem.theme}}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="kaiti-17">文学体裁：</span>{{poem.style}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pull-right">
+                                <button class="btn-warning" @click="getInfoByPoetId()">
+                                    <span class="kaiti-17">加入收藏</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#content-tab">原文&翻译</a></li>
+                <li><a data-toggle="tab" href="#poem-reviews-tab">评论</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="content-tab" class="tab-pane fade in active">
+                    <p>故人西辞黄鹤楼，烟花三月下扬州</p>
+                    <p>孤帆远影碧空尽，唯见长江天际流</p>
+                    <p>友人在黄鹤楼向我挥手告别，阳光明媚的三月他要去扬州。</p>
+                    <p>他的帆影渐渐消失在碧空中，只看见滚滚长江在天边奔流。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 <!--列表模板-->
 <script type="text/x-template" id="list-template">
-    <div class="panel">
-        <ul class="list-group-item" v-for="item in list.items">
-            <li class="item">
-                <router-link v-bind:to="{name:list.type, params:{id:item.id}}" href="#">{{item.name}}</router-link>
-            </li>
-        </ul>
+    <div>
+        <!--列表名称-->
+        <div class="panel panel-title-custom">
+            <h5 class="kaiti-25 text-center">{{ $route.params.type }}</h5>
+        </div>
+        <!--列表主体-->
+        <div class="panel">
+            <ul class="list-group-item" v-for="item in list.items">
+                <li class="item">
+                    <router-link v-bind:to="{name:list.type, params:{id:item.id}}" href="#">{{item.name}}</router-link>
+                </li>
+            </ul>
+        </div>
     </div>
 </script>
 <!--首页模板-->
