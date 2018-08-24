@@ -24,6 +24,7 @@
             </div>
             <!--导航栏主体-->
             <div>
+                <!--下拉列表框导航栏元素-->
                 <ul class="nav navbar-nav">
                     <!--图层控制下拉框-->
                     <li class="dropdown">
@@ -91,8 +92,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">长安</a></li>
-                            <li><a href="#">洛阳</a></li>
+                            <li><router-link to="/place/changan" href="#">长安</router-link></li>
+                            <li><router-link to="/place/luoyang" href="#">洛阳</router-link></li>
                             <li class="divider"></li>
                             <li>
                                 <router-link to="/list/place" href="#">全部地点</router-link>
@@ -122,20 +123,21 @@
                         </ul>
                     </li>
                     <!--分类下拉框-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            分类
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">边塞诗</a></li>
-                            <li><a href="#">田园诗</a></li>
-                            <li><a href="#">送别诗</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">所有分类</a></li>
-                        </ul>
-                    </li>
+                    <!--<li class="dropdown">-->
+                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+                            <!--分类-->
+                            <!--<b class="caret"></b>-->
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--<li><a href="#">边塞诗</a></li>-->
+                            <!--<li><a href="#">田园诗</a></li>-->
+                            <!--<li><a href="#">送别诗</a></li>-->
+                            <!--<li class="divider"></li>-->
+                            <!--<li><a href="#">所有分类</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
                 </ul>
+                <!--登录注册导航栏元素-->
                 <ul class="nav navbar-nav navbar-right" v-if="visitor.logined == false">
                     <li>
                         <a data-toggle="modal" data-target="#register" href="">注册</a>
@@ -365,7 +367,7 @@
                     <tr>
                         <td>
                             <div class="pull-right">
-                                <button class="btn-warning" @click="getInfoByPoetId()">
+                                <button class="btn-warning" @click="getInfoByPoemId()">
                                     <span class="kaiti-17">加入收藏</span>
                                 </button>
                             </div>
@@ -426,24 +428,24 @@
 
         <div class="panel">
             <div class="text-center">
-                <span class="kaiti-25"><strong>{{poem.title}}</strong></span>
+                <span class="kaiti-25"><strong>{{place.old_name}}</strong></span>
             </div>
             <div class="table-info">
                 <table class="table cart-items light-inputs">
                     <tbody>
                     <tr>
-                        <td><span class="kaiti-17">作者：</span>{{poem.author}}</td>
+                        <td><span class="kaiti-17">现地名：</span>{{place.new_name}}</td>
                     </tr>
                     <tr>
-                        <td><span class="kaiti-17">题材：</span>{{poem.theme}}</td>
+                        <td><span class="kaiti-17">经度：</span>{{place.longitude}}</td>
                     </tr>
                     <tr>
-                        <td><span class="kaiti-17">文学体裁：</span>{{poem.style}}</td>
+                        <td><span class="kaiti-17">纬度：</span>{{place.latitude}}</td>
                     </tr>
                     <tr>
                         <td>
                             <div class="pull-right">
-                                <button class="btn-warning" @click="getInfoByPoetId()">
+                                <button class="btn-warning" @click="getInfoByPlaceId()">
                                     <span class="kaiti-17">加入收藏</span>
                                 </button>
                             </div>
@@ -456,15 +458,25 @@
 
         <div class="panel">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#content-tab">原文&翻译</a></li>
-                <li><a data-toggle="tab" href="#poem-reviews-tab">评论</a></li>
+                <li class="active"><a data-toggle="tab" href="#poet-tab">该地出生的诗人</a></li>
+                <li><a data-toggle="tab" href="#poem-tab">创作在该地的诗歌</a></li>
             </ul>
             <div class="tab-content">
-                <div id="content-tab" class="tab-pane fade in active">
-                    <p>故人西辞黄鹤楼，烟花三月下扬州</p>
-                    <p>孤帆远影碧空尽，唯见长江天际流</p>
-                    <p>友人在黄鹤楼向我挥手告别，阳光明媚的三月他要去扬州。</p>
-                    <p>他的帆影渐渐消失在碧空中，只看见滚滚长江在天边奔流。</p>
+                <div id="poet-tab" class="tab-pane fade in active">
+                    <ul class="list-group-item" v-for="poet in place.poets">
+                        <li class="item">
+                            <router-link v-bind:to="{name:'poet',params:{id:poet.id}}" href="#">{{poet.name}}
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
+                <div id="poem-tab" class="tab-pane fade in active">
+                    <ul class="list-group-item" v-for="poem in place.poems">
+                        <li class="item">
+                            <router-link v-bind:to="{name:'poem',params:{id:poem.id}}" href="#">{{poem.title}}
+                            </router-link>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

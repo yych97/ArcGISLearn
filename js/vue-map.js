@@ -55,6 +55,7 @@ const libai = {
     ]
 };
 const huanghelou = {
+    poemId: 'huanghelou',
     title: '黄鹤楼 送孟浩然之广陵',
     author: '李白',
     place: '不详',
@@ -71,6 +72,26 @@ const huanghelou = {
             content: 'Very good!'
         }
     ]
+};
+const changan = {
+    old_name: '长安',
+    new_name: '西安',
+    longitude: '105',
+    latitude: '40',
+    poets: [
+        {
+            poetId: 'libai',
+            name: '李白'
+        },
+        {
+            poemId: 'baijuyi',
+            name: '白居易'
+        }
+    ],
+    poems: [{
+        id: 'huanghelou',
+        title: '黄鹤楼 送孟浩然之广陵'
+    }]
 };
 const listData = {
     type: 'poet',
@@ -118,6 +139,20 @@ const poem = {
         }
     }
 };
+// 定义地点(路由) 组件。
+const place = {
+    template: '#place-template',
+    data: function () {
+        return {
+            place: changan
+        };
+    },
+    methods: {
+        getInfoByPlaceId: function () {
+            alert(this.$route.params.id);
+        }
+    }
+};
 // 定义首页(路由) 组件。
 const home = {
     template: '#home-template',
@@ -135,7 +170,7 @@ const list = {
         };
     },
     methods: {
-        getListByType: function(){
+        getListByType: function () {
             alert(this.$route.params.id);
         }
     }
@@ -147,6 +182,7 @@ const router = new VueRouter({
         // 动态路径参数 以冒号开头
         {path: '/poet/:id', name: 'poet', component: poet},
         {path: '/poem/:id', name: 'poem', component: poem},
+        {path: '/place/:id', name: 'place', component: place},
         {path: '/list/:type', name: 'list', component: list},
         {path: '/', name: 'home', component: home}
     ]
