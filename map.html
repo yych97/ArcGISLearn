@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>map</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
           href="http://101.132.125.165:8081/arcgis_js_api/library/4.7/esri/css/main.css">
     <link rel="stylesheet" type="text/css" href="css/map.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/vue.js"></script>
-    <script type="text/javascript" src="js/vue-router.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/vue.js"></script>
+    <script type="text/javascript" src="lib/js/vue-router.js"></script>
     <script src="http://101.132.125.165:8081/arcgis_js_api/library/4.7/init.js"></script>
 </head>
 <body>
@@ -46,12 +46,12 @@
                             <li class="divider"></li>
                             <li>
                                 <a href="#">普通地图
-                                    <input v-model="base_layer" name="base_layer" type="radio" class="pull-right" value="路网图">
+                                    <input v-model="base_layer" type="radio" class="pull-right" value="osm">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">地形图
-                                    <input v-model="base_layer" name="base_layer" type="radio" class="pull-right" value="地形图">
+                                    <input v-model="base_layer" type="radio" class="pull-right" value="terrain">
                                 </a>
                             </li>
                         </ul>
@@ -123,19 +123,19 @@
                         </ul>
                     </li>
                     <!--分类下拉框-->
-                    <!--<li class="dropdown">-->
-                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-                            <!--分类-->
-                            <!--<b class="caret"></b>-->
-                        <!--</a>-->
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a href="#">边塞诗</a></li>-->
-                            <!--<li><a href="#">田园诗</a></li>-->
-                            <!--<li><a href="#">送别诗</a></li>-->
-                            <!--<li class="divider"></li>-->
-                            <!--<li><a href="#">所有分类</a></li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            分类
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">边塞诗</a></li>
+                            <li><a href="#">田园诗</a></li>
+                            <li><a href="#">送别诗</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">所有分类</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <!--登录注册导航栏元素-->
                 <ul class="nav navbar-nav navbar-right" v-if="visitor.logined == false">
@@ -299,15 +299,13 @@
                 <!-- #description-tab -->
                 <div id="description-tab" class="tab-pane fade in active">
                     <p v-for="description in poet.descriptions">{{description}}</p>
-                    <p><a v-bind:href="poet.baikeLink">更多信息</a></p>
                 </div>
                 <!-- #works-tab -->
                 <div id="works-tab" class="tab-pane fade">
                     <ul class="list-group-item" v-for="work in poet.works">
                         <li class="item">
-                            <router-link v-bind:to="{name:'poem',params:{id:work.titleId}}" href="#">{{work.title}}
+                            <router-link v-bind:to="{name:'poem',params:{id:work.id}}" href="#">{{work.name}}
                             </router-link>
-                            <a class="pull-right" v-bind:href="poet.baikeLink">{{work.place}}</a>
                         </li>
                     </ul>
                 </div>
@@ -355,14 +353,8 @@
             <div class="table-info">
                 <table class="table cart-items light-inputs">
                     <tbody>
-                    <tr>
-                        <td><span class="kaiti-17">作者：</span>{{poem.author}}</td>
-                    </tr>
-                    <tr>
-                        <td><span class="kaiti-17">题材：</span>{{poem.theme}}</td>
-                    </tr>
-                    <tr>
-                        <td><span class="kaiti-17">文学体裁：</span>{{poem.style}}</td>
+                    <tr v-for="content_one in poem.content">
+                        <td><span class="kaiti-17">{{content_one}}</span></td>
                     </tr>
                     <tr>
                         <td>
@@ -380,15 +372,34 @@
 
         <div class="panel">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#content-tab">原文&翻译</a></li>
+                <li class="active"><a data-toggle="tab" href="#Introduction-tab">简介</a></li>
+                <li><a data-toggle="tab" href="#translation-tab">翻译</a></li>
                 <li><a data-toggle="tab" href="#poem-reviews-tab">评论</a></li>
             </ul>
             <div class="tab-content">
-                <div id="content-tab" class="tab-pane fade in active">
-                    <p>故人西辞黄鹤楼，烟花三月下扬州</p>
-                    <p>孤帆远影碧空尽，唯见长江天际流</p>
-                    <p>友人在黄鹤楼向我挥手告别，阳光明媚的三月他要去扬州。</p>
-                    <p>他的帆影渐渐消失在碧空中，只看见滚滚长江在天边奔流。</p>
+                <div id="Introduction-tab" class="tab-pane fade in active">
+                    <table class="table cart-items light-inputs">
+                        <tbody>
+                        <tr>
+                            <td><span class="kaiti-17">作者：</span>{{poem.author}}</td>
+                        </tr>
+                        <tr>
+                            <td><span class="kaiti-17">题材：</span>{{poem.theme}}</td>
+                        </tr>
+                        <tr>
+                            <td><span class="kaiti-17">文学体裁：</span>{{poem.style}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="translation-tab" class="tab-pane fade">
+                    <table class="table cart-items light-inputs">
+                        <tbody>
+                        <tr v-for="translation_one in poem.translation">
+                            <td>{{translation_one}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div id="poem-reviews-tab" class="tab-pane fade">
                     <div class="review clearfix" v-for="comment in poem.comments">
@@ -508,6 +519,7 @@
     </div>
 </script>
 <!--JS-->
+<script type="text/javascript" src="js/api/test.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/vue-map.js"></script>
 </html>

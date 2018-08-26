@@ -18,19 +18,14 @@ const libai = {
         '代表作有《望庐山瀑布》、《行路难》、《蜀道难》、《将进酒》、《越女词》、《早发白帝城》等多首。',
         '李白所作词赋，宋人已有传记（如文莹《湘山野录》卷上），就其开创意义及艺术成就而言，“李白词”享有极为崇高的地位。'
     ],
-    baikeLink: 'https://baike.so.com/doc/5340576-5576019.html',
     works: [
         {
-            titleId: '1',
-            title: '黄鹤楼送孟浩然之广陵',
-            placeId: '1',
-            place: '不详'
+            id: '1',
+            name: '黄鹤楼送孟浩然之广陵'
         },
         {
-            titleId: '2',
-            title: '早发白帝城',
-            placeId: '2',
-            place: '不详'
+            id: '2',
+            name: '早发白帝城'
         }
     ],
     comments: [
@@ -61,7 +56,18 @@ const huanghelou = {
     place: '不详',
     theme: '赠别诗',
     style: '七言绝句',
-    content: {},
+    content: [
+        '故人西辞黄鹤楼，',
+        '烟花三月下扬州。',
+        '孤帆远影碧空尽，',
+        '唯见长江天际流。'
+    ],
+    translation: [
+        '友人在黄鹤楼向我挥手告别，',
+        '阳光明媚的三月他要去扬州。',
+        '他的帆影渐渐消失在碧空中，',
+        '只看见滚滚长江在天边奔流。'
+    ],
     comments: [
         {
             username: 'shq',
@@ -74,23 +80,24 @@ const huanghelou = {
     ]
 };
 const changan = {
+    placeId: '1',
     old_name: '长安',
     new_name: '西安',
     longitude: '105',
     latitude: '40',
     poets: [
         {
-            poetId: 'libai',
+            id: 'libai',
             name: '李白'
         },
         {
-            poemId: 'baijuyi',
+            id: 'baijuyi',
             name: '白居易'
         }
     ],
     poems: [{
         id: 'huanghelou',
-        title: '黄鹤楼 送孟浩然之广陵'
+        name: '黄鹤楼 送孟浩然之广陵'
     }]
 };
 const listData = {
@@ -109,7 +116,7 @@ const listData = {
             name: '杜甫'
         }
     ]
-}
+};
 
 // 定义诗人(路由) 组件。
 const poet = {
@@ -188,16 +195,19 @@ const router = new VueRouter({
     ]
 });
 
-var wm = new Vue({
+var vm = new Vue({
     el: '#app',
-    data: {
-        visitor: {
-            logined: false,
-            username: '',
-        },
-        point_layer: '诗人',
-        base_layer: '地形图',
-        period_layer: '初唐'
+    data: initData,
+    methods: {
+        loadMapView: function(){
+            loadMapView();
+        }
+    },
+    watch: {
+        // 如果 `base_layer` 发生改变，这个函数就会运行
+        base_layer: function () {
+            loadMapView();
+        }
     },
     router: router
 }).$mount('#app');
