@@ -65,22 +65,22 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#">初唐
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="初唐">
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Chutang">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">盛唐
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="盛唐">
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Shengtang">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">中唐
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="中唐">
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Zhongtang">
                                 </a>
                             </li>
                             <li>
                                 <a href="#">晚唐
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="晚唐">
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Wantang">
                                 </a>
                             </li>
                         </ul>
@@ -134,6 +134,19 @@
                             <li><a href="#">送别诗</a></li>
                             <li class="divider"></li>
                             <li><a href="#">所有分类</a></li>
+                        </ul>
+                    </li>
+                    <!--诗人轨迹-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            诗人轨迹
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">李白</a></li>
+                            <li><a href="#">...</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">查看全部</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -518,8 +531,9 @@
         </div>
     </div>
 </script>
-<!--JS-->
-<script type="text/javascript" src="js/api/test.js"></script>
+<!--JS后台接口函数-->
+<!--<script type="text/javascript" src="js/api/test.js"></script>-->
+<!--JS页面脚本-->
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/vue-map.js"></script>
 </html>

@@ -207,6 +207,10 @@ var vm = new Vue({
         // 如果 `base_layer` 发生改变，这个函数就会运行
         base_layer: function () {
             loadMapView();
+        },
+        // 如果 `period_layer` 发生改变，这个函数就会运行
+        period_layer: function () {
+            loadMapView();
         }
     },
     router: router
