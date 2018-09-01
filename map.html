@@ -11,6 +11,13 @@
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/js/vue.js"></script>
     <script type="text/javascript" src="lib/js/vue-router.js"></script>
+    <script type="text/javascript">
+        var dojoConfig = {
+            has: {
+                "esri-featurelayer-webgl": 1
+            }
+        };
+    </script>
     <script src="http://101.132.125.165:8081/arcgis_js_api/library/4.7/init.js"></script>
 </head>
 <body>
@@ -34,23 +41,22 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">诗人
-                                    <input v-model="point_layer" name="point_layer" type="radio" class="pull-right" value="诗人">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">诗歌
-                                    <input v-model="point_layer" name="point_layer" type="radio" class="pull-right" value="诗歌">
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">普通地图
+                                <a href="#">OSM地图
                                     <input v-model="base_layer" type="radio" class="pull-right" value="osm">
                                 </a>
                             </li>
                             <li>
-                                <a href="#">地形图
+                                <a href="#">天地图
+                                    <input v-model="base_layer" type="radio" class="pull-right" value="osm">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">ESRI街道图
+                                    <input v-model="base_layer" type="radio" class="pull-right" value="streets">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">ESRI地形图
                                     <input v-model="base_layer" type="radio" class="pull-right" value="terrain">
                                 </a>
                             </li>
@@ -81,6 +87,12 @@
                             <li>
                                 <a href="#">晚唐
                                     <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Wantang">
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">纵览模式<br>（无时期图层）
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Empty">
                                 </a>
                             </li>
                         </ul>

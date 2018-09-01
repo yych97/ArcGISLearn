@@ -198,10 +198,9 @@ const router = new VueRouter({
 var vm = new Vue({
     el: '#app',
     data: initData,
-    methods: {
-        loadMapView: function(){
-            loadMapView();
-        }
+    methods: {},
+    mounted: function(){
+        loadMapView();
     },
     watch: {
         // 如果 `base_layer` 发生改变，这个函数就会运行
