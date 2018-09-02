@@ -55,41 +55,6 @@
                             </li>
                         </ul>
                     </li>
-                    <!--时期下拉框-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            时期
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">初唐
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Chutang">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">盛唐
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Shengtang">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">中唐
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Zhongtang">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">晚唐
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Wantang">
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">纵览模式<br>（无时期图层）
-                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Empty">
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <!--地点下拉框-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -254,6 +219,11 @@
                 <router-view></router-view>
             </div>
         </div>
+        <!--ESRI自定义地图图例-->
+        <div id="infoDiv" class="esri-widget" style="height: 40px; width: 140px; text-align: center" v-if="period_layer != 'Empty'">
+            <p style="padding-top: 11px; font-size: 18px">时期：{{period_layer}}</p>
+        </div>
+        <div id="infoDiv" style="visibility: hidden" v-else></div>
     </div>
 </div>
 </body>

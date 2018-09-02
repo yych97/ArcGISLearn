@@ -152,11 +152,13 @@ function loadMapView() {
     require([
         "esri/Map",
         "esri/views/MapView",
+        "esri/widgets/Legend",
         "esri/layers/MapImageLayer",
         "dojo/domReady!"
     ], function (
         Map,
         MapView,
+        Legend,
         MapImageLayer
     ) {
         //测试用图层
@@ -187,9 +189,12 @@ function loadMapView() {
         //map.add(test_layer); //测试图层
         map.add(place_layer); //地点图层
         map.add(highlight_layer); //高亮图层
-        // if( id != null ){
-        //     zoomByPlaceId(id);
-        // }
+        //添加图例框
+        const legend = new Legend({
+            view: mapview,
+            container: "legendDiv"
+        });
+        mapview.ui.add("infoDiv", "top-right");
     });
 }
 
@@ -232,7 +237,7 @@ function zoomByPlaceId(id) {
             // });
             mapViewConfig.center = [feature.geometry.x, feature.geometry.y];
             mapViewConfig.zoom = 8;
-            //loadMapView();
+            loadMapView();
         })
     });
 }

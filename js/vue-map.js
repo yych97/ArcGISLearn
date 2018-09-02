@@ -186,6 +186,7 @@ const place = {
         }
     },
     mounted: function(){
+        initData.period_layer = "Empty";
         loadMapView();
         zoomByPlaceId(this.$data.place.placeId);
     },
@@ -203,6 +204,7 @@ const home = {
     },
     methods: {},
     mounted: function(){
+        initData.period_layer = "Empty";
         loadMapView();
     }
 };
