@@ -153,13 +153,11 @@ function loadMapView() {
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/MapImageLayer",
-        "esri/tasks/support/Query",
         "dojo/domReady!"
     ], function (
         Map,
         MapView,
-        MapImageLayer,
-        Query
+        MapImageLayer
     ) {
         //测试用图层
         let tangLayer = new MapImageLayer({
@@ -178,21 +176,24 @@ function loadMapView() {
         mapview = new MapView({
             map: map,
             container: "map",
-            center: [110, 40],
-            zoom: 4,
+            center: mapViewConfig.center,
+            zoom: mapViewConfig.zoom,
             highlightOptions: {
                 color: [255, 255, 0, 1],
                 haloOpacity: 0.9,
                 fillOpacity: 0.2
             }
         });
-        map.add(test_layer);
-        map.add(place_layer);
-        map.add(highlight_layer);
+        //map.add(test_layer); //测试图层
+        map.add(place_layer); //地点图层
+        map.add(highlight_layer); //高亮图层
+        // if( id != null ){
+        //     zoomByPlaceId(id);
+        // }
     });
 }
 
-//highlight方法
+//zoomByPlaceId方法
 function zoomByPlaceId(id) {
     require([
         "esri/Map",
@@ -220,21 +221,36 @@ function zoomByPlaceId(id) {
         //     highlight = layerView.highlight(ids);
         // });
         //服务器端查询
-        mapview.whenLayerView(place_layer).then(function (layerView) {
-            let query = place_layer.createQuery();
-            query.where = "placeId = " + id;
-            return place_layer.queryFeatures(query).then(function (result) {
-                let feature = result.features[0];
-                //console.log(feature);
-                mapview.goTo({
-                    target: feature.geometry,
-                    zoom: 12
-                });
-            })
+        mapview.when(function(){ //待mapview生成后执行
+            mapview.whenLayerView(place_layer).then(function (layerView) {
+                let query = place_layer.createQuery();
+                query.where = "placeId = " + id;
+                place_layer.queryFeatures(query).then(function (result) {
+                    let feature = result.features[0];
+                    //console.log(feature);
+                    // mapview.goTo({
+                    //     target: feature.geometry,
+                    //     zoom: 12
+                    // });
+                    mapViewConfig.center = [feature.geometry.x, feature.geometry.y];
+                    mapViewConfig.zoom = 8;
+                    //loadMapView();
+                })
+            });
         });
     });
 }
 
 //通过graphiclsyer不同于featurelayer的样式实现高亮
 //highlight_layer.add(feature);
+
+function changePeriodLayerById(id) {
+    switch (id) {
+        case 0: initData.period_layer = 'Empty'; break;
+        case 1: initData.period_layer = 'Chutang'; break;
+        case 2: initData.period_layer = 'Shengtang'; break;
+        case 3: initData.period_layer = 'Zhongtang'; break;
+        case 4: initData.period_layer = 'Wantang'; break;
+    }
+}
 

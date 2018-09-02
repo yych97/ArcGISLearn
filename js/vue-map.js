@@ -10,6 +10,8 @@ const libai = {
     birth: '701年（长安元年）',
     death: '762年（宝应元年）',
     home: '绵州昌隆县（今四川省江油市）',
+    placeId: '12',
+    periodId: 1,
     descriptions: [
         '是唐代伟大的浪漫主义诗人，被后人誉为“诗仙”。' +
         '与杜甫并称为“李杜”，为了与另两位诗人李商隐与杜牧即“小李杜”区别，杜甫与李白又合称“大李杜”。' +
@@ -54,6 +56,8 @@ const huanghelou = {
     title: '黄鹤楼 送孟浩然之广陵',
     author: '李白',
     place: '不详',
+    placeId: '45',
+    periodId: 3,
     theme: '赠别诗',
     style: '七言绝句',
     content: [
@@ -130,6 +134,17 @@ const poet = {
         getInfoByPoetId: function () {
             alert(this.$route.params.id);
         }
+    },
+    mounted: function () {
+        changePeriodLayerById(this.$data.poet.periodId);
+        loadMapView();
+        zoomByPlaceId(this.$data.poet.placeId);
+    },
+    watch: {
+        '$route': function() {
+            changePeriodLayerById(this.$data.poet.periodId);
+            zoomByPlaceId(this.$data.poet.placeId);
+        }
     }
 };
 // 定义诗歌(路由) 组件。
@@ -143,6 +158,17 @@ const poem = {
     methods: {
         getInfoByPoemId: function () {
             alert(this.$route.params.id);
+        }
+    },
+    mounted: function(){
+        changePeriodLayerById(this.$data.poem.periodId); // 切换时期图层
+        loadMapView();
+        zoomByPlaceId(this.$data.poem.placeId);
+    },
+    watch: {
+        '$route': function() {
+            changePeriodLayerById(this.$data.poem.periodId); // 切换时期图层
+            zoomByPlaceId(this.$data.poem.placeId);
         }
     }
 };
@@ -158,6 +184,15 @@ const place = {
         getInfoByPlaceId: function () {
             alert(this.$route.params.id);
         }
+    },
+    mounted: function(){
+        loadMapView();
+        zoomByPlaceId(this.$data.place.placeId);
+    },
+    watch: {
+        '$route': function() {
+            zoomByPlaceId(this.$data.place.placeId);
+        }
     }
 };
 // 定义首页(路由) 组件。
@@ -166,7 +201,10 @@ const home = {
     data: function () {
         return {};
     },
-    methods: {}
+    methods: {},
+    mounted: function(){
+        loadMapView();
+    }
 };
 // 定义列表(路由) 组件。
 const list = {
@@ -180,6 +218,9 @@ const list = {
         getListByType: function () {
             alert(this.$route.params.id);
         }
+    },
+    mounted: function(){
+        loadMapView();
     }
 };
 
@@ -199,9 +240,6 @@ var vm = new Vue({
     el: '#app',
     data: initData,
     methods: {},
-    mounted: function(){
-        loadMapView();
-    },
     watch: {
         // 如果 `base_layer` 发生改变，这个函数就会运行
         base_layer: function () {
