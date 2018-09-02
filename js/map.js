@@ -221,23 +221,19 @@ function zoomByPlaceId(id) {
         //     highlight = layerView.highlight(ids);
         // });
         //服务器端查询
-        mapview.when(function(){ //待mapview生成后执行
-            mapview.whenLayerView(place_layer).then(function (layerView) {
-                let query = place_layer.createQuery();
-                query.where = "placeId = " + id;
-                place_layer.queryFeatures(query).then(function (result) {
-                    let feature = result.features[0];
-                    //console.log(feature);
-                    // mapview.goTo({
-                    //     target: feature.geometry,
-                    //     zoom: 12
-                    // });
-                    mapViewConfig.center = [feature.geometry.x, feature.geometry.y];
-                    mapViewConfig.zoom = 8;
-                    //loadMapView();
-                })
-            });
-        });
+        let query = place_layer.createQuery();
+        query.where = "placeId = " + id;
+        place_layer.queryFeatures(query).then(function (result) {
+            let feature = result.features[0];
+            //console.log(feature);
+            // mapview.goTo({
+            //     target: feature.geometry,
+            //     zoom: 12
+            // });
+            mapViewConfig.center = [feature.geometry.x, feature.geometry.y];
+            mapViewConfig.zoom = 8;
+            //loadMapView();
+        })
     });
 }
 
@@ -246,11 +242,21 @@ function zoomByPlaceId(id) {
 
 function changePeriodLayerById(id) {
     switch (id) {
-        case 0: initData.period_layer = 'Empty'; break;
-        case 1: initData.period_layer = 'Chutang'; break;
-        case 2: initData.period_layer = 'Shengtang'; break;
-        case 3: initData.period_layer = 'Zhongtang'; break;
-        case 4: initData.period_layer = 'Wantang'; break;
+        case 0:
+            initData.period_layer = 'Empty';
+            break;
+        case 1:
+            initData.period_layer = 'Chutang';
+            break;
+        case 2:
+            initData.period_layer = 'Shengtang';
+            break;
+        case 3:
+            initData.period_layer = 'Zhongtang';
+            break;
+        case 4:
+            initData.period_layer = 'Wantang';
+            break;
     }
 }
 
