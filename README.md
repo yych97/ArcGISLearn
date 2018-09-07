@@ -1,6 +1,7 @@
 ## 诗意中国的无后台测试版
 ### 入口
-map.html \
+index.html  
 ### 框架
-CSS: bootstrap \
-JS: JQuery Vue
+1. 地图: ArcGIS API FOR JavaScript 4.x  
+2. CSS: bootstrap  
+3. JS: JQuery、Vue、Dojo
