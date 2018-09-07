@@ -141,7 +141,7 @@ require([
         //popupTemplate: pTemplate
     });
     place_layer = new FeatureLayer({
-        url: "http://192.168.1.26/arcgis/rest/services/SYZG/places/MapServer/0",
+        url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
         popupTemplate: pTemplate
     })
     highlight_layer = new GraphicsLayer();
@@ -171,7 +171,7 @@ function loadMapView() {
         if (initData.period_layer != "Empty") {
             //添加时期图层
             let period_ImageLayer = new MapImageLayer({
-                url: "http://192.168.1.26/arcgis/rest/services/SYZG/" + initData.period_layer + "/MapServer"
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + initData.period_layer + "/MapServer"
             });
             map.add(period_ImageLayer);
         }
