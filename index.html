@@ -33,28 +33,64 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
+                            <!-- <li>
+                                <a href="#">诗人
+                                    <input v-model="point_layer" name="point_layer" type="radio" class="pull-right" value="诗人">
+                                </a>
+                            </li>
                             <li>
-                                <a href="#">OSM地图
+                                <a href="#">诗歌
+                                    <input v-model="point_layer" name="point_layer" type="radio" class="pull-right" value="诗歌">
+                                </a>
+                            </li>
+                            <li class="divider"></li> -->
+                            <li>
+                                <a href="#">普通地图
                                     <input v-model="base_layer" type="radio" class="pull-right" value="osm">
                                 </a>
                             </li>
                             <li>
-                                <a href="#">天地图
-                                    <input v-model="base_layer" type="radio" class="pull-right" value="osm">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">ESRI街道图
-                                    <input v-model="base_layer" type="radio" class="pull-right" value="streets">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">ESRI地形图
+                                <a href="#">地形图
                                     <input v-model="base_layer" type="radio" class="pull-right" value="terrain">
                                 </a>
                             </li>
                         </ul>
                     </li>
+                    <!--时期下拉框-->
+                    <!-- <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            时期
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">初唐
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Chutang">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">盛唐
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Shengtang">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">中唐
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Zhongtang">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">晚唐
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Wantang">
+                                </a>
+                            </li>                            
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">无
+                                    <input v-model="period_layer" name="period_layer" type="radio" class="pull-right" value="Empty">
+                                </a>
+                            </li>
+                        </ul>
+                    </li> -->
                     <!--地点下拉框-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -62,8 +98,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><router-link to="/place/changan" href="#">长安</router-link></li>
-                            <li><router-link to="/place/luoyang" href="#">洛阳</router-link></li>
+                            <li><router-link to="/place/103" href="#">长安</router-link></li>
+                            <li><router-link to="/place/37" href="#">洛阳</router-link></li>
                             <li class="divider"></li>
                             <li>
                                 <router-link to="/list/place" href="#">全部地点</router-link>
@@ -78,45 +114,18 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <router-link to="/poet/libai" href="#">李白</router-link>
+                                <router-link to="/poet/23" href="#">李白</router-link>
                             </li>
                             <li>
-                                <router-link to="/poet/baijuyi" href="#">白居易</router-link>
+                                <router-link to="/poet/1" href="#">白居易</router-link>
                             </li>
                             <li>
-                                <router-link to="/poet/dufu" href="#">杜甫</router-link>
+                                <router-link to="/poet/10" href="#">杜甫</router-link>
                             </li>
                             <li class="divider"></li>
                             <li>
                                 <router-link to="/list/poet" href="#">全部作者</router-link>
                             </li>
-                        </ul>
-                    </li>
-                    <!--分类下拉框-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            分类
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">边塞诗</a></li>
-                            <li><a href="#">田园诗</a></li>
-                            <li><a href="#">送别诗</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">所有分类</a></li>
-                        </ul>
-                    </li>
-                    <!--诗人轨迹-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            诗人轨迹
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">李白</a></li>
-                            <li><a href="#">...</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">查看全部</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -213,6 +222,7 @@
     </nav>
     <!--主体内容部分-->
     <div class="container container-map">
+        <!--地图、侧边栏-->
         <div class="row row-map">
             <div id="map" class="col-md-9"></div>
             <div id="side" class="col-md-3">
@@ -290,9 +300,9 @@
                 </div>
                 <!-- #works-tab -->
                 <div id="works-tab" class="tab-pane fade">
-                    <ul class="list-group-item" v-for="work in poet.works">
+                    <ul class="list-group-item" v-for="work in poet.works.items">
                         <li class="item">
-                            <router-link v-bind:to="{name:'poem',params:{id:work.id}}" href="#">{{work.name}}
+                            <router-link v-bind:to="{name:poet.works.type, params:{id:work.id}}" href="#">{{work.name}}
                             </router-link>
                         </li>
                     </ul>
@@ -462,17 +472,17 @@
             </ul>
             <div class="tab-content">
                 <div id="poet-tab" class="tab-pane fade in active">
-                    <ul class="list-group-item" v-for="poet in place.poets">
+                    <ul class="list-group-item" v-for="poet in place.poets.items">
                         <li class="item">
-                            <router-link v-bind:to="{name:'poet',params:{id:poet.id}}" href="#">{{poet.name}}
+                            <router-link v-bind:to="{name:place.poets.type, params:{id:poet.id}}" href="#">{{poet.name}}
                             </router-link>
                         </li>
                     </ul>
                 </div>
-                <div id="poem-tab" class="tab-pane fade in active">
-                    <ul class="list-group-item" v-for="poem in place.poems">
+                <div id="poem-tab" class="tab-pane fade">
+                    <ul class="list-group-item" v-for="poem in place.poems.items">
                         <li class="item">
-                            <router-link v-bind:to="{name:'poem',params:{id:poem.id}}" href="#">{{poem.title}}
+                            <router-link v-bind:to="{name:place.poems.type, params:{id:poem.id}}" href="#">{{poem.name}}
                             </router-link>
                         </li>
                     </ul>
@@ -506,7 +516,9 @@
         </div>
     </div>
 </script>
-<!--JS页面脚本-->
+<!--JS-->
+<script type="text/javascript" src="js/testdata.js"></script>
+<script type="text/javascript" src="js/api/test.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/vue-map.js"></script>
 </html>
