@@ -18,9 +18,6 @@ const poet = {
     },
     mounted: function () {
         changePeriodLayerById(this.$data.poet.periodId);
-        if ( mapview == null ) {
-            loadMapView();
-        }        
         zoomByPlaceId(this.$data.poet.placeId);
         layerChange();
     },
@@ -50,9 +47,6 @@ const poem = {
     },
     mounted: function(){
         changePeriodLayerById(this.$data.poem.periodId); // 切换时期图层
-        if ( mapview == null ) {
-            loadMapView();
-        }
         zoomByPlaceId(this.$data.poem.placeId);
         layerChange();
     },
@@ -82,9 +76,6 @@ const place = {
     },
     mounted: function(){
         changePeriodLayerById(0);
-        if ( mapview == null ) {
-            loadMapView();
-        }        
         zoomByPlaceId(this.$data.place.placeId);
         layerChange();
     },
@@ -106,7 +97,7 @@ const home = {
         if ( mapview == null ) {
             loadMapView();
         }
-        layerChange();        
+        layerChange();
     }
 };
 // 定义列表(路由) 组件。
@@ -126,9 +117,7 @@ const list = {
         }
     },
     mounted: function(){
-        if ( mapview == null ) {
-            loadMapView();
-        }
+        changePeriodLayerById(0);
         layerChange();
     },
     watch: {
@@ -155,12 +144,10 @@ var vm = new Vue({
     watch: {
         // 如果 `base_layer` 发生改变，这个函数就会运行
         base_layer: function () {
-            //loadMapView();
             layerChange();
         },
         // 如果 `period_layer` 发生改变，这个函数就会运行
         period_layer: function () {
-            //loadMapView();
             layerChange()
         }
     },

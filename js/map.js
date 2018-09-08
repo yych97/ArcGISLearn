@@ -2,7 +2,7 @@
 var map;
 var test_layer;
 var place_layer;
-var mapview = null;
+var mapview;
 var highlight_layer;
 var period_ImageLayer;
 
@@ -23,17 +23,32 @@ mapViewConfig = {
 };
 //初始化地图图层信息
 require([
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/widgets/Legend",
     "esri/layers/FeatureLayer",
     "esri/layers/GraphicsLayer",
     "esri/layers/MapImageLayer",
     "dojo/domReady!"
 ], function (
+    Map,
+    MapView,
+    Legend,
     FeatureLayer,
     GraphicsLayer,
-    MapImageLayer,
-    Legend
+    MapImageLayer
 ) {
-    period_ImageLayer = new MapImageLayer()
+    map = new Map({
+        basemap: initData.base_layer
+    });
+    mapview = new MapView({
+        map: map,
+        container: "map",
+        center: mapViewConfig.center,
+        zoom: mapViewConfig.zoom
+    });
+    period_ImageLayer = new MapImageLayer();
+    highlight_layer = new GraphicsLayer();
     //实现点击temple中content内容的跳转
     var pTemplate = {
         title: "{place_anci}",
@@ -54,8 +69,14 @@ require([
     place_layer = new FeatureLayer({
         url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
         popupTemplate: pTemplate
-    })
-    highlight_layer = new GraphicsLayer();    
+    });
+    map.add(place_layer); // 添加地点图层
+    //添加图例框
+    const legend = new Legend({
+        view: mapview,
+        container: "legendDiv"
+    });
+    mapview.ui.add("infoDiv", "top-right");
 });
 
 
@@ -64,9 +85,6 @@ require([
 //加载地图视图函数
 function loadMapView() {
     require([
-        "esri/Map",
-        "esri/views/MapView",    
-        "esri/widgets/Legend",
         "esri/layers/MapImageLayer",
         "dojo/domReady!"
     ], function (
@@ -75,9 +93,6 @@ function loadMapView() {
         Legend,
         MapImageLayer
     ) {
-        map = new Map({
-            basemap: initData.base_layer
-        });
         if (initData.period_layer != "Empty") {
             //添加时期图层
             period_ImageLayer = new MapImageLayer({
@@ -85,20 +100,6 @@ function loadMapView() {
             });
             map.add(period_ImageLayer);
         }
-        mapview = new MapView({
-            map: map,
-            container: "map",
-            center: mapViewConfig.center,
-            zoom: mapViewConfig.zoom
-        });
-        map.add(place_layer); //地点图层
-        map.add(highlight_layer); //高亮图层
-        //添加图例框
-        const legend = new Legend({
-            view: mapview,
-            container: "legendDiv"
-        });
-        mapview.ui.add("infoDiv", "top-right");
     });
 }
 
@@ -129,8 +130,47 @@ function zoomByPlaceId(id) {
             mapview.goTo({
                 center: mapViewConfig.center,
                 zoom: mapViewConfig.zoom
-            });           
+            });
+            highlight (feature.geometry.x, feature.geometry.y);
         })
+    });
+}
+
+//高亮方法
+function highlight (x, y) {
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/Graphic",
+        "esri/layers/GraphicsLayer",
+        "dojo/domReady!"
+    ], function (
+        Map,
+        MapView,
+        Graphic
+    ) {
+        var point = {
+            type: "point",
+            longitude: x,
+            latitude: y
+        };
+        var markerSymbol = {
+            type: "simple-marker",
+            style: "square",
+            color: [0, 0, 0, 0],
+            size: 28,
+            yoffset: 14,
+            outline: {
+                color: "blue",
+                width: "3px"
+            }
+        };
+        var pointGraphic = new Graphic({
+            geometry: point,
+            symbol: markerSymbol
+        });
+        highlight_layer.removeAll();
+        highlight_layer.add(pointGraphic);
     });
 }
 
@@ -162,6 +202,7 @@ function layerChange() {
         map.basemap = initData.base_layer;
         map.remove(period_ImageLayer);
         map.remove(place_layer);
+        map.remove(highlight_layer);
         if (initData.period_layer != "Empty") {
             //添加时期图层
             period_ImageLayer = new MapImageLayer({
@@ -171,5 +212,6 @@ function layerChange() {
         }
         //map.add(period_ImageLayer);
         map.add(place_layer);
-    });    
+        map.add(highlight_layer);
+    });
 }
