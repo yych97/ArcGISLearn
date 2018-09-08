@@ -11,6 +11,7 @@
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/js/vue.js"></script>
     <script type="text/javascript" src="lib/js/vue-router.js"></script>
+    <script type="text/javascript" src="lib/js/echarts.simple.min.js"></script>
     <script src="https://js.arcgis.com/4.8/"></script>
 </head>
 <body>
@@ -52,8 +53,12 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><router-link to="/place/103" href="#">长安</router-link></li>
-                            <li><router-link to="/place/37" href="#">洛阳</router-link></li>
+                            <li>
+                                <router-link to="/place/103" href="#">长安</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/place/37" href="#">洛阳</router-link>
+                            </li>
                             <li class="divider"></li>
                             <li>
                                 <router-link to="/list/place" href="#">全部地点</router-link>
@@ -183,7 +188,8 @@
             </div>
         </div>
         <!--ESRI自定义地图图例-->
-        <div id="infoDiv" class="esri-widget" style="height: 40px; width: 140px; text-align: center" v-if="period_layer != 'Empty'">
+        <div id="infoDiv" class="esri-widget" style="height: 40px; width: 140px; text-align: center"
+             v-if="period_layer != 'Empty'">
             <p style="padding-top: 11px; font-size: 18px">时期：{{period_layer}}</p>
         </div>
         <div id="infoDiv" style="visibility: hidden" v-else></div>
@@ -469,6 +475,17 @@
         </div>
     </div>
 </script>
+<!--统计图表模板-->
+<script type="text/x-template" id="chart-template">
+    <div>
+        <div class="panel panel-title-custom">
+            <h5 class="kaiti-25 text-center">欢迎来到诗意中国</h5>
+        </div>
+        <div class="panel">
+            <div id="chart" style="width: 100%; height:250px;"></div>
+        </div>
+    </div>
+</script>
 <!--首页模板-->
 <script type="text/x-template" id="home-template">
     <div>
@@ -481,5 +498,6 @@
 <script type="text/javascript" src="js/testdata.js"></script>
 <script type="text/javascript" src="js/api/test.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/chart.js"></script>
 <script type="text/javascript" src="js/vue-map.js"></script>
 </html>

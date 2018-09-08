@@ -137,6 +137,17 @@ const heatMap = {
         loadHeatMap();
     }
 };
+// 定义热力图(路由) 组件。
+const charts = {
+    template: '#chart-template',
+    data: function () {
+        return {};
+    },
+    methods: {},
+    mounted: function(){
+        loadChart();
+    }
+};
 
 // 创建 router 实例
 const router = new VueRouter({
@@ -147,6 +158,7 @@ const router = new VueRouter({
         {path: '/place/:id', name: 'place', component: place},
         {path: '/list/:type', name: 'list', component: list},
         {path: '/heatMap/:id', name: 'heatMap', component: heatMap},
+        {path: '/charts/:id', name: 'charts', component: charts},
         {path: '/', name: 'home', component: home}
     ]
 });
