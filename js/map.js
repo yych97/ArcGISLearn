@@ -234,121 +234,6 @@ function loadHeatMap() {
         FeatureLayer,
         HeatmapRenderer
     ) {
-        let fields = [
-            {
-                name: "ObjectID",
-                alias: "ObjectID",
-                type: "oid"
-            }, {
-                name: "name",
-                alias: "name",
-                type: "string"
-            }, {
-                name: "count",
-                alias: "count",
-                type: "double"
-            }
-        ];
-        let hrenderer = new HeatmapRenderer({
-            //type: "heatmap",
-            //field: "count",
-            blurRadius: 12,
-            colors: [
-                { ratio: 0, color: "rgba(255, 255, 255, 0)" },
-                { ratio: 0.2, color: "rgba(255, 255, 255, 1)" },
-                { ratio: 0.5, color: "rgba(255, 140, 0, 1)" },
-                { ratio: 0.8, color: "rgba(255, 140, 0, 1)" },
-                { ratio: 1, color: "rgba(255, 0, 0, 1)" }
-            ]
-            //minPixelIntensity: 2,
-            //maxPixelIntensity: 20
-        });
-        let features = [
-            {
-                geometry: {
-                    type: "point",
-                    longitude: 100,
-                    latitude: 38
-                },
-                attributes: {
-                    ObjectID: 1,
-                    name: "李白",
-                    count: 6
-                }
-            },
-            {
-                geometry: {
-                    type: "point",
-                    longitude: 77,
-                    latitude: 35
-                },
-                attributes: {
-                    ObjectID: 2,
-                    name: "杜甫",
-                    count: 20
-                }
-            },
-            {
-                geometry: {
-                    type: "point",
-                    longitude: 100,
-                    latitude: 25
-                },
-                attributes: {
-                    ObjectID: 3,
-                    name: "白居易",
-                    count: 12
-                }
-            },
-            {
-                geometry: {
-                    type: "point",
-                    longitude: 120,
-                    latitude: 30
-                },
-                attributes: {
-                    ObjectID: 4,
-                    name: "白居易",
-                    count: 12
-                }
-            },
-            {
-                geometry: {
-                    type: "point",
-                    longitude: 120,
-                    latitude: 45
-                },
-                attributes: {
-                    ObjectID: 5,
-                    name: "白居易",
-                    count: 12
-                }
-            },
-            {
-                geometry: {
-                    type: "point",
-                    longitude: 130,
-                    latitude: 40
-                },
-                attributes: {
-                    ObjectID: 6,
-                    name: "白居易",
-                    count: 12
-                }
-            },
-            {
-                geometry: {
-                    type: "point",
-                    longitude: 120,
-                    latitude: 50
-                },
-                attributes: {
-                    ObjectID: 7,
-                    name: "白居易",
-                    count: 50
-                }
-            }
-        ];
         heatMap_layer = new FeatureLayer({
             source: features,
             fields: fields,
@@ -361,6 +246,5 @@ function loadHeatMap() {
         });
         mapview.map = heatmap;
         place_layer.renderer = hrenderer;
-        heatmap.add(place_layer);
     });
 }
