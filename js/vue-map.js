@@ -17,6 +17,7 @@ const poet = {
         }
     },
     mounted: function () {
+        loadMap();
         changePeriodLayerById(this.$data.poet.periodId);
         zoomByPlaceId(this.$data.poet.placeId);
         layerChange();
@@ -46,6 +47,7 @@ const poem = {
         }
     },
     mounted: function(){
+        loadMap();
         changePeriodLayerById(this.$data.poem.periodId); // 切换时期图层
         zoomByPlaceId(this.$data.poem.placeId);
         layerChange();
@@ -75,6 +77,7 @@ const place = {
         }
     },
     mounted: function(){
+        loadMap();
         changePeriodLayerById(0);
         zoomByPlaceId(this.$data.place.placeId);
         layerChange();
@@ -94,9 +97,7 @@ const home = {
     },
     methods: {},
     mounted: function(){
-        if ( mapview == null ) {
-            loadMapView();
-        }
+        loadMap();
         layerChange();
     }
 };
@@ -117,11 +118,23 @@ const list = {
         }
     },
     mounted: function(){
+        loadMap();
         changePeriodLayerById(0);
         layerChange();
     },
     watch: {
         '$route': 'getContent'
+    }
+};
+// 定义热力图(路由) 组件。
+const heatMap = {
+    template: '#heatMap-template',
+    data: function () {
+        return {};
+    },
+    methods: {},
+    mounted: function(){
+        loadHeatMap();
     }
 };
 
@@ -133,6 +146,7 @@ const router = new VueRouter({
         {path: '/poem/:id', name: 'poem', component: poem},
         {path: '/place/:id', name: 'place', component: place},
         {path: '/list/:type', name: 'list', component: list},
+        {path: '/heatMap/:id', name: 'heatMap', component: heatMap},
         {path: '/', name: 'home', component: home}
     ]
 });

@@ -5,13 +5,13 @@
     <title>map</title>
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
-          href="http://106.12.27.212/arcgis_js_api/library/4.7/esri/css/main.css">
+          href="https://js.arcgis.com/4.8/esri/css/main.css">
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script type="text/javascript" src="lib/js/jquery.min.js"></script>
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/js/vue.js"></script>
     <script type="text/javascript" src="lib/js/vue-router.js"></script>
-    <script src="http://106.12.27.212/arcgis_js_api/library/4.7/init.js"></script>
+    <script src="https://js.arcgis.com/4.8/"></script>
 </head>
 <body>
 <div id="app">
@@ -105,16 +105,23 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <router-link to="/poet/23" href="#">初唐</router-link>
+                                <router-link to="/heatMap/1" href="#">初唐</router-link>
                             </li>
                             <li>
-                                <router-link to="/poet/1" href="#">盛唐</router-link>
+                                <router-link to="/heatMap/2" href="#">盛唐</router-link>
                             </li>
                             <li>
-                                <router-link to="/poet/1" href="#">中唐</router-link>
+                                <router-link to="/heatMap/3" href="#">中唐</router-link>
                             </li>
                             <li>
-                                <router-link to="/poet/1" href="#">晚唐</router-link>
+                                <router-link to="/heatMap/4" href="#">晚唐</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/heatMap/0" href="#">全部时期</router-link>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <router-link to="/" href="#">退出热力图模式</router-link>
                             </li>
                         </ul>
                     </li>
@@ -451,6 +458,14 @@
                     <router-link v-bind:to="{name:list.type, params:{id:item.id}}" href="#">{{item.name}}</router-link>
                 </li>
             </ul>
+        </div>
+    </div>
+</script>
+<!--热力图模板-->
+<script type="text/x-template" id="heatMap-template">
+    <div>
+        <div class="panel panel-title-custom">
+            <h5 class="kaiti-25 text-center">欢迎来到诗意中国</h5>
         </div>
     </div>
 </script>

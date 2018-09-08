@@ -5,6 +5,8 @@ var place_layer;
 var mapview;
 var highlight_layer;
 var period_ImageLayer;
+var heatmap;
+var heatMap_layer;
 
 initData = {
     visitor: {
@@ -38,8 +40,12 @@ require([
     GraphicsLayer,
     MapImageLayer
 ) {
+    // 初始化map与mapview
     map = new Map({
         basemap: initData.base_layer
+    });
+    heatmap = new Map({
+        basemap: "dark-gray"
     });
     mapview = new MapView({
         map: map,
@@ -47,9 +53,9 @@ require([
         center: mapViewConfig.center,
         zoom: mapViewConfig.zoom
     });
+    // 初始化各图层
     period_ImageLayer = new MapImageLayer();
     highlight_layer = new GraphicsLayer();
-    //实现点击temple中content内容的跳转
     var pTemplate = {
         title: "{place_anci}",
         content: [{
@@ -61,16 +67,15 @@ require([
             }]
         }]
     };
-    //在content中添加内容，content是一个数组所以要用push
-    pTemplate.content.push({
+    pTemplate.content.push({ // 在content中添加内容，content是一个数组所以要用push
         type: "text",
-        text: "<a href=\"#/place/{placeId}\">点击查看详情</a>"
+        text: "<a href=\"#/place/{placeId}\">点击查看详情</a>" // 实现点击temple中content内容的跳转
     });
     place_layer = new FeatureLayer({
         url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
         popupTemplate: pTemplate
     });
-    map.add(place_layer); // 添加地点图层
+    map.add(place_layer);
     //添加图例框
     const legend = new Legend({
         view: mapview,
@@ -82,24 +87,17 @@ require([
 
 /*其他地图操作函数*/
 
-//加载地图视图函数
-function loadMapView() {
+//加载地图函数
+function loadMap() {
     require([
-        "esri/layers/MapImageLayer",
+        "esri/Map",
+        "esri/views/MapView",
         "dojo/domReady!"
     ], function (
         Map,
-        MapView,
-        Legend,
-        MapImageLayer
+        MapView
     ) {
-        if (initData.period_layer != "Empty") {
-            //添加时期图层
-            period_ImageLayer = new MapImageLayer({
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + initData.period_layer + "/MapServer"
-            });
-            map.add(period_ImageLayer);
-        }
+        mapview.map = map;
     });
 }
 
@@ -213,5 +211,156 @@ function layerChange() {
         //map.add(period_ImageLayer);
         map.add(place_layer);
         map.add(highlight_layer);
+    });
+}
+
+//加载热力图层
+
+//加载热力图
+function loadHeatMap() {
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/geometry/Point",
+        "esri/Graphic",
+        "esri/layers/FeatureLayer",
+        "esri/renderers/HeatmapRenderer",
+        "dojo/domReady!"
+    ], function (
+        Map,
+        MapView,
+        Point,
+        Graphic,
+        FeatureLayer,
+        HeatmapRenderer
+    ) {
+        let fields = [
+            {
+                name: "ObjectID",
+                alias: "ObjectID",
+                type: "oid"
+            }, {
+                name: "name",
+                alias: "name",
+                type: "string"
+            }, {
+                name: "count",
+                alias: "count",
+                type: "double"
+            }
+        ];
+        let hrenderer = new HeatmapRenderer({
+            //type: "heatmap",
+            //field: "count",
+            blurRadius: 12,
+            colors: [
+                { ratio: 0, color: "rgba(255, 255, 255, 0)" },
+                { ratio: 0.2, color: "rgba(255, 255, 255, 1)" },
+                { ratio: 0.5, color: "rgba(255, 140, 0, 1)" },
+                { ratio: 0.8, color: "rgba(255, 140, 0, 1)" },
+                { ratio: 1, color: "rgba(255, 0, 0, 1)" }
+            ]
+            //minPixelIntensity: 2,
+            //maxPixelIntensity: 20
+        });
+        let features = [
+            {
+                geometry: {
+                    type: "point",
+                    longitude: 100,
+                    latitude: 38
+                },
+                attributes: {
+                    ObjectID: 1,
+                    name: "李白",
+                    count: 6
+                }
+            },
+            {
+                geometry: {
+                    type: "point",
+                    longitude: 77,
+                    latitude: 35
+                },
+                attributes: {
+                    ObjectID: 2,
+                    name: "杜甫",
+                    count: 20
+                }
+            },
+            {
+                geometry: {
+                    type: "point",
+                    longitude: 100,
+                    latitude: 25
+                },
+                attributes: {
+                    ObjectID: 3,
+                    name: "白居易",
+                    count: 12
+                }
+            },
+            {
+                geometry: {
+                    type: "point",
+                    longitude: 120,
+                    latitude: 30
+                },
+                attributes: {
+                    ObjectID: 4,
+                    name: "白居易",
+                    count: 12
+                }
+            },
+            {
+                geometry: {
+                    type: "point",
+                    longitude: 120,
+                    latitude: 45
+                },
+                attributes: {
+                    ObjectID: 5,
+                    name: "白居易",
+                    count: 12
+                }
+            },
+            {
+                geometry: {
+                    type: "point",
+                    longitude: 130,
+                    latitude: 40
+                },
+                attributes: {
+                    ObjectID: 6,
+                    name: "白居易",
+                    count: 12
+                }
+            },
+            {
+                geometry: {
+                    type: "point",
+                    longitude: 120,
+                    latitude: 50
+                },
+                attributes: {
+                    ObjectID: 7,
+                    name: "白居易",
+                    count: 50
+                }
+            }
+        ];
+        heatMap_layer = new FeatureLayer({
+            source: features,
+            fields: fields,
+            objectIdField: "ObjectID",
+            renderer: hrenderer,
+            spatialReference: {
+                wkid: 4326
+            },
+            geometryType: "point"
+        });
+        mapview.map = heatmap;
+        place_layer.renderer = hrenderer;
+        heatmap.add(place_layer);
     });
 }
