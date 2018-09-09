@@ -246,7 +246,7 @@ function loadHeatMap() {
                 { color: "#e0cf40", ratio: 0.913 },
                 { color: "#ffff00", ratio: 1 }
             ],
-            maxPixelIntensity: 25,
+            maxPixelIntensity: 100,
             minPixelIntensity: 0
         };
         heatMap_layer = new CSVLayer({
