@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>map</title>
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" type="text/css"
           href="https://js.arcgis.com/4.8/esri/css/main.css">
     <link rel="stylesheet" type="text/css" href="css/map.css">
@@ -11,173 +12,201 @@
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/js/vue.js"></script>
     <script type="text/javascript" src="lib/js/vue-router.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script type="text/javascript" src="lib/js/echarts.simple.min.js"></script>
     <script src="https://js.arcgis.com/4.8/"></script>
 </head>
 <body>
 <div id="app">
     <!--导航栏-->
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <!--导航栏标题-->
-            <div class="navbar-header">
-                <router-link class="navbar-brand" to="/" href="#">诗意中国</router-link>
-            </div>
-            <!--导航栏主体-->
-            <div>
-                <!--下拉列表框导航栏元素-->
-                <ul class="nav navbar-nav">
-                    <!--图层控制下拉框-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            图层控制
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">普通地图
-                                    <input v-model="base_layer" type="radio" class="pull-right" value="osm">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">地形图
-                                    <input v-model="base_layer" type="radio" class="pull-right" value="terrain">
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--地点下拉框-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            查看地点
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <router-link to="/place/103" href="#">长安</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/place/37" href="#">洛阳</router-link>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <router-link to="/list/place" href="#">全部地点</router-link>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--作者下拉框-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            查看作者
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <router-link to="/poet/23" href="#">李白</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/poet/1" href="#">白居易</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/poet/10" href="#">杜甫</router-link>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <router-link to="/list/poet" href="#">全部作者</router-link>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--诗人轨迹下拉框-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            诗人轨迹
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <router-link to="/poet/23" href="#">王维</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/poet/1" href="#">白居易</router-link>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--热力图下拉框-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            热力图
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <router-link to="/heatMap/1" href="#">初唐</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/heatMap/2" href="#">盛唐</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/heatMap/3" href="#">中唐</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/heatMap/4" href="#">晚唐</router-link>
-                            </li>
-                            <li>
-                                <router-link to="/heatMap/0" href="#">全部时期</router-link>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <router-link to="/" href="#">退出热力图模式</router-link>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!--登录导航栏元素-->
-                <ul class="nav navbar-nav navbar-right" v-if="visitor.logined == false">
-                    <li>
-                        <a data-toggle="modal" data-target="#login" href="">登录</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" v-else>
-                    <li>
-                        <a href="">Welcome {{visitor.username}}!</a>
-                    </li>
-                </ul>
-                <!-- 登录模态窗 -->
-                <div id="login" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-title">
-                                <h1 class="text-center">登录</h1>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-group" action="">
-                                    <div class="form-group">
-                                        <label for="">用户名</label>
-                                        <input class="form-control" type="text" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">密码</label>
-                                        <input class="form-control" type="password" placeholder="">
-                                    </div>
-                                    <div class="text-right">
-                                        <button class="btn btn-primary" type="submit">登录</button>
-                                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
-                                    </div>
-                                    <a href="" data-toggle="modal" data-dismiss="modal"
-                                       data-target="#register">还没有账号？点我注册</a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect"
+             background-color="#ffd42b" text-color="#000" active-text-color="#ffd04b">
+        <el-submenu index="1" popper-class="submenu-custom">
+            <template slot="title">图层控制</template>
+            <el-menu-item index="1-1" style="background-color: #ffffff">
+                <el-radio v-model="base_layer" label="streets" class="pull">ESRI街道图</el-radio>
+            </el-menu-item>
+            <el-menu-item index="1-2" style="background-color: #ffffff">
+                <el-radio v-model="base_layer" label="terrain">ESRI高程图</el-radio>
+            </el-menu-item>
+            <el-menu-item index="1-3" style="background-color: #ffffff">
+                <el-radio v-model="base_layer" label="osm">OSM地图</el-radio>
+            </el-menu-item>
+        </el-submenu>
+        <el-submenu index="2">
+            <template slot="title">我的工作台</template>
+            <el-menu-item index="2-1">选项1</el-menu-item>
+            <el-menu-item index="2-2">选项2</el-menu-item>
+            <el-menu-item index="2-3">选项3</el-menu-item>
+        </el-submenu>
+        <el-submenu index="3">
+            <template slot="title">我的工作台</template>
+            <el-menu-item index="3-1">选项1</el-menu-item>
+            <el-menu-item index="3-2">选项2</el-menu-item>
+            <el-menu-item index="3-3">选项3</el-menu-item>
+        </el-submenu>
+    </el-menu>
+    <!--<nav class="navbar navbar-default" role="navigation">-->
+    <!--<div class="container-fluid">-->
+    <!--&lt;!&ndash;导航栏标题&ndash;&gt;-->
+    <!--<div class="navbar-header">-->
+    <!--<router-link class="navbar-brand" to="/" href="#">诗意中国</router-link>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;导航栏主体&ndash;&gt;-->
+    <!--<div>-->
+    <!--&lt;!&ndash;下拉列表框导航栏元素&ndash;&gt;-->
+    <!--<ul class="nav navbar-nav">-->
+    <!--&lt;!&ndash;图层控制下拉框&ndash;&gt;-->
+    <!--<li class="dropdown">-->
+    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+    <!--图层控制-->
+    <!--<b class="caret"></b>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<li>-->
+    <!--<a href="#">普通地图-->
+    <!--<input v-model="base_layer" type="radio" class="pull-right" value="osm">-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a href="#">地形图-->
+    <!--<input v-model="base_layer" type="radio" class="pull-right" value="terrain">-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</li>-->
+    <!--&lt;!&ndash;地点下拉框&ndash;&gt;-->
+    <!--<li class="dropdown">-->
+    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+    <!--查看地点-->
+    <!--<b class="caret"></b>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<li>-->
+    <!--<router-link to="/place/103" href="#">长安</router-link>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<router-link to="/place/37" href="#">洛阳</router-link>-->
+    <!--</li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li>-->
+    <!--<router-link to="/list/place" href="#">全部地点</router-link>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</li>-->
+    <!--&lt;!&ndash;作者下拉框&ndash;&gt;-->
+    <!--<li class="dropdown">-->
+    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+    <!--查看作者-->
+    <!--<b class="caret"></b>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<li>-->
+    <!--<router-link to="/poet/23" href="#">李白</router-link>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<router-link to="/poet/1" href="#">白居易</router-link>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<router-link to="/poet/10" href="#">杜甫</router-link>-->
+    <!--</li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li>-->
+    <!--<router-link to="/list/poet" href="#">全部作者</router-link>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</li>-->
+    <!--&lt;!&ndash;诗人轨迹下拉框&ndash;&gt;-->
+    <!--<li class="dropdown">-->
+    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+    <!--诗人轨迹-->
+    <!--<b class="caret"></b>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<li>-->
+    <!--<router-link to="/poet/23" href="#">王维</router-link>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<router-link to="/poet/1" href="#">白居易</router-link>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</li>-->
+    <!--&lt;!&ndash;热力图下拉框&ndash;&gt;-->
+    <!--<li class="dropdown">-->
+    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+    <!--热力图-->
+    <!--<b class="caret"></b>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<li>-->
+    <!--<router-link to="/heatMap/1" href="#">初唐</router-link>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<router-link to="/heatMap/2" href="#">盛唐</router-link>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<router-link to="/heatMap/3" href="#">中唐</router-link>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<router-link to="/heatMap/4" href="#">晚唐</router-link>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<router-link to="/heatMap/0" href="#">全部时期</router-link>-->
+    <!--</li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li>-->
+    <!--<router-link to="/" href="#">退出热力图模式</router-link>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--&lt;!&ndash;登录导航栏元素&ndash;&gt;-->
+    <!--<ul class="nav navbar-nav navbar-right" v-if="visitor.logined == false">-->
+    <!--<li>-->
+    <!--<a data-toggle="modal" data-target="#login" href="">登录</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--<ul class="nav navbar-nav navbar-right" v-else>-->
+    <!--<li>-->
+    <!--<a href="">Welcome {{visitor.username}}!</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--&lt;!&ndash; 登录模态窗 &ndash;&gt;-->
+    <!--<div id="login" class="modal fade">-->
+    <!--<div class="modal-dialog">-->
+    <!--<div class="modal-content">-->
+    <!--<div class="modal-body">-->
+    <!--<button class="close" data-dismiss="modal">-->
+    <!--<span>&times;</span>-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--<div class="modal-title">-->
+    <!--<h1 class="text-center">登录</h1>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+    <!--<form class="form-group" action="">-->
+    <!--<div class="form-group">-->
+    <!--<label for="">用户名</label>-->
+    <!--<input class="form-control" type="text" placeholder="">-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+    <!--<label for="">密码</label>-->
+    <!--<input class="form-control" type="password" placeholder="">-->
+    <!--</div>-->
+    <!--<div class="text-right">-->
+    <!--<button class="btn btn-primary" type="submit">登录</button>-->
+    <!--<button class="btn btn-danger" data-dismiss="modal">取消</button>-->
+    <!--</div>-->
+    <!--<a href="" data-toggle="modal" data-dismiss="modal"-->
+    <!--data-target="#register">还没有账号？点我注册</a>-->
+    <!--</form>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</nav>-->
     <!--主体内容部分-->
     <div class="container container-map">
         <!--地图、侧边栏-->
