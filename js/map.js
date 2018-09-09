@@ -221,20 +221,32 @@ function loadHeatMap() {
     require([
         "esri/Map",
         "esri/views/MapView",
-        "esri/geometry/Point",
-        "esri/Graphic",
-        "esri/layers/FeatureLayer",
-        "esri/renderers/HeatmapRenderer",
+        "esri/layers/CSVLayer",
         "dojo/domReady!"
     ], function (
         Map,
         MapView,
-        Point,
-        Graphic,
-        FeatureLayer,
-        HeatmapRenderer
+        CSVLayer,
     ) {
+        let renderer = {
+            type: "heatmap",
+            blurRadius: 20,
+            colors: [
+                { ratio: 0, color: "rgba(255, 255, 255, 0)" },
+                { ratio: 0.2, color: "rgba(255, 255, 255, 1)" },
+                { ratio: 0.5, color: "rgba(255, 140, 0, 1)" },
+                { ratio: 0.8, color: "rgba(255, 140, 0, 1)" },
+                { ratio: 1, color: "rgba(255, 0, 0, 1)" }
+            ],
+            minPixelIntensity: 2,
+            maxPixelIntensity: 25
+        };
+        heatMap_layer = new CSVLayer({
+            url: "http://localhost:5000/api/heatmap/4",
+            title: "诗歌分布热力图",
+            renderer: renderer
+        });
         mapview.map = heatmap;
-        place_layer.renderer = hrenderer;
+        heatmap.add(heatMap_layer);
     });
 }
