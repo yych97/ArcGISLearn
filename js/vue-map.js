@@ -126,7 +126,7 @@ const list = {
         '$route': 'getContent'
     }
 };
-// 定义热力图(路由) 组件。
+// 定义热力图(路由)组件。
 const heatMap = {
     template: '#heatMap-template',
     data: function () {
@@ -134,10 +134,15 @@ const heatMap = {
     },
     methods: {},
     mounted: function(){
-        loadHeatMap();
+        loadHeatMapByPeriodId(this.$route.params.id);
+    },
+    watch: {
+        '$route': function () {
+            loadHeatMapByPeriodId(this.$route.params.id);
+        }
     }
 };
-// 定义热力图(路由) 组件。
+// 定义图表展示(路由)组件。
 const charts = {
     template: '#chart-template',
     data: function () {
