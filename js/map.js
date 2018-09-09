@@ -234,16 +234,6 @@ function loadHeatMap() {
         FeatureLayer,
         HeatmapRenderer
     ) {
-        heatMap_layer = new FeatureLayer({
-            source: features,
-            fields: fields,
-            objectIdField: "ObjectID",
-            renderer: hrenderer,
-            spatialReference: {
-                wkid: 4326
-            },
-            geometryType: "point"
-        });
         mapview.map = heatmap;
         place_layer.renderer = hrenderer;
     });
