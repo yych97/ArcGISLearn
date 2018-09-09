@@ -16,7 +16,7 @@ const poet = {
             this.$data.poet = getContentByNameAndId(this.$route.name, this.$route.params.id);
         }
     },
-    mounted: function () {
+    created: function () {
         loadMap();
         changePeriodLayerById(this.$data.poet.periodId);
         zoomByPlaceId(this.$data.poet.placeId);
@@ -46,7 +46,7 @@ const poem = {
             this.$data.poem = getContentByNameAndId(this.$route.name, this.$route.params.id);
         }
     },
-    mounted: function(){
+    created: function(){
         loadMap();
         changePeriodLayerById(this.$data.poem.periodId); // 切换时期图层
         zoomByPlaceId(this.$data.poem.placeId);
@@ -76,7 +76,7 @@ const place = {
             this.$data.place = getContentByNameAndId(this.$route.name, this.$route.params.id);
         }
     },
-    mounted: function(){
+    created: function(){
         loadMap();
         changePeriodLayerById(0);
         zoomByPlaceId(this.$data.place.placeId);
@@ -96,7 +96,7 @@ const home = {
         return {};
     },
     methods: {},
-    mounted: function(){
+    created: function(){
         loadMap();
         layerChange();
     }
@@ -117,7 +117,7 @@ const list = {
             this.$data.list = getListByType(this.$route.params.type);
         }
     },
-    mounted: function(){
+    created: function(){
         loadMap();
         changePeriodLayerById(0);
         layerChange();
@@ -133,7 +133,7 @@ const heatMap = {
         return {};
     },
     methods: {},
-    mounted: function(){
+    created: function(){
         loadHeatMapByPeriodId(this.$route.params.id);
     },
     watch: {
@@ -149,7 +149,7 @@ const charts = {
         return {};
     },
     methods: {},
-    mounted: function(){
+    created: function(){
         loadChart();
     }
 };
@@ -181,6 +181,9 @@ var vm = new Vue({
         period_layer: function () {
             layerChange()
         }
+    },
+    created: function() {
+        initMapApp();
     },
     router: router
 }).$mount('#app');

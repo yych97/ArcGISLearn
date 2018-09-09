@@ -24,65 +24,67 @@ mapViewConfig = {
     zoom: 4
 };
 //初始化地图图层信息
-require([
-    "esri/Map",
-    "esri/views/MapView",
-    "esri/widgets/Legend",
-    "esri/layers/FeatureLayer",
-    "esri/layers/GraphicsLayer",
-    "esri/layers/MapImageLayer",
-    "dojo/domReady!"
-], function (
-    Map,
-    MapView,
-    Legend,
-    FeatureLayer,
-    GraphicsLayer,
-    MapImageLayer
-) {
-    // 初始化map与mapview
-    map = new Map({
-        basemap: initData.base_layer
-    });
-    heatmap = new Map({
-        basemap: "dark-gray"
-    });
-    mapview = new MapView({
-        map: map,
-        container: "map",
-        center: mapViewConfig.center,
-        zoom: mapViewConfig.zoom
-    });
-    // 初始化各图层
-    period_ImageLayer = new MapImageLayer();
-    highlight_layer = new GraphicsLayer();
-    var pTemplate = {
-        title: "{place_anci}",
-        content: [{
-            type: "fields",
-            fieldInfos: [{
-                fieldName: "place_now"
-            }, {
-                fieldName: "place_anci"
+function initMapApp() {
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/widgets/Legend",
+        "esri/layers/FeatureLayer",
+        "esri/layers/GraphicsLayer",
+        "esri/layers/MapImageLayer",
+        "dojo/domReady!"
+    ], function (
+        Map,
+        MapView,
+        Legend,
+        FeatureLayer,
+        GraphicsLayer,
+        MapImageLayer
+    ) {
+        // 初始化map与mapview
+        map = new Map({
+            basemap: initData.base_layer
+        });
+        heatmap = new Map({
+            basemap: "dark-gray"
+        });
+        mapview = new MapView({
+            map: map,
+            container: "map",
+            center: mapViewConfig.center,
+            zoom: mapViewConfig.zoom
+        });
+        // 初始化各图层
+        period_ImageLayer = new MapImageLayer();
+        highlight_layer = new GraphicsLayer();
+        var pTemplate = {
+            title: "{place_anci}",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "place_now"
+                }, {
+                    fieldName: "place_anci"
+                }]
             }]
-        }]
-    };
-    pTemplate.content.push({ // 在content中添加内容，content是一个数组所以要用push
-        type: "text",
-        text: "<a href=\"#/place/{placeId}\">点击查看详情</a>" // 实现点击temple中content内容的跳转
+        };
+        pTemplate.content.push({ // 在content中添加内容，content是一个数组所以要用push
+            type: "text",
+            text: "<a href=\"#/place/{placeId}\">点击查看详情</a>" // 实现点击temple中content内容的跳转
+        });
+        place_layer = new FeatureLayer({
+            url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
+            popupTemplate: pTemplate
+        });
+        map.add(place_layer);
+        //添加图例框
+        const legend = new Legend({
+            view: mapview,
+            container: "legendDiv"
+        });
+        mapview.ui.add("infoDiv", "top-right");
     });
-    place_layer = new FeatureLayer({
-        url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
-        popupTemplate: pTemplate
-    });
-    map.add(place_layer);
-    //添加图例框
-    const legend = new Legend({
-        view: mapview,
-        container: "legendDiv"
-    });
-    mapview.ui.add("infoDiv", "top-right");
-});
+}
 
 
 /*其他地图操作函数*/
@@ -246,7 +248,7 @@ function loadHeatMap() {
                 { color: "#e0cf40", ratio: 0.913 },
                 { color: "#ffff00", ratio: 1 }
             ],
-            maxPixelIntensity: 100,
+            maxPixelIntensity: 150,
             minPixelIntensity: 0
         };
         heatMap_layer = new CSVLayer({
