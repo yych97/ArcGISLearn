@@ -45,7 +45,7 @@ function initMapApp() {
             basemap: initData.base_layer
         });
         heatmap = new Map({
-            basemap: "dark-gray"
+            basemap: "streets"
         });
         mapview = new MapView({
             map: map,
@@ -233,19 +233,17 @@ function loadHeatMap() {
             type: "heatmap",
             blurRadius: 15,
             colorStops: [
-                { color: "rgba(63, 40, 102, 0)", ratio: 0 },
-                { color: "#472b77", ratio: 0.083 },
-                { color: "#4e2d87", ratio: 0.166 },
-                { color: "#563098", ratio: 0.249 },
-                { color: "#5d32a8", ratio: 0.332 },
-                { color: "#6735be", ratio: 0.415 },
-                { color: "#7139d4", ratio: 0.498 },
-                { color: "#7b3ce9", ratio: 0.581 },
-                { color: "#853fff", ratio: 0.664 },
-                { color: "#a46fbf", ratio: 0.747 },
-                { color: "#c29f80", ratio: 0.830 },
-                { color: "#e0cf40", ratio: 0.913 },
-                { color: "#ffff00", ratio: 1 }
+                { color: "#fefbee", ratio: 0 },
+                { color: "#fef7bd", ratio: 0.1 },
+                { color: "#fef182", ratio: 0.2 },
+                { color: "#fee670", ratio: 0.3 },
+                { color: "#fed378", ratio: 0.4 },
+                { color: "#fec569", ratio: 0.5 },
+                { color: "#feb54e", ratio: 0.6 },
+                { color: "#fea534", ratio: 0.7 },
+                { color: "#fe941e", ratio: 0.8 },
+                { color: "#fe9100", ratio: 0.9 },
+                { color: "#fe7b00", ratio: 1 }
             ],
             maxPixelIntensity: 150,
             minPixelIntensity: 0
@@ -253,7 +251,7 @@ function loadHeatMap() {
         heatMap_layer = new CSVLayer({
             url: "http://localhost:5000/api/heatmap/" + id,
             title: "诗歌分布热力图",
-            opacity: 1,
+            opacity: 0.75,
             renderer: renderer
         });
         heatmap.removeAll();
