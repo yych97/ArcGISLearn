@@ -98,6 +98,7 @@ const home = {
     methods: {},
     created: function(){
         loadMap();
+        changePeriodLayerById(0);
         layerChange();
     }
 };
@@ -168,7 +169,7 @@ const router = new VueRouter({
     ]
 });
 
-var vm = new Vue({
+vm = new Vue({
     el: '#app',
     data: initData,
     computed: {

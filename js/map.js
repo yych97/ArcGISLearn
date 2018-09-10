@@ -6,6 +6,7 @@ var highlight_layer;
 var period_ImageLayer;
 var heatmap;
 var heatMap_layer;
+var vm;
 
 initData = {
     visitor: {
@@ -233,7 +234,7 @@ function loadHeatMapByPeriodId(id) {
             type: "heatmap",
             blurRadius: 15,
             colorStops: [
-                { color: "rgba(63, 40, 102, 0)", ratio: 0 },
+                { color: "rgba(0, 0, 0, 0)", ratio: 0 },//透明
                 { color: "#fefbb3", ratio: 0.1 },
                 { color: "#fef182", ratio: 0.2 },
                 { color: "#fee670", ratio: 0.3 },
@@ -245,17 +246,18 @@ function loadHeatMapByPeriodId(id) {
                 { color: "#fe9100", ratio: 0.9 },
                 { color: "#fe7b00", ratio: 1 }
             ],
-            maxPixelIntensity: 150,
+            maxPixelIntensity: 140,
             minPixelIntensity: 0
         };
         heatMap_layer = new CSVLayer({
             url: "http://localhost:5000/api/heatmap/" + id,
             title: "诗歌分布热力图",
-            opacity: 0.75,
+            opacity: 0.65,
             renderer: renderer
         });
         heatmap.removeAll();
         heatmap.add(heatMap_layer);
         mapview.map = heatmap;
+        changePeriodLayerById(parseInt(id)); //需要将路由中的string型id转化为int型
     });
 }
