@@ -218,7 +218,7 @@ function layerChange() {
 //加载热力图层
 
 //加载热力图
-function loadHeatMap() {
+function loadHeatMapByPeriodId(id) {
     require([
         "esri/Map",
         "esri/views/MapView",
@@ -233,8 +233,8 @@ function loadHeatMap() {
             type: "heatmap",
             blurRadius: 15,
             colorStops: [
-                { color: "#fefbee", ratio: 0 },
-                { color: "#fef7bd", ratio: 0.1 },
+                { color: "rgba(63, 40, 102, 0)", ratio: 0 },
+                { color: "#fefbb3", ratio: 0.1 },
                 { color: "#fef182", ratio: 0.2 },
                 { color: "#fee670", ratio: 0.3 },
                 { color: "#fed378", ratio: 0.4 },
