@@ -171,6 +171,17 @@ const router = new VueRouter({
 var vm = new Vue({
     el: '#app',
     data: initData,
+    computed: {
+        period: function () {
+            switch (this.$data.period_layer) {
+                case 'Empty': return '无';break;
+                case 'Chutang': return '初唐';break;
+                case 'Shengtang': return '盛唐';break;
+                case 'Zhongtang': return '中唐';break;
+                case 'Wantang': return '晚唐';break;
+            }
+        }
+    },
     methods: {},
     watch: {
         // 如果 `base_layer` 发生改变，这个函数就会运行

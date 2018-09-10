@@ -82,7 +82,7 @@ function initMapApp() {
             view: mapview,
             container: "legendDiv"
         });
-        mapview.ui.add("infoDiv", "top-right");
+        mapview.ui.add("infoDiv", "bottom-right");
     });
 }
 

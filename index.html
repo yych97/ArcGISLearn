@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <!--导航栏标题-->
             <div class="navbar-header">
-                <router-link class="navbar-brand" to="/" href="#">诗意中国</router-link>
+                <router-link class="navbar-brand" to="/" href="#"><img src="image/title.png" height="30px" width="100px" style="margin-top: -5px"></img></router-link>
             </div>
             <!--导航栏主体-->
             <div>
@@ -190,7 +190,7 @@
         <!--ESRI自定义地图图例-->
         <div id="infoDiv" class="esri-widget" style="height: 40px; width: 140px; text-align: center"
              v-if="period_layer != 'Empty'">
-            <p style="padding-top: 11px; font-size: 18px">时期：{{period_layer}}</p>
+            <p style="padding-top: 11px; font-size: 18px">时期：{{period}}</p>
         </div>
         <div id="infoDiv" style="visibility: hidden" v-else></div>
     </div>
