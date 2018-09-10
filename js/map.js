@@ -1,6 +1,5 @@
 //声明全局变量
 var map;
-var test_layer;
 var place_layer;
 var mapview;
 var highlight_layer;

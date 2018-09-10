@@ -149,7 +149,7 @@ const charts = {
         return {};
     },
     methods: {},
-    created: function(){
+    mounted: function(){ // 此处一定要等渲染完成后再执行，否则找不到dom id
         loadChart();
     }
 };
