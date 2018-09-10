@@ -15,13 +15,13 @@
     <script src="https://js.arcgis.com/4.8/"></script>
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
     <!--导航栏-->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <!--导航栏标题-->
             <div class="navbar-header">
-                <router-link class="navbar-brand" to="/" href="#">诗意中国</router-link>
+                <router-link class="navbar-brand" to="/" href="#"><img src="image/title.png" height="30px" width="100px" style="margin-top: -5px"></img></router-link>
             </div>
             <!--导航栏主体-->
             <div>
@@ -122,7 +122,7 @@
                                 <router-link to="/heatMap/4" href="#">晚唐</router-link>
                             </li>
                             <li>
-                                <router-link to="/heatMap/0" href="#">全部时期</router-link>
+                                <router-link to="/heatMap/5" href="#">全部时期</router-link>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -190,7 +190,7 @@
         <!--ESRI自定义地图图例-->
         <div id="infoDiv" class="esri-widget" style="height: 40px; width: 140px; text-align: center"
              v-if="period_layer != 'Empty'">
-            <p style="padding-top: 11px; font-size: 18px">时期：{{period_layer}}</p>
+            <p style="padding-top: 11px; font-size: 18px">时期：{{period}}</p>
         </div>
         <div id="infoDiv" style="visibility: hidden" v-else></div>
     </div>

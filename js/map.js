@@ -24,65 +24,67 @@ mapViewConfig = {
     zoom: 4
 };
 //初始化地图图层信息
-require([
-    "esri/Map",
-    "esri/views/MapView",
-    "esri/widgets/Legend",
-    "esri/layers/FeatureLayer",
-    "esri/layers/GraphicsLayer",
-    "esri/layers/MapImageLayer",
-    "dojo/domReady!"
-], function (
-    Map,
-    MapView,
-    Legend,
-    FeatureLayer,
-    GraphicsLayer,
-    MapImageLayer
-) {
-    // 初始化map与mapview
-    map = new Map({
-        basemap: initData.base_layer
-    });
-    heatmap = new Map({
-        basemap: "dark-gray"
-    });
-    mapview = new MapView({
-        map: map,
-        container: "map",
-        center: mapViewConfig.center,
-        zoom: mapViewConfig.zoom
-    });
-    // 初始化各图层
-    period_ImageLayer = new MapImageLayer();
-    highlight_layer = new GraphicsLayer();
-    var pTemplate = {
-        title: "{place_anci}",
-        content: [{
-            type: "fields",
-            fieldInfos: [{
-                fieldName: "place_now"
-            }, {
-                fieldName: "place_anci"
+function initMapApp() {
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/widgets/Legend",
+        "esri/layers/FeatureLayer",
+        "esri/layers/GraphicsLayer",
+        "esri/layers/MapImageLayer",
+        "dojo/domReady!"
+    ], function (
+        Map,
+        MapView,
+        Legend,
+        FeatureLayer,
+        GraphicsLayer,
+        MapImageLayer
+    ) {
+        // 初始化map与mapview
+        map = new Map({
+            basemap: initData.base_layer
+        });
+        heatmap = new Map({
+            basemap: "dark-gray"
+        });
+        mapview = new MapView({
+            map: map,
+            container: "map",
+            center: mapViewConfig.center,
+            zoom: mapViewConfig.zoom
+        });
+        // 初始化各图层
+        period_ImageLayer = new MapImageLayer();
+        highlight_layer = new GraphicsLayer();
+        var pTemplate = {
+            title: "{place_anci}",
+            content: [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "place_now"
+                }, {
+                    fieldName: "place_anci"
+                }]
             }]
-        }]
-    };
-    pTemplate.content.push({ // 在content中添加内容，content是一个数组所以要用push
-        type: "text",
-        text: "<a href=\"#/place/{placeId}\">点击查看详情</a>" // 实现点击temple中content内容的跳转
+        };
+        pTemplate.content.push({ // 在content中添加内容，content是一个数组所以要用push
+            type: "text",
+            text: "<a href=\"#/place/{placeId}\">点击查看详情</a>" // 实现点击temple中content内容的跳转
+        });
+        place_layer = new FeatureLayer({
+            url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
+            popupTemplate: pTemplate
+        });
+        map.add(place_layer);
+        //添加图例框
+        const legend = new Legend({
+            view: mapview,
+            container: "legendDiv"
+        });
+        mapview.ui.add("infoDiv", "bottom-right");
     });
-    place_layer = new FeatureLayer({
-        url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
-        popupTemplate: pTemplate
-    });
-    map.add(place_layer);
-    //添加图例框
-    const legend = new Legend({
-        view: mapview,
-        container: "legendDiv"
-    });
-    mapview.ui.add("infoDiv", "top-right");
-});
+}
 
 
 /*其他地图操作函数*/
@@ -221,20 +223,42 @@ function loadHeatMap() {
     require([
         "esri/Map",
         "esri/views/MapView",
-        "esri/geometry/Point",
-        "esri/Graphic",
-        "esri/layers/FeatureLayer",
-        "esri/renderers/HeatmapRenderer",
+        "esri/layers/CSVLayer",
         "dojo/domReady!"
     ], function (
         Map,
         MapView,
-        Point,
-        Graphic,
-        FeatureLayer,
-        HeatmapRenderer
+        CSVLayer,
     ) {
+        const renderer = {
+            type: "heatmap",
+            blurRadius: 15,
+            colorStops: [
+                { color: "rgba(63, 40, 102, 0)", ratio: 0 },
+                { color: "#472b77", ratio: 0.083 },
+                { color: "#4e2d87", ratio: 0.166 },
+                { color: "#563098", ratio: 0.249 },
+                { color: "#5d32a8", ratio: 0.332 },
+                { color: "#6735be", ratio: 0.415 },
+                { color: "#7139d4", ratio: 0.498 },
+                { color: "#7b3ce9", ratio: 0.581 },
+                { color: "#853fff", ratio: 0.664 },
+                { color: "#a46fbf", ratio: 0.747 },
+                { color: "#c29f80", ratio: 0.830 },
+                { color: "#e0cf40", ratio: 0.913 },
+                { color: "#ffff00", ratio: 1 }
+            ],
+            maxPixelIntensity: 150,
+            minPixelIntensity: 0
+        };
+        heatMap_layer = new CSVLayer({
+            url: "http://localhost:5000/api/heatmap/" + id,
+            title: "诗歌分布热力图",
+            opacity: 1,
+            renderer: renderer
+        });
+        heatmap.removeAll();
+        heatmap.add(heatMap_layer);
         mapview.map = heatmap;
-        place_layer.renderer = hrenderer;
     });
 }

@@ -16,7 +16,7 @@ const poet = {
             this.$data.poet = getContentByNameAndId(this.$route.name, this.$route.params.id);
         }
     },
-    mounted: function () {
+    created: function () {
         loadMap();
         changePeriodLayerById(this.$data.poet.periodId);
         zoomByPlaceId(this.$data.poet.placeId);
@@ -46,7 +46,7 @@ const poem = {
             this.$data.poem = getContentByNameAndId(this.$route.name, this.$route.params.id);
         }
     },
-    mounted: function(){
+    created: function(){
         loadMap();
         changePeriodLayerById(this.$data.poem.periodId); // 切换时期图层
         zoomByPlaceId(this.$data.poem.placeId);
@@ -76,7 +76,7 @@ const place = {
             this.$data.place = getContentByNameAndId(this.$route.name, this.$route.params.id);
         }
     },
-    mounted: function(){
+    created: function(){
         loadMap();
         changePeriodLayerById(0);
         zoomByPlaceId(this.$data.place.placeId);
@@ -96,7 +96,7 @@ const home = {
         return {};
     },
     methods: {},
-    mounted: function(){
+    created: function(){
         loadMap();
         layerChange();
     }
@@ -117,7 +117,7 @@ const list = {
             this.$data.list = getListByType(this.$route.params.type);
         }
     },
-    mounted: function(){
+    created: function(){
         loadMap();
         changePeriodLayerById(0);
         layerChange();
@@ -126,25 +126,30 @@ const list = {
         '$route': 'getContent'
     }
 };
-// 定义热力图(路由) 组件。
+// 定义热力图(路由)组件。
 const heatMap = {
     template: '#heatMap-template',
     data: function () {
         return {};
     },
     methods: {},
-    mounted: function(){
-        loadHeatMap();
+    created: function(){
+        loadHeatMapByPeriodId(this.$route.params.id);
+    },
+    watch: {
+        '$route': function () {
+            loadHeatMapByPeriodId(this.$route.params.id);
+        }
     }
 };
-// 定义热力图(路由) 组件。
+// 定义图表展示(路由)组件。
 const charts = {
     template: '#chart-template',
     data: function () {
         return {};
     },
     methods: {},
-    mounted: function(){
+    created: function(){
         loadChart();
     }
 };
@@ -166,6 +171,17 @@ const router = new VueRouter({
 var vm = new Vue({
     el: '#app',
     data: initData,
+    computed: {
+        period: function () {
+            switch (this.$data.period_layer) {
+                case 'Empty': return '无';break;
+                case 'Chutang': return '初唐';break;
+                case 'Shengtang': return '盛唐';break;
+                case 'Zhongtang': return '中唐';break;
+                case 'Wantang': return '晚唐';break;
+            }
+        }
+    },
     methods: {},
     watch: {
         // 如果 `base_layer` 发生改变，这个函数就会运行
@@ -176,6 +192,9 @@ var vm = new Vue({
         period_layer: function () {
             layerChange()
         }
+    },
+    created: function() {
+        initMapApp();
     },
     router: router
 }).$mount('#app');
