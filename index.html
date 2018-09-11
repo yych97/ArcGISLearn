@@ -209,7 +209,7 @@
     <div>
         <!--信息栏标题-->
         <div class="panel panel-title-custom">
-            <h5 class="kaiti-25 text-center">作者简介{{ $route.params.id }}</h5>
+            <h5 class="kaiti-25 text-center">作者简介</h5>
         </div>
         <!-- poet-info -->
         <div class="panel">
@@ -228,24 +228,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><span class="kaiti-17">出生日期：</span>{{poet.birth}}
+                        <td><span class="kaiti-17">出生年份：</span>公元{{poet.birth}}年
                         </td>
                     </tr>
                     <tr>
-                        <td><span class="kaiti-17">逝世日期：</span>{{poet.death}}
+                        <td><span class="kaiti-17">逝世年份：</span>公元{{poet.death}}年
                         </td>
                     </tr>
                     <tr>
                         <td><span class="kaiti-17">出生地：</span>{{poet.home}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="pull-right">
-                                <button class="btn-warning" @click="getInfoByPoetId()">
-                                    <span class="kaiti-17">加入收藏</span>
-                                </button>
-                            </div>
                         </td>
                     </tr>
                     </tbody>
@@ -257,7 +248,6 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#description-tab">简介</a></li>
                 <li><a data-toggle="tab" href="#works-tab">作品</a></li>
-                <li><a data-toggle="tab" href="#poet-reviews-tab">评论</a></li>
             </ul>
 
             <div class="tab-content">
@@ -274,32 +264,6 @@
                         </li>
                     </ul>
                 </div>
-                <!-- #reviews-tab -->
-                <div id="poet-reviews-tab" class="tab-pane fade">
-                    <div class="review clearfix" v-for="comment in poet.comments">
-                        <ul class="meta list-unstyled">
-                            <li class="name">{{comment.username}}</li>
-                        </ul>
-                        <div class="tab-pane fade in active">
-                            <div>
-                                <p>{{comment.content}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="add-review">
-                        <form>
-                            <div class="form-group light-inputs">
-                                <textarea rows="4" cols="40" placeholder="您想要添加的信息 ..." required></textarea>
-                            </div>
-                            <div class="table-info pull-right">
-                                <button class="btn-warning">
-                                    <span class="kaiti-17">提交</span>
-                                </button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -308,7 +272,7 @@
 <script type="text/x-template" id="poem-template">
     <div>
         <div class="panel panel-title-custom">
-            <h5 class="kaiti-25 text-center">诗词信息{{ $route.params.id }}</h5>
+            <h5 class="kaiti-25 text-center">诗词信息</h5>
         </div>
 
         <div class="panel">
@@ -319,16 +283,7 @@
                 <table class="table cart-items light-inputs">
                     <tbody>
                     <tr v-for="content_one in poem.content">
-                        <td><span class="kaiti-17">{{content_one}}</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="pull-right">
-                                <button class="btn-warning" @click="getInfoByPoemId()">
-                                    <span class="kaiti-17">加入收藏</span>
-                                </button>
-                            </div>
-                        </td>
+                        <td class="text-center"><span class="kaiti-17">{{content_one}}</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -339,7 +294,6 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#Introduction-tab">简介</a></li>
                 <li><a data-toggle="tab" href="#translation-tab">翻译</a></li>
-                <li><a data-toggle="tab" href="#poem-reviews-tab">评论</a></li>
             </ul>
             <div class="tab-content">
                 <div id="Introduction-tab" class="tab-pane fade in active">
@@ -365,31 +319,6 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
-                <div id="poem-reviews-tab" class="tab-pane fade">
-                    <div class="review clearfix" v-for="comment in poem.comments">
-                        <ul class="meta list-unstyled">
-                            <li class="name">{{comment.username}}</li>
-                        </ul>
-                        <div class="content">
-                            <div>
-                                <p>{{comment.content}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="add-review">
-                        <form>
-                            <div class="form-group light-inputs">
-                                <textarea rows="4" cols="40" placeholder="您想要添加的信息 ..." required></textarea>
-                            </div>
-                            <div class="table-info pull-right">
-                                <button class="btn-warning">
-                                    <span class="kaiti-17">提交</span>
-                                </button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
