@@ -224,17 +224,19 @@ function loadHeatMapByPeriodId(id) {
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/CSVLayer",
+        "esri/widgets/Legend",
         "dojo/domReady!"
     ], function (
         Map,
         MapView,
         CSVLayer,
+        Legend
     ) {
         const renderer = {
             type: "heatmap",
             blurRadius: 15,
             colorStops: [
-                { color: "rgba(0, 0, 0, 0)", ratio: 0 },//透明
+                { color: "rgba(254, 251, 179, 0)", ratio: 0 },//透明
                 { color: "#fefbb3", ratio: 0.1 },
                 { color: "#fef182", ratio: 0.2 },
                 { color: "#fee670", ratio: 0.3 },
@@ -251,7 +253,7 @@ function loadHeatMapByPeriodId(id) {
         };
         heatMap_layer = new CSVLayer({
             url: "http://localhost:5000/api/heatmap/" + id,
-            title: "诗歌分布热力图",
+            title: "唐诗三百首分布热力图",
             opacity: 0.65,
             renderer: renderer
         });
@@ -259,5 +261,10 @@ function loadHeatMapByPeriodId(id) {
         heatmap.add(heatMap_layer);
         mapview.map = heatmap;
         changePeriodLayerById(parseInt(id)); //需要将路由中的string型id转化为int型
+        // 添加图例
+        mapview.ui.empty("bottom-left");
+        mapview.ui.add(new Legend({
+            view: mapview
+        }), "bottom-left");
     });
 }
