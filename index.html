@@ -43,12 +43,17 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">普通地图
+                                <a href="#">OSM地图
                                     <input v-model="base_layer" type="radio" class="pull-right" value="osm">
                                 </a>
                             </li>
                             <li>
-                                <a href="#">地形图
+                                <a href="#">ESRI街道图
+                                    <input v-model="base_layer" type="radio" class="pull-right" value="streets">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">ESRI高程图
                                     <input v-model="base_layer" type="radio" class="pull-right" value="terrain">
                                 </a>
                             </li>
@@ -103,38 +108,34 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <router-link to="/poet/23" href="#">王维</router-link>
+                                <router-link to="/road/23" href="#">王维</router-link>
                             </li>
                             <li>
-                                <router-link to="/poet/1" href="#">白居易</router-link>
+                                <router-link to="/road/1" href="#">孟浩然</router-link>
                             </li>
                         </ul>
                     </li>
                     <!--热力图下拉框-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            热力图
+                            统计分析
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <router-link to="/heatMap/1" href="#">初唐</router-link>
+                                <router-link to="/statistic/1" href="#">初唐</router-link>
                             </li>
                             <li>
-                                <router-link to="/heatMap/2" href="#">盛唐</router-link>
+                                <router-link to="/statistic/2" href="#">盛唐</router-link>
                             </li>
                             <li>
-                                <router-link to="/heatMap/3" href="#">中唐</router-link>
+                                <router-link to="/statistic/3" href="#">中唐</router-link>
                             </li>
                             <li>
-                                <router-link to="/heatMap/4" href="#">晚唐</router-link>
+                                <router-link to="/statistic/4" href="#">晚唐</router-link>
                             </li>
                             <li>
-                                <router-link to="/heatMap/0" href="#">全部时期</router-link>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <router-link to="/" href="#">退出热力图模式</router-link>
+                                <router-link to="/statistic/0" href="#">全部时期</router-link>
                             </li>
                         </ul>
                     </li>
@@ -191,7 +192,7 @@
         <!--地图、侧边栏-->
         <div class="row row-map">
             <div id="map" class="col-md-9"></div>
-            <div id="side" class="col-md-3">
+            <div id="side" class="col-md-3" style="background: url(image/1.png)">
                 <router-view></router-view>
             </div>
         </div>
@@ -404,16 +405,8 @@
         </div>
     </div>
 </script>
-<!--热力图模板-->
-<script type="text/x-template" id="heatMap-template">
-    <div>
-        <div class="panel panel-title-custom">
-            <h5 class="kaiti-25 text-center">欢迎来到诗意中国</h5>
-        </div>
-    </div>
-</script>
-<!--统计图表模板-->
-<script type="text/x-template" id="chart-template">
+<!--统计分析模板-->
+<script type="text/x-template" id="statistic-template">
     <div>
         <div class="panel panel-title-custom">
             <h5 class="kaiti-25 text-center">统计分析</h5>
@@ -423,6 +416,14 @@
         </div>
         <div class="panel">
             <div id="wordcloud" style="width: 100%; height:250px;"></div>
+        </div>
+    </div>
+</script>
+<!--轨迹模板-->
+<script type="text/x-template" id="road-template">
+    <div>
+        <div class="panel panel-title-custom">
+            <h5 class="kaiti-25 text-center">欢迎来到诗意中国</h5>
         </div>
     </div>
 </script>

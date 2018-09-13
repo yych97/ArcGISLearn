@@ -128,14 +128,15 @@ const list = {
     }
 };
 // 定义热力图(路由)组件。
-const heatMap = {
-    template: '#heatMap-template',
+const statistic = {
+    template: '#statistic-template',
     data: function () {
         return {};
     },
     methods: {},
-    created: function(){
+    mounted: function(){
         loadHeatMapByPeriodId(this.$route.params.id);
+        loadChart(); // 此处一定要等渲染完成后再执行，否则找不到dom id
     },
     watch: {
         '$route': function () {
@@ -143,15 +144,17 @@ const heatMap = {
         }
     }
 };
-// 定义图表展示(路由)组件。
-const charts = {
-    template: '#chart-template',
+// 定义诗人轨迹组件。
+const road = {
+    template: '#home-template',
     data: function () {
         return {};
     },
     methods: {},
-    mounted: function(){ // 此处一定要等渲染完成后再执行，否则找不到dom id
-        loadChart();
+    created: function(){
+        loadMap();
+        changePeriodLayerById(0);
+        layerChange();
     }
 };
 
@@ -163,13 +166,13 @@ const router = new VueRouter({
         {path: '/poem/:id', name: 'poem', component: poem},
         {path: '/place/:id', name: 'place', component: place},
         {path: '/list/:type', name: 'list', component: list},
-        {path: '/heatMap/:id', name: 'heatMap', component: heatMap},
-        {path: '/charts/:id', name: 'charts', component: charts},
+        {path: '/statistic/:id', name: 'statistic', component: statistic},
+        {path: '/road/:id', name: 'road', component: road},
         {path: '/', name: 'home', component: home}
     ]
 });
 
-vm = new Vue({
+var vm = new Vue({
     el: '#app',
     data: initData,
     computed: {

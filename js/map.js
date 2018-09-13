@@ -1,14 +1,15 @@
 //声明全局变量
-var map;
-var place_layer;
 var mapview;
+var map; //普通图
+var heatmap; //热力图
+var roadmap; //诗人轨迹图
+var place_layer;
 var highlight_layer;
 var period_ImageLayer;
-var heatmap;
 var heatMap_layer;
-var vm;
+var road_layer;
 
-initData = {
+var initData = {
     visitor: {
         logined: false,
         username: '',
@@ -17,7 +18,7 @@ initData = {
     base_layer: 'terrain',
     period_layer: 'Empty'
 };
-mapViewConfig = {
+var mapViewConfig = {
     map: map,
     container: "map",
     center: [110, 40],
