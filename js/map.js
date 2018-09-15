@@ -10,10 +10,6 @@ var heatMap_layer;
 var road_layer;
 
 var initData = {
-    visitor: {
-        logined: false,
-        username: '',
-    },
     point_layer: '诗人',
     base_layer: 'terrain',
     period_layer: 'Empty'
@@ -47,6 +43,9 @@ function initMapApp() {
             basemap: initData.base_layer
         });
         heatmap = new Map({
+            basemap: "streets"
+        });
+        roadmap = new Map({
             basemap: "streets"
         });
         mapview = new MapView({
@@ -100,7 +99,10 @@ function loadMap() {
         Map,
         MapView
     ) {
-        mapview.map = map;
+        if(mapview != null){
+            mapview.map = map;
+            mapview.ui.empty("bottom-left");
+        }
     });
 }
 
@@ -120,20 +122,22 @@ function zoomByPlaceId(id) {
         FeatureLayer,
         Query
     ) {
-        //服务器端查询
-        let query = place_layer.createQuery();
-        query.where = "placeId = " + id;
-        place_layer.queryFeatures(query).then(function (result) {
-            let feature = result.features[0];
-            mapViewConfig.center = [feature.geometry.x, feature.geometry.y];
-            mapViewConfig.zoom = 10;
-            //loadMapView();
-            mapview.goTo({
-                center: mapViewConfig.center,
-                zoom: mapViewConfig.zoom
-            });
-            highlight (feature.geometry.x, feature.geometry.y);
-        })
+        if(place_layer != null){
+            //服务器端查询
+            let query = place_layer.createQuery();
+            query.where = "placeId = " + id;
+            place_layer.queryFeatures(query).then(function (result) {
+                let feature = result.features[0];
+                mapViewConfig.center = [feature.geometry.x, feature.geometry.y];
+                mapViewConfig.zoom = 10;
+                //loadMapView();
+                mapview.goTo({
+                    center: mapViewConfig.center,
+                    zoom: mapViewConfig.zoom
+                });
+                highlight (feature.geometry.x, feature.geometry.y);
+            })
+        }
     });
 }
 
@@ -159,8 +163,8 @@ function highlight (x, y) {
             type: "simple-marker",
             style: "square",
             color: [0, 0, 0, 0],
-            size: 28,
-            yoffset: 14,
+            size: 16,
+            yoffset: 0,
             outline: {
                 color: "blue",
                 width: "3px"
@@ -200,24 +204,24 @@ function layerChange() {
         MapImageLayer,
         FeatureLayer
     ) {
-        map.basemap = initData.base_layer;
-        map.remove(period_ImageLayer);
-        map.remove(place_layer);
-        map.remove(highlight_layer);
-        if (initData.period_layer != "Empty") {
-            //添加时期图层
-            period_ImageLayer = new MapImageLayer({
-                url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/" + initData.period_layer + "/MapServer"
-            });
-            map.add(period_ImageLayer);
+        if(map != null){
+            map.basemap = initData.base_layer;
+            map.remove(period_ImageLayer);
+            map.remove(place_layer);
+            map.remove(highlight_layer);
+            if (initData.period_layer != "Empty") {
+                //添加时期图层
+                period_ImageLayer = new MapImageLayer({
+                    url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/" + initData.period_layer + "/MapServer"
+                });
+                map.add(period_ImageLayer);
+            }
+            //map.add(period_ImageLayer);
+            map.add(place_layer);
+            map.add(highlight_layer);
         }
-        //map.add(period_ImageLayer);
-        map.add(place_layer);
-        map.add(highlight_layer);
     });
 }
-
-//加载热力图层
 
 //加载热力图
 function loadHeatMapByPeriodId(id) {

@@ -140,50 +140,6 @@
                         </ul>
                     </li>
                 </ul>
-                <!--登录导航栏元素-->
-                <ul class="nav navbar-nav navbar-right" v-if="visitor.logined == false">
-                    <li>
-                        <a data-toggle="modal" data-target="#login" href="">登录</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" v-else>
-                    <li>
-                        <a href="">Welcome {{visitor.username}}!</a>
-                    </li>
-                </ul>
-                <!-- 登录模态窗 -->
-                <div id="login" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <button class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-title">
-                                <h1 class="text-center">登录</h1>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-group" action="">
-                                    <div class="form-group">
-                                        <label for="">用户名</label>
-                                        <input class="form-control" type="text" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">密码</label>
-                                        <input class="form-control" type="password" placeholder="">
-                                    </div>
-                                    <div class="text-right">
-                                        <button class="btn btn-primary" type="submit">登录</button>
-                                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
-                                    </div>
-                                    <a href="" data-toggle="modal" data-dismiss="modal"
-                                       data-target="#register">还没有账号？点我注册</a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>
@@ -229,11 +185,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><span class="kaiti-17">出生年份：</span>公元{{poet.birth}}年
+                        <td><span class="kaiti-17">出生年份：</span>{{ poet.birth == '不详' ? poet.birth : '公元' + poet.birth + '年' }}
                         </td>
                     </tr>
                     <tr>
-                        <td><span class="kaiti-17">逝世年份：</span>公元{{poet.death}}年
+                        <td><span class="kaiti-17">逝世年份：</span>{{ poet.death == '不详' ? poet.death : '公元' + poet.death + '年' }}
                         </td>
                     </tr>
                     <tr>
@@ -348,15 +304,6 @@
                     <tr>
                         <td><span class="kaiti-17">纬度：</span>{{place.latitude}}</td>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="pull-right">
-                                <button class="btn-warning" @click="getInfoByPlaceId()">
-                                    <span class="kaiti-17">加入收藏</span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -423,7 +370,7 @@
 <script type="text/x-template" id="road-template">
     <div>
         <div class="panel panel-title-custom">
-            <h5 class="kaiti-25 text-center">欢迎来到诗意中国</h5>
+            <h5 class="kaiti-25 text-center">诗人轨迹</h5>
         </div>
     </div>
 </script>
