@@ -127,7 +127,7 @@ const list = {
         '$route': 'getContent'
     }
 };
-// 定义热力图(路由)组件。
+// 定义统计分析(路由)组件。
 const statistic = {
     template: '#statistic-template',
     data: function () {
@@ -136,7 +136,8 @@ const statistic = {
     methods: {},
     mounted: function(){
         loadHeatMapByPeriodId(this.$route.params.id);
-        loadChart(); // 此处一定要等渲染完成后再执行，否则找不到dom id
+        loadChart(this.$route.params.id); // 此处一定要等渲染完成后再执行，否则找不到dom id
+        loadWordCloudByPeriodId(this.$route.params.id);
     },
     watch: {
         '$route': function () {

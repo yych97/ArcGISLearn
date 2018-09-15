@@ -22,3 +22,27 @@ function getListByType(type){
     });
     return data_r;
 }
+//统计图表后台数据接口
+function getChartData(){
+    var data_r;
+    $.ajax({
+        url: "http://106.12.27.212/dotnetcore/api/statistic",
+        async: false,
+        success: function(data, status){
+            data_r = JSON.parse(data);
+        }
+    });
+    return data_r;
+}
+//词云图后台数据接口
+function getWordCloudDataByPeriodId(id){
+    var data_r;
+    $.ajax({
+        url: "http://106.12.27.212/dotnetcore/api/statistic" + id,
+        async: false,
+        success: function(data, status){
+            data_r = JSON.parse(data);
+        }
+    });
+    return data_r;
+}
