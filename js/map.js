@@ -257,7 +257,7 @@ function loadHeatMapByPeriodId(id) {
             minPixelIntensity: 0
         };
         heatMap_layer = new CSVLayer({
-            url: "http://localhost:5000/api/heatmap/" + id,
+            url: "http://106.12.27.212/dotnetcore/api/heatmap/" + id,
             title: "唐诗三百首分布热力图",
             opacity: 0.65,
             renderer: renderer

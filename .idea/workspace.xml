@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5633a093-da8b-4bd5-b3bc-8f00b8a2565e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/js/api/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/api/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/vue-map.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/vue-map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/map.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -90,24 +89,25 @@
     <session id="-1093418898">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.18" value="3" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.21" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="159" />
-          <entry key="js" value="523" />
+          <entry key="js" value="549" />
           <entry key="txt" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="159" />
-          <entry key="JavaScript" value="523" />
+          <entry key="JavaScript" value="549" />
           <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
@@ -118,11 +118,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="223" column="1" selection-start-line="223" selection-start-column="1" selection-end-line="223" selection-end-column="1" />
+            <state relative-caret-position="367">
+              <caret line="259" column="69" lean-forward="true" selection-start-line="259" selection-start-column="69" selection-end-line="259" selection-end-column="69" />
               <folding>
                 <element signature="n#!!block;n#initMapApp#0" />
                 <element signature="n#!!block;n#loadMap#0" />
@@ -130,7 +130,6 @@
                 <element signature="n#!!block;n#highlight#0" />
                 <element signature="n#!!block;n#changePeriodLayerById#0" />
                 <element signature="n#!!block;n#layerChange#0" />
-                <element signature="n#!!block;n#loadHeatMapByPeriodId#0" />
               </folding>
             </state>
           </provider>
@@ -139,7 +138,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1034">
+            <state relative-caret-position="609">
               <caret line="141" column="21" selection-start-line="141" selection-start-column="21" selection-end-line="141" selection-end-column="21" />
               <folding>
                 <element signature="n#li#0;n#ul#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -163,7 +162,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/vue-map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="-953">
               <caret line="138" column="17" lean-forward="true" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
               <folding>
                 <element signature="e#44#890#0" />
@@ -171,16 +170,15 @@
                 <element signature="e#1783#2515#0" />
                 <element signature="e#2546#2755#0" />
                 <element signature="e#2786#3321#0" />
-                <element signature="e#3748#3957#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
+            <state relative-caret-position="456">
               <caret line="57" column="6" lean-forward="true" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
             </state>
           </provider>
@@ -189,8 +187,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/api/test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="40" column="66" lean-forward="true" selection-start-line="40" selection-start-column="66" selection-end-line="40" selection-end-column="66" />
+            <state relative-caret-position="880">
+              <caret line="40" column="60" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -216,10 +214,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/js/map.js" />
-        <option value="$PROJECT_DIR$/js/api/test.js" />
         <option value="$PROJECT_DIR$/js/vue-map.js" />
         <option value="$PROJECT_DIR$/js/chart.js" />
+        <option value="$PROJECT_DIR$/js/api/test.js" />
+        <option value="$PROJECT_DIR$/js/map.js" />
       </list>
     </option>
   </component>
@@ -306,6 +304,7 @@
       <workItem from="1536853500530" duration="77000" />
       <workItem from="1536984886220" duration="8290000" />
       <workItem from="1537014525611" duration="2194000" />
+      <workItem from="1537017491376" duration="59000" />
     </task>
     <task id="LOCAL-00001" summary="修改url">
       <created>1536285128623</created>
@@ -325,7 +324,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52293000" />
+    <option name="totallyTimeSpent" value="52352000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -368,25 +367,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/js/echarts-wordcloud.min.js" />
     <entry file="file://$PROJECT_DIR$/lib/js/echarts.min.js" />
-    <entry file="file://$PROJECT_DIR$/js/map.js">
+    <entry file="file://$PROJECT_DIR$/js/api/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="223" column="1" selection-start-line="223" selection-start-column="1" selection-end-line="223" selection-end-column="1" />
+        <state relative-caret-position="880">
+          <caret line="40" column="60" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/chart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="57" column="6" lean-forward="true" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/vue-map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-953">
+          <caret line="138" column="17" lean-forward="true" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
           <folding>
-            <element signature="n#!!block;n#initMapApp#0" />
-            <element signature="n#!!block;n#loadMap#0" />
-            <element signature="n#!!block;n#zoomByPlaceId#0" />
-            <element signature="n#!!block;n#highlight#0" />
-            <element signature="n#!!block;n#changePeriodLayerById#0" />
-            <element signature="n#!!block;n#layerChange#0" />
-            <element signature="n#!!block;n#loadHeatMapByPeriodId#0" />
+            <element signature="e#44#890#0" />
+            <element signature="e#921#1751#0" />
+            <element signature="e#1783#2515#0" />
+            <element signature="e#2546#2755#0" />
+            <element signature="e#2786#3321#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
+        <state relative-caret-position="609">
           <caret line="141" column="21" selection-start-line="141" selection-start-column="21" selection-end-line="141" selection-end-column="21" />
           <folding>
             <element signature="n#li#0;n#ul#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -406,32 +417,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/api/test.js">
+    <entry file="file://$PROJECT_DIR$/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="40" column="66" lean-forward="true" selection-start-line="40" selection-start-column="66" selection-end-line="40" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/vue-map.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="138" column="17" lean-forward="true" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
+        <state relative-caret-position="367">
+          <caret line="259" column="69" lean-forward="true" selection-start-line="259" selection-start-column="69" selection-end-line="259" selection-end-column="69" />
           <folding>
-            <element signature="e#44#890#0" />
-            <element signature="e#921#1751#0" />
-            <element signature="e#1783#2515#0" />
-            <element signature="e#2546#2755#0" />
-            <element signature="e#2786#3321#0" />
-            <element signature="e#3748#3957#0" />
+            <element signature="n#!!block;n#initMapApp#0" />
+            <element signature="n#!!block;n#loadMap#0" />
+            <element signature="n#!!block;n#zoomByPlaceId#0" />
+            <element signature="n#!!block;n#highlight#0" />
+            <element signature="n#!!block;n#changePeriodLayerById#0" />
+            <element signature="n#!!block;n#layerChange#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/chart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="57" column="6" lean-forward="true" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
         </state>
       </provider>
     </entry>

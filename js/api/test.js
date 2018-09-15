@@ -38,7 +38,7 @@ function getChartData(){
 function getWordCloudDataByPeriodId(id){
     var data_r;
     $.ajax({
-        url: "http://106.12.27.212/dotnetcore/api/statistic" + id,
+        url: "http://106.12.27.212/dotnetcore/api/statistic/" + id,
         async: false,
         success: function(data, status){
             data_r = JSON.parse(data);
