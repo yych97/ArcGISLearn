@@ -154,9 +154,9 @@ const road = {
     },
     methods: {},
     created: function(){
-        loadMap();
-        changePeriodLayerById(0);
-        layerChange();
+        loadRoadMap()
+        changePeriodLayerById(2);
+        layerChange(); // 执行图层变化
     }
 };
 

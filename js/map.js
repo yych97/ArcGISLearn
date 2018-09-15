@@ -273,3 +273,26 @@ function loadHeatMapByPeriodId(id) {
         }), "bottom-left");
     });
 }
+
+//加载诗人轨迹图函数
+function loadRoadMap() {
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+        "dojo/domReady!"
+    ], function (
+        Map,
+        MapView,
+        FeatureLayer
+    ) {
+        if(mapview != null){
+            mapview.map = roadmap;
+            road_layer = new FeatureLayer({
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/wangwei/MapServer/"
+            })
+            roadmap.add(road_layer);
+            mapview.ui.empty("bottom-left");
+        }
+    });
+}
