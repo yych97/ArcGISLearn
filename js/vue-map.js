@@ -142,6 +142,7 @@ const statistic = {
     watch: {
         '$route': function () {
             loadHeatMapByPeriodId(this.$route.params.id);
+            loadWordCloudByPeriodId(this.$route.params.id);
         }
     }
 };
