@@ -275,7 +275,7 @@ function loadHeatMapByPeriodId(id) {
 }
 
 //加载诗人轨迹图函数
-function loadRoadMap() {
+function loadRoadMapById(id) {
     require([
         "esri/Map",
         "esri/views/MapView",
@@ -300,13 +300,13 @@ function loadRoadMap() {
             roadmap.add(period_ImageLayer);
             road_layer = new FeatureLayer({
                 title: "路线",
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/menghaoran/MapServer/2"
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/2"
             })
             roadmap.add(road_layer);
             road_layer = new FeatureLayer({
                 title: "城市",
                 legendEnabled: false,
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/menghaoran/MapServer/1"
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/1"
             })
             roadmap.add(road_layer);
             mapview.goTo(road_layer.fullExtent);

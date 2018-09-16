@@ -154,9 +154,16 @@ const road = {
     },
     methods: {},
     created: function(){
-        loadRoadMap()
+        loadRoadMapById(this.$route.params.id)
         changePeriodLayerById(2);
         layerChange(); // 执行图层变化
+    },
+    watch: {
+        '$route': function () {
+            loadRoadMapById(this.$route.params.id);
+            changePeriodLayerById(2);
+            layerChange(); // 执行图层变化
+        }
     }
 };
 
