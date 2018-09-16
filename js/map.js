@@ -129,7 +129,7 @@ function zoomByPlaceId(id) {
             place_layer.queryFeatures(query).then(function (result) {
                 let feature = result.features[0];
                 mapViewConfig.center = [feature.geometry.x, feature.geometry.y];
-                mapViewConfig.zoom = 10;
+                mapViewConfig.zoom = 9;
                 //loadMapView();
                 mapview.goTo({
                     center: mapViewConfig.center,
@@ -280,19 +280,40 @@ function loadRoadMap() {
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
+        "esri/layers/MapImageLayer",
+        "esri/widgets/Legend",
         "dojo/domReady!"
     ], function (
         Map,
         MapView,
-        FeatureLayer
+        FeatureLayer,
+        MapImageLayer,
+        Legend
     ) {
         if(mapview != null){
             mapview.map = roadmap;
+            period_ImageLayer = new MapImageLayer({
+                title: "盛唐行省图",
+                legendEnabled: false,
+                url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/Shengtang/MapServer"
+            });
+            roadmap.add(period_ImageLayer);
             road_layer = new FeatureLayer({
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/wangwei/MapServer/"
+                title: "路线",
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/menghaoran/MapServer/2"
             })
             roadmap.add(road_layer);
+            road_layer = new FeatureLayer({
+                title: "城市",
+                legendEnabled: false,
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/menghaoran/MapServer/1"
+            })
+            roadmap.add(road_layer);
+            mapview.goTo(road_layer.fullExtent);
             mapview.ui.empty("bottom-left");
+            mapview.ui.add(new Legend({
+                view: mapview
+            }), "bottom-left");
         }
     });
 }
