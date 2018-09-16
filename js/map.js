@@ -57,7 +57,7 @@ function initMapApp() {
         // 初始化各图层
         period_ImageLayer = new MapImageLayer();
         highlight_layer = new GraphicsLayer();
-        var pTemplate = {
+        let pTemplate = {
             title: "{place_anci}",
             content: [{
                 type: "fields",
@@ -292,6 +292,7 @@ function loadRoadMapById(id) {
     ) {
         if(mapview != null){
             mapview.map = roadmap;
+            roadmap.removeAll();
             period_ImageLayer = new MapImageLayer({
                 title: "盛唐行省图",
                 legendEnabled: false,
@@ -303,13 +304,27 @@ function loadRoadMapById(id) {
                 url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/2"
             })
             roadmap.add(road_layer);
+            let pTemplate = {
+                title: "{nowname}",
+                content: [{
+                    type: "fields",
+                    fieldInfos: [{
+                        fieldName: "year_"
+                    }, {
+                        fieldName: "age"
+                    }, {
+                        fieldName: "remark"
+                    }]
+                }]
+            };
             road_layer = new FeatureLayer({
                 title: "城市",
                 legendEnabled: false,
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/1"
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/1",
+                popupTemplate: pTemplate
             })
             roadmap.add(road_layer);
-            mapview.goTo(road_layer.fullExtent);
+            //mapview.goTo(road_layer.fullExtent);
             mapview.ui.empty("bottom-left");
             mapview.ui.add(new Legend({
                 view: mapview
