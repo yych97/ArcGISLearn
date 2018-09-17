@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5633a093-da8b-4bd5-b3bc-8f00b8a2565e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="5633a093-da8b-4bd5-b3bc-8f00b8a2565e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,7 +15,7 @@
     <session id="-1168238839">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.0" value="4" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="5" />
@@ -235,7 +233,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="9" />
     <option name="y" value="-27" />
     <option name="width" value="1890" />
@@ -323,7 +321,7 @@
       <workItem from="1537058994055" duration="4155000" />
       <workItem from="1537076430981" duration="1448000" />
       <workItem from="1537088657803" duration="660000" />
-      <workItem from="1537147898620" duration="3957000" />
+      <workItem from="1537147898620" duration="4098000" />
     </task>
     <task id="LOCAL-00001" summary="修改url">
       <created>1536285128623</created>
@@ -343,7 +341,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65373000" />
+    <option name="totallyTimeSpent" value="65514000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
