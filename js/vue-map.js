@@ -148,7 +148,7 @@ const statistic = {
 };
 // 定义诗人轨迹组件。
 const road = {
-    template: '#home-template',
+    template: '#road-template',
     data: function () {
         return {};
     },

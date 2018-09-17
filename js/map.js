@@ -299,23 +299,21 @@ function loadRoadMapById(id) {
                 url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/Shengtang/MapServer"
             });
             roadmap.add(period_ImageLayer);
+            let pTemplate = {
+                title: "{StartEndCity}",
+                content: "<p>{心情}</p>"
+            };
             road_layer = new FeatureLayer({
-                title: "路线",
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/2"
+                title: "诗人轨迹",
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/2",
+                popupTemplate: pTemplate
             })
             roadmap.add(road_layer);
-            let pTemplate = {
+            pTemplate = {
                 title: "{nowname}",
-                content: [{
-                    type: "fields",
-                    fieldInfos: [{
-                        fieldName: "year_"
-                    }, {
-                        fieldName: "age"
-                    }, {
-                        fieldName: "remark"
-                    }]
-                }]
+                content: "<p>年份：{year_}</p>" +
+                    "<p>年龄：{age}</p>" +
+                    "<p>事件：{remark}</p>"
             };
             road_layer = new FeatureLayer({
                 title: "城市",
