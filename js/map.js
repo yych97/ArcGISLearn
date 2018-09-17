@@ -40,7 +40,8 @@ function initMapApp() {
     ) {
         // 初始化map与mapview
         map = new Map({
-            basemap: initData.base_layer
+            basemap: initData.base_layer,
+            showLabels : true
         });
         heatmap = new Map({
             basemap: "streets"
@@ -74,7 +75,21 @@ function initMapApp() {
         });
         place_layer = new FeatureLayer({
             url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
-            popupTemplate: pTemplate
+            popupTemplate: pTemplate,
+            labelingInfo: [{
+                labelExpressionInfo: {
+                    expression: "$feature.place_anci"
+                },
+                labelPlacement: "center-right",
+                symbol: {
+                    type: "text",  // autocasts as new TextSymbol()
+                    font: {
+                        size: 20,
+                        family: "Noto Sans"
+                    },
+                    color: "#2b2b2b"
+                }
+            }]
         });
         map.add(place_layer);
         //添加图例框
@@ -299,6 +314,7 @@ function loadRoadMapById(id) {
                 url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/Shengtang/MapServer"
             });
             roadmap.add(period_ImageLayer);
+            //加路线
             let pTemplate = {
                 title: "{StartEndCity}",
                 content: "<p>{mood}</p>"
@@ -309,6 +325,7 @@ function loadRoadMapById(id) {
                 popupTemplate: pTemplate
             })
             roadmap.add(road_layer);
+            //加城市点
             pTemplate = {
                 title: "{cityname}",
                 content: "<p>年份：{year_}</p>" +
@@ -322,7 +339,12 @@ function loadRoadMapById(id) {
                 popupTemplate: pTemplate
             })
             roadmap.add(road_layer);
-            //mapview.goTo(road_layer.fullExtent);
+            //加标注
+            road_layer = new MapImageLayer({
+                legendEnabled: false,
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer"
+            })
+            roadmap.add(road_layer);
             mapview.ui.empty("bottom-left");
             mapview.ui.add(new Legend({
                 view: mapview
