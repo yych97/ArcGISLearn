@@ -318,7 +318,7 @@ function loadRoadMapById(id) {
             road_layer = new FeatureLayer({
                 title: "城市",
                 legendEnabled: false,
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/1",
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/0",
                 popupTemplate: pTemplate
             })
             roadmap.add(road_layer);
