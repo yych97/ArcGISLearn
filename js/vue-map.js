@@ -100,6 +100,12 @@ const home = {
         loadMap();
         changePeriodLayerById(0);
         layerChange();
+    },
+    watch: {
+        '$route': function () {
+            changePeriodLayerById(0);
+            layerChange();
+        }
     }
 };
 // 定义列表(路由) 组件。

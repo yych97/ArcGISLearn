@@ -301,7 +301,7 @@ function loadRoadMapById(id) {
             roadmap.add(period_ImageLayer);
             let pTemplate = {
                 title: "{StartEndCity}",
-                content: "<p>{心情}</p>"
+                content: "<p>{mood}</p>"
             };
             road_layer = new FeatureLayer({
                 title: "诗人轨迹",
@@ -310,7 +310,7 @@ function loadRoadMapById(id) {
             })
             roadmap.add(road_layer);
             pTemplate = {
-                title: "{nowname}",
+                title: "{cityname}",
                 content: "<p>年份：{year_}</p>" +
                     "<p>年龄：{age}</p>" +
                     "<p>事件：{remark}</p>"
