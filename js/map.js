@@ -6,6 +6,7 @@ var roadmap; //诗人轨迹图
 var place_layer;
 var highlight_layer;
 var period_ImageLayer;
+var place_ImageLayer;
 var heatMap_layer;
 var road_layer;
 
@@ -75,23 +76,13 @@ function initMapApp() {
         });
         place_layer = new FeatureLayer({
             url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
-            popupTemplate: pTemplate,
-            labelingInfo: [{
-                labelExpressionInfo: {
-                    expression: "$feature.place_anci"
-                },
-                labelPlacement: "center-right",
-                symbol: {
-                    type: "text",  // autocasts as new TextSymbol()
-                    font: {
-                        size: 20,
-                        family: "Noto Sans"
-                    },
-                    color: "#2b2b2b"
-                }
-            }]
+            popupTemplate: pTemplate
+        });
+        place_ImageLayer = new MapImageLayer({
+            url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer"
         });
         map.add(place_layer);
+        map.add(place_ImageLayer);
         //添加图例框
         const legend = new Legend({
             view: mapview,
@@ -223,6 +214,7 @@ function layerChange() {
             map.basemap = initData.base_layer;
             map.remove(period_ImageLayer);
             map.remove(place_layer);
+            map.remove(place_ImageLayer);
             map.remove(highlight_layer);
             if (initData.period_layer != "Empty") {
                 //添加时期图层
@@ -233,6 +225,7 @@ function layerChange() {
             }
             //map.add(period_ImageLayer);
             map.add(place_layer);
+            map.add(place_ImageLayer);
             map.add(highlight_layer);
         }
     });
