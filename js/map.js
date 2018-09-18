@@ -62,17 +62,14 @@ function initMapApp() {
         let pTemplate = {
             title: "{place_anci}",
             content: [{
-                type: "fields",
-                fieldInfos: [{
-                    fieldName: "place_now"
-                }, {
-                    fieldName: "place_anci"
-                }]
+                type: "text",
+                text: "<p>现地名：{place_now}</p>" +
+                    "<p>古地名：{place_anci}</p>"
             }]
         };
         pTemplate.content.push({ // 在content中添加内容，content是一个数组所以要用push
             type: "text",
-            text: "<a href=\"#/place/{placeId}\">点击查看详情</a>" // 实现点击temple中content内容的跳转
+            text: "<a href='#/place/{placeId}' style='float: right'>点击查看详情</a>" // 实现点击temple中content内容的跳转
         });
         place_layer = new FeatureLayer({
             url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
@@ -338,6 +335,10 @@ function loadRoadMapById(id) {
                 url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer"
             })
             roadmap.add(road_layer);
+            mapview.goTo({
+                center: [110, 35],
+                zoom: 5
+            });
             mapview.ui.empty("bottom-left");
             mapview.ui.add(new Legend({
                 view: mapview

@@ -84,6 +84,8 @@ const place = {
     },
     watch: {
         '$route': function() {
+            changePeriodLayerById(0);
+            layerChange();
             this.getContent();
             zoomByPlaceId(this.$data.place.placeId);
         }
@@ -157,6 +159,17 @@ const road = {
     template: '#road-template',
     data: function () {
         return {};
+    },
+    computed: {
+        poetName: function () {
+            let name;
+            if(this.$route.params.id == 'wangwei'){
+                name = '王维'
+            }else{
+                name = '孟浩然'
+            }
+            return name;
+        }
     },
     methods: {},
     created: function(){
