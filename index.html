@@ -52,11 +52,6 @@
                                     <input v-model="base_layer" type="radio" class="pull-right" value="streets">
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">ESRI高程图
-                                    <input v-model="base_layer" type="radio" class="pull-right" value="terrain">
-                                </a>
-                            </li>
                         </ul>
                     </li>
                     <!--地点下拉框-->
@@ -374,10 +369,13 @@
 <script type="text/x-template" id="statistic-template">
     <div>
         <div class="panel panel-title-custom">
-            <h5 class="kaiti-25 text-center">统计分析</h5>
+            <h5 class="kaiti-25 text-center">诗人数量时期分布</h5>
         </div>
         <div class="panel">
             <div id="chart" style="width: 100%; height:250px;"></div>
+        </div>
+        <div class="panel panel-title-custom">
+            <h5 class="kaiti-25 text-center">诗人创作数量词云图</h5>
         </div>
         <div class="panel">
             <div id="wordcloud" style="width: 100%; height:300px;"></div>

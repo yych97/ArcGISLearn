@@ -5,9 +5,9 @@ function loadChart() {
     // 指定图表的配置项和数据
     var chartDdata = getChartData();
     var hisOption = {
-        title: {
-            text: '时期分布'
-        },
+        // title: {
+        //     text: '时期分布'
+        // },
         tooltip: {},
         xAxis: {
             data: ["初唐", "盛唐", "中唐", "晚唐"]

@@ -86,6 +86,7 @@ const place = {
         '$route': function() {
             changePeriodLayerById(0);
             layerChange();
+            loadMap();
             this.getContent();
             zoomByPlaceId(this.$data.place.placeId);
         }

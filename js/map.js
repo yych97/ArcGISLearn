@@ -12,7 +12,7 @@ var road_layer;
 
 var initData = {
     point_layer: '诗人',
-    base_layer: 'terrain',
+    base_layer: 'streets',
     period_layer: 'Empty'
 };
 var mapViewConfig = {
