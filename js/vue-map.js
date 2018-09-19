@@ -108,6 +108,7 @@ const home = {
         '$route': function () {
             changePeriodLayerById(0);
             layerChange();
+            loadMap();
         }
     }
 };
