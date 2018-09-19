@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5633a093-da8b-4bd5-b3bc-8f00b8a2565e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/vue-map.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/vue-map.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -130,22 +128,22 @@
     <session id="1354314568">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.0" value="4" />
-          <entry key="project.open.time.5" value="3" />
+          <entry key="project.open.time.5" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="159" />
+          <entry key="html" value="192" />
           <entry key="js" value="488" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="159" />
+          <entry key="HTML" value="192" />
           <entry key="JavaScript" value="488" />
         </counts>
       </usages-collector>
@@ -176,8 +174,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="53" column="33" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="33" />
+            <state relative-caret-position="255">
+              <caret line="355" column="94" selection-start-line="355" selection-start-column="94" selection-end-line="355" selection-end-column="94" />
               <folding>
                 <element signature="n#li#1;n#ul#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#li#2;n#ul#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -187,7 +185,6 @@
                 <element signature="n#script#0;n#html#0;n#!!top" />
                 <element signature="n#script#1;n#html#0;n#!!top" />
                 <element signature="n#script#2;n#html#0;n#!!top" />
-                <element signature="n#script#3;n#html#0;n#!!top" />
                 <element signature="n#script#4;n#html#0;n#!!top" />
                 <element signature="n#script#5;n#html#0;n#!!top" />
                 <element signature="n#script#6;n#html#0;n#!!top" />
@@ -199,7 +196,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/vue-map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
+            <state relative-caret-position="608">
               <caret line="88" column="22" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
               <folding>
                 <element signature="e#44#890#0" />
@@ -213,7 +210,7 @@
         <entry file="file://$PROJECT_DIR$/js/chart.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="209">
-              <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+              <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -266,7 +263,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="9" />
     <option name="y" value="-27" />
     <option name="width" value="1890" />
@@ -362,7 +359,8 @@
       <workItem from="1537233488848" duration="664000" />
       <workItem from="1537247443269" duration="1360000" />
       <workItem from="1537275405618" duration="3166000" />
-      <workItem from="1537338724980" duration="2379000" />
+      <workItem from="1537338724980" duration="2857000" />
+      <workItem from="1537344952449" duration="174000" />
     </task>
     <task id="LOCAL-00001" summary="修改url">
       <created>1536285128623</created>
@@ -382,11 +380,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81525000" />
+    <option name="totallyTimeSpent" value="82177000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991119" visible="true" weight="0.23351866" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -426,19 +423,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/js/echarts-wordcloud.min.js" />
     <entry file="file://$PROJECT_DIR$/lib/js/echarts.min.js" />
-    <entry file="file://$PROJECT_DIR$/js/api/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="40" column="60" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/map.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/vue-map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state relative-caret-position="608">
           <caret line="88" column="22" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
           <folding>
             <element signature="e#44#890#0" />
@@ -450,9 +437,19 @@
     <entry file="file://$PROJECT_DIR$/js/chart.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/api/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="40" column="60" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/map.css">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -471,8 +468,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="53" column="33" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="33" />
+        <state relative-caret-position="255">
+          <caret line="355" column="94" selection-start-line="355" selection-start-column="94" selection-end-line="355" selection-end-column="94" />
           <folding>
             <element signature="n#li#1;n#ul#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#li#2;n#ul#0;n#div#1;n#div#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -482,7 +479,6 @@
             <element signature="n#script#0;n#html#0;n#!!top" />
             <element signature="n#script#1;n#html#0;n#!!top" />
             <element signature="n#script#2;n#html#0;n#!!top" />
-            <element signature="n#script#3;n#html#0;n#!!top" />
             <element signature="n#script#4;n#html#0;n#!!top" />
             <element signature="n#script#5;n#html#0;n#!!top" />
             <element signature="n#script#6;n#html#0;n#!!top" />
