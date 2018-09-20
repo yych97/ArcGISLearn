@@ -9,6 +9,7 @@ var period_ImageLayer;
 var place_ImageLayer;
 var heatMap_layer;
 var road_layer;
+var serviceUrl = 'http://106.12.27.212/dotnetcore/';
 
 var initData = {
     point_layer: '诗人',
@@ -262,7 +263,7 @@ function loadHeatMapByPeriodId(id) {
             minPixelIntensity: 0
         };
         heatMap_layer = new CSVLayer({
-            url: "http://106.12.27.212/dotnetcore/api/heatmap/" + id,
+            url: serviceUrl + "api/heatmap/" + id,
             title: "唐诗三百首分布热力图",
             opacity: 0.65,
             renderer: renderer
@@ -287,13 +288,15 @@ function loadRoadMapById(id) {
         "esri/layers/FeatureLayer",
         "esri/layers/MapImageLayer",
         "esri/widgets/Legend",
+        "esri/tasks/support/Query",
         "dojo/domReady!"
     ], function (
         Map,
         MapView,
         FeatureLayer,
         MapImageLayer,
-        Legend
+        Legend,
+        Query
     ) {
         if(mapview != null){
             mapview.map = roadmap;
@@ -304,19 +307,8 @@ function loadRoadMapById(id) {
                 url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/Shengtang/MapServer"
             });
             roadmap.add(period_ImageLayer);
-            //加路线
-            let pTemplate = {
-                title: "{StartEndCity}",
-                content: "<p>{mood}</p>"
-            };
-            road_layer = new FeatureLayer({
-                title: "诗人轨迹",
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/2",
-                popupTemplate: pTemplate
-            })
-            roadmap.add(road_layer);
             //加城市点
-            pTemplate = {
+            let pTemplate = {
                 title: "{cityname}",
                 content: "<p>年份：{year_}</p>" +
                     "<p>年龄：{age}</p>" +
@@ -335,6 +327,18 @@ function loadRoadMapById(id) {
                 url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer"
             })
             roadmap.add(road_layer);
+            //加路线
+            pTemplate = {
+                title: "{StartEndCity}",
+                content: "<p>{mood}</p>"
+            };
+            road_layer = new FeatureLayer({
+                title: "诗人轨迹",
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/2",
+                popupTemplate: pTemplate
+            })
+            roadmap.add(road_layer);
+            //缩放至
             mapview.goTo({
                 center: [110, 35],
                 zoom: 5
@@ -343,6 +347,54 @@ function loadRoadMapById(id) {
             mapview.ui.add(new Legend({
                 view: mapview
             }), "bottom-left");
+
+            //查询添加列表
+            const listNode = document.getElementById("road_graphics");
+            var query = road_layer.createQuery();
+            query.where = "id <> 0";
+            road_layer.queryFeatures(query).then(function(results) {
+                graphics = results.features;
+                const fragment = document.createDocumentFragment();
+
+                graphics.forEach(function(result, index) {
+                    const attributes = result.attributes;
+                    //const name = index + ": " + attributes.StartEndCity; //带序号
+                    const name = attributes.StartEndCity;
+
+                    // Create a list zip codes in NY
+                    const ul = document.createElement("ul");
+                    ul.classList.add('list-group-item');
+                    const li = document.createElement("li");
+                    li.tabIndex = 0;
+                    li.classList.add('item');
+                    li.setAttribute("data-result-id", index);
+                    li.textContent = name;
+                    ul.appendChild(li);
+                    fragment.appendChild(ul);
+                });
+                // Empty the current list
+                listNode.innerHTML = "";
+                listNode.appendChild(fragment);
+            }).catch(function(error) {
+                console.error("query failed: ", error);
+            });
+            //添加点击跳转事件
+            listNode.addEventListener("click", onListClickHandler);
+
+            function onListClickHandler(event) {
+                const target = event.target;
+                const resultId = target.getAttribute("data-result-id");
+                const result = resultId && graphics && graphics[parseInt(resultId, 10)];
+                if (result) {
+                    mapview.goTo(result.geometry.extent.expand(2))
+                        .then(function() {
+                            mapview.popup.open({
+                                features: [result],
+                                location: result.geometry.centroid
+                            });
+                        });
+                }
+            }
         }
     });
 }

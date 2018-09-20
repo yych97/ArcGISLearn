@@ -2,7 +2,7 @@
 function getContentByNameAndId(name, id){
     var data_r;
     $.ajax({
-        url: "http://106.12.27.212/dotnetcore/api/" + name + "/" + id,
+        url: serviceUrl + "api/" + name + "/" + id,
         async: false,
         success: function(data, status){
             data_r = JSON.parse(data);
@@ -14,7 +14,7 @@ function getContentByNameAndId(name, id){
 function getListByType(type){
     var data_r;
     $.ajax({
-        url: "http://106.12.27.212/dotnetcore/api/" + type,
+        url: serviceUrl + "api/" + type,
         async: false,
         success: function(data, status){
             data_r = JSON.parse(data);
@@ -26,7 +26,7 @@ function getListByType(type){
 function getChartData(){
     var data_r;
     $.ajax({
-        url: "http://106.12.27.212/dotnetcore/api/statistic",
+        url: serviceUrl + "api/statistic",
         async: false,
         success: function(data, status){
             data_r = JSON.parse(data);
@@ -38,7 +38,7 @@ function getChartData(){
 function getWordCloudDataByPeriodId(id){
     var data_r;
     $.ajax({
-        url: "http://106.12.27.212/dotnetcore/api/statistic/" + id,
+        url: serviceUrl + "api/statistic/" + id,
         async: false,
         success: function(data, status){
             data_r = JSON.parse(data);
