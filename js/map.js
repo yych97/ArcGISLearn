@@ -322,12 +322,6 @@ function loadRoadMapById(id) {
                 popupTemplate: pTemplate
             })
             roadmap.add(road_layer);
-            //加标注
-            road_layer = new MapImageLayer({
-                legendEnabled: false,
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer"
-            })
-            roadmap.add(road_layer);
             //加路线
             pTemplate = {
                 title: "{StartEndCity}",
@@ -400,6 +394,12 @@ function loadRoadMapById(id) {
                 }
             }
             listNode.addEventListener("click", onListClickHandler);
+            //加标注
+            road_layer = new MapImageLayer({
+                legendEnabled: false,
+                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer"
+            })
+            roadmap.add(road_layer);
         }
     });
 }
