@@ -135,6 +135,7 @@ function zoomByPlaceId(id) {
                 mapViewConfig.center = [feature.geometry.x, feature.geometry.y];
                 mapViewConfig.zoom = 9;
                 //loadMapView();
+                mapview.popup.close();
                 mapview.goTo({
                     center: mapViewConfig.center,
                     zoom: mapViewConfig.zoom
@@ -170,7 +171,7 @@ function highlight (x, y) {
             size: 16,
             yoffset: 0,
             outline: {
-                color: "blue",
+                color: [86, 254, 254, 1],
                 width: "3px"
             }
         };
@@ -330,7 +331,8 @@ function loadRoadMapById(id) {
             //加路线
             pTemplate = {
                 title: "{StartEndCity}",
-                content: "<p>{mood}</p>"
+                content: "<p>{mood}</p><" +
+                    "<p>公元{RoadTime}</p>"
             };
             road_layer = new FeatureLayer({
                 title: "诗人轨迹",
@@ -359,16 +361,20 @@ function loadRoadMapById(id) {
                 graphics.forEach(function(result, index) {
                     const attributes = result.attributes;
                     //const name = index + ": " + attributes.StartEndCity; //带序号
-                    const name = attributes.StartEndCity;
+                    const name = "公元" + attributes.RoadTime + " " + attributes.StartEndCity;
 
                     // Create a list zip codes in NY
                     const ul = document.createElement("ul");
                     ul.classList.add('list-group-item');
+                    ul.classList.add('transparent');
                     const li = document.createElement("li");
                     li.tabIndex = 0;
                     li.classList.add('item');
-                    li.setAttribute("data-result-id", index);
-                    li.textContent = name;
+                    const a = document.createElement("a");
+                    a.setAttribute("data-result-id", index);
+                    a.setAttribute('href', '#');
+                    a.textContent = name;
+                    li.appendChild(a);
                     ul.appendChild(li);
                     fragment.appendChild(ul);
                 });
@@ -379,22 +385,21 @@ function loadRoadMapById(id) {
                 console.error("query failed: ", error);
             });
             //添加点击跳转事件
-            listNode.addEventListener("click", onListClickHandler);
-
             function onListClickHandler(event) {
                 const target = event.target;
                 const resultId = target.getAttribute("data-result-id");
                 const result = resultId && graphics && graphics[parseInt(resultId, 10)];
                 if (result) {
-                    mapview.goTo(result.geometry.extent.expand(2))
-                        .then(function() {
-                            mapview.popup.open({
-                                features: [result],
-                                location: result.geometry.centroid
-                            });
-                        });
+                    mapview.goTo(result.geometry.extent.expand(2));
+                    // .then(function() {
+                    //     mapview.popup.open({
+                    //         features: [result],
+                    //         location: result.geometry.centroid
+                    //     });
+                    // });
                 }
             }
+            listNode.addEventListener("click", onListClickHandler);
         }
     });
 }

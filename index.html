@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">ESRI街道图
+                                <a href="#">ESRI地图
                                     <input v-model="base_layer" type="radio" class="pull-right" value="streets">
                                 </a>
                             </li>
@@ -233,8 +233,8 @@
                 </div>
                 <!-- #works-tab -->
                 <div id="works-tab" class="tab-pane fade">
-                    <ul class="list-group-item" v-for="work in poet.works.items">
-                        <li class="item">
+                    <ul class="list-group-item transparent" v-for="work in poet.works.items">
+                        <li class="item" style="margin-left: 20px">
                             <router-link v-bind:to="{name:poet.works.type, params:{id:work.id}}" href="#">{{work.name}}
                             </router-link>
                         </li>
@@ -269,7 +269,7 @@
         <div class="panel">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#Introduction-tab">简介</a></li>
-                <li><a data-toggle="tab" href="#translation-tab">翻译</a></li>
+                <li><a data-toggle="tab" href="#translation-tab">译文</a></li>
             </ul>
             <div class="tab-content">
                 <div id="Introduction-tab" class="tab-pane fade in active">
@@ -318,10 +318,10 @@
                         <td><span class="kaiti-17">现地名：</span>{{place.new_name}}</td>
                     </tr>
                     <tr>
-                        <td><span class="kaiti-17">经度：</span>东经{{place.longitude}}度</td>
+                        <td><span class="kaiti-17">经度：</span>东经 {{place.longitude}}度</td>
                     </tr>
                     <tr>
-                        <td><span class="kaiti-17">纬度：</span>北纬{{place.latitude}}度</td>
+                        <td><span class="kaiti-17">纬度：</span>北纬 {{place.latitude}}度</td>
                     </tr>
                     </tbody>
                 </table>
@@ -335,16 +335,16 @@
             </ul>
             <div class="tab-content">
                 <div id="poet-tab" class="tab-pane fade in active">
-                    <ul class="list-group-item" v-for="poet in place.poets.items">
-                        <li class="item">
+                    <ul class="list-group-item transparent" v-for="poet in place.poets.items">
+                        <li class="item" style="margin-left: 20px">
                             <router-link v-bind:to="{name:place.poets.type, params:{id:poet.id}}" href="#">{{poet.name}}
                             </router-link>
                         </li>
                     </ul>
                 </div>
                 <div id="poem-tab" class="tab-pane fade">
-                    <ul class="list-group-item" v-for="poem in place.poems.items">
-                        <li class="item">
+                    <ul class="list-group-item transparent" v-for="poem in place.poems.items">
+                        <li class="item" style="margin-left: 20px">
                             <router-link v-bind:to="{name:place.poems.type, params:{id:poem.id}}" href="#">{{poem.name}}
                             </router-link>
                         </li>
@@ -363,8 +363,8 @@
         </div>
         <!--列表主体-->
         <div class="panel">
-            <ul class="list-group-item" v-for="item in list.items">
-                <li class="item">
+            <ul class="list-group-item transparent" v-for="item in list.items">
+                <li class="item" style="margin-left: 20px">
                     <router-link v-bind:to="{name:list.type, params:{id:item.id}}" href="#">{{item.name}}</router-link>
                 </li>
             </ul>
@@ -393,8 +393,6 @@
             </div>
         </div>
         <div class="panel" id="road_graphics">
-            <ul class="list-group-item">
-            </ul>
         </div>
     </div>
 </script>
