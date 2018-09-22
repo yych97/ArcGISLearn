@@ -4,7 +4,8 @@ var map; //普通图
 var heatmap; //热力图
 var roadmap; //诗人轨迹图
 var place_layer;
-var highlight_layer;
+var highlight_layer1;
+var highlight_layer2;
 var period_ImageLayer;
 var place_ImageLayer;
 var heatMap_layer;
@@ -59,7 +60,8 @@ function initMapApp() {
         });
         // 初始化各图层
         period_ImageLayer = new MapImageLayer();
-        highlight_layer = new GraphicsLayer();
+        highlight_layer1 = new GraphicsLayer();
+        highlight_layer2 = new GraphicsLayer();
         let pTemplate = {
             title: "{place_anci}",
             content: [{
@@ -179,8 +181,8 @@ function highlight (x, y) {
             geometry: point,
             symbol: markerSymbol
         });
-        highlight_layer.removeAll();
-        highlight_layer.add(pointGraphic);
+        highlight_layer1.removeAll();
+        highlight_layer1.add(pointGraphic);
     });
 }
 
@@ -214,7 +216,7 @@ function layerChange() {
             map.remove(period_ImageLayer);
             map.remove(place_layer);
             map.remove(place_ImageLayer);
-            map.remove(highlight_layer);
+            map.remove(highlight_layer1);
             if (initData.period_layer != "Empty") {
                 //添加时期图层
                 period_ImageLayer = new MapImageLayer({
@@ -225,7 +227,7 @@ function layerChange() {
             //map.add(period_ImageLayer);
             map.add(place_layer);
             map.add(place_ImageLayer);
-            map.add(highlight_layer);
+            map.add(highlight_layer1);
         }
     });
 }
@@ -288,6 +290,7 @@ function loadRoadMapById(id) {
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/layers/MapImageLayer",
+        "esri/Graphic",
         "esri/widgets/Legend",
         "esri/tasks/support/Query",
         "dojo/domReady!"
@@ -296,6 +299,7 @@ function loadRoadMapById(id) {
         MapView,
         FeatureLayer,
         MapImageLayer,
+        Graphic,
         Legend,
         Query
     ) {
@@ -325,7 +329,7 @@ function loadRoadMapById(id) {
             //加路线
             pTemplate = {
                 title: "{StartEndCity}",
-                content: "<p>{mood}</p><" +
+                content: "<p>{mood}</p>" +
                     "<p>公元{RoadTime}</p>"
             };
             road_layer = new FeatureLayer({
@@ -366,7 +370,7 @@ function loadRoadMapById(id) {
                     li.classList.add('item');
                     const a = document.createElement("a");
                     a.setAttribute("data-result-id", index);
-                    a.setAttribute('href', '#');
+                    //a.setAttribute('href', '#');
                     a.textContent = name;
                     li.appendChild(a);
                     ul.appendChild(li);
@@ -384,13 +388,25 @@ function loadRoadMapById(id) {
                 const resultId = target.getAttribute("data-result-id");
                 const result = resultId && graphics && graphics[parseInt(resultId, 10)];
                 if (result) {
-                    mapview.goTo(result.geometry.extent.expand(2));
-                    // .then(function() {
-                    //     mapview.popup.open({
-                    //         features: [result],
-                    //         location: result.geometry.centroid
-                    //     });
-                    // });
+                    let lineSymbol = {
+                        type: "simple-line",
+                        color: [86, 254, 254],
+                        width: 4
+                    };
+                    let lineGraphic = new Graphic({
+                        geometry: result.geometry,
+                        symbol: lineSymbol
+                    });
+                    highlight_layer2.removeAll();
+                    highlight_layer2.add(lineGraphic);
+                    mapview.goTo(result.geometry.extent.expand(2))
+                    .then(function() {
+                        mapview.popup.dockEnabled = true;
+                        mapview.popup.open({
+                            features: [result],
+                            location: result.geometry.centroid
+                        });
+                    });
                 }
             }
             listNode.addEventListener("click", onListClickHandler);
@@ -400,6 +416,7 @@ function loadRoadMapById(id) {
                 url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer"
             })
             roadmap.add(road_layer);
+            roadmap.add(highlight_layer2);
         }
     });
 }
