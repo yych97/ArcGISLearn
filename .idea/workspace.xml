@@ -140,14 +140,14 @@
         <counts>
           <entry key="css" value="7" />
           <entry key="html" value="406" />
-          <entry key="js" value="1250" />
+          <entry key="js" value="1256" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="7" />
           <entry key="HTML" value="406" />
-          <entry key="JavaScript" value="1250" />
+          <entry key="JavaScript" value="1256" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -228,11 +228,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="256" column="32" selection-start-line="256" selection-start-column="32" selection-end-line="256" selection-end-column="32" />
+            <state relative-caret-position="226">
+              <caret line="270" column="10" lean-forward="true" selection-start-line="270" selection-start-column="10" selection-end-line="270" selection-end-column="10" />
               <folding>
                 <element signature="n#!!block;n#initMapApp#0" />
-                <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
                 <element signature="n#!!block;n#loadMap#0" />
                 <element signature="n#!!block;n#zoomByPlaceId#0" />
                 <element signature="n#!!block;n#highlight#0" />
@@ -386,7 +385,7 @@
       <workItem from="1537623414765" duration="2649000" />
       <workItem from="1537632019351" duration="186000" />
       <workItem from="1537632614781" duration="2097000" />
-      <workItem from="1537670135581" duration="1897000" />
+      <workItem from="1537670135581" duration="2018000" />
     </task>
     <task id="LOCAL-00001" summary="修改url">
       <created>1536285128623</created>
@@ -406,7 +405,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103104000" />
+    <option name="totallyTimeSpent" value="103225000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -509,11 +508,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="256" column="32" selection-start-line="256" selection-start-column="32" selection-end-line="256" selection-end-column="32" />
+        <state relative-caret-position="226">
+          <caret line="270" column="10" lean-forward="true" selection-start-line="270" selection-start-column="10" selection-end-line="270" selection-end-column="10" />
           <folding>
             <element signature="n#!!block;n#initMapApp#0" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
             <element signature="n#!!block;n#loadMap#0" />
             <element signature="n#!!block;n#zoomByPlaceId#0" />
             <element signature="n#!!block;n#highlight#0" />

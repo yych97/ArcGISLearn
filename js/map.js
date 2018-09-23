@@ -269,14 +269,13 @@ function loadHeatMapByPeriodId(id) {
             maxPixelIntensity: 140,
             minPixelIntensity: 0
         };
+        heatmap.removeAll();
         heatMap_layer = new CSVLayer({
             url: serviceUrl + "api/heatmap/" + id,
             title: "唐诗三百首分布热力图",
             opacity: 0.65,
             renderer: renderer
         });
-        heatmap.removeAll();
-        heatmap.add(heatMap_layer);
         if(id!=0){
             let period;
             switch (id) {
@@ -291,6 +290,7 @@ function loadHeatMapByPeriodId(id) {
             })
             heatmap.add(boundary_layer);
         }
+        heatmap.add(heatMap_layer);
         mapview.map = heatmap;
         changePeriodLayerById(parseInt(id)); //需要将路由中的string型id转化为int型
         // 添加图例
