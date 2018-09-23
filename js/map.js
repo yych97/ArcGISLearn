@@ -253,7 +253,8 @@ function loadHeatMapByPeriodId(id) {
             type: "heatmap",
             blurRadius: 15,
             colorStops: [
-                { color: "rgba(254, 251, 179, 0)", ratio: 0 },//透明
+                //{ color: "rgba(254, 251, 179, 0)", ratio: 0 },//透明
+                { color: "rgba(0, 0, 0, 0)", ratio: 0 },//透明
                 { color: "#fefbb3", ratio: 0.1 },
                 { color: "#fef182", ratio: 0.2 },
                 { color: "#fee670", ratio: 0.3 },
