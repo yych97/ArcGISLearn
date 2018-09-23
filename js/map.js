@@ -8,6 +8,7 @@ var highlight_layer1;
 var highlight_layer2;
 var period_ImageLayer;
 var place_ImageLayer;
+var boundary_layer;
 var heatMap_layer;
 var road_layer;
 var serviceUrl = 'http://106.12.27.212/dotnetcore/';
@@ -238,12 +239,14 @@ function loadHeatMapByPeriodId(id) {
         "esri/Map",
         "esri/views/MapView",
         "esri/layers/CSVLayer",
+        "esri/layers/MapImageLayer",
         "esri/widgets/Legend",
         "dojo/domReady!"
     ], function (
         Map,
         MapView,
         CSVLayer,
+        MapImageLayer,
         Legend
     ) {
         const renderer = {
@@ -273,6 +276,20 @@ function loadHeatMapByPeriodId(id) {
         });
         heatmap.removeAll();
         heatmap.add(heatMap_layer);
+        if(id!=0){
+            let period;
+            switch (id) {
+                case "1": period = "Chutang";break;
+                case "2": period = "Shengtang";break;
+                case "3": period = "Zhongtang";break;
+                case "4": period = "Wantang";break;
+            }
+            boundary_layer = new MapImageLayer({
+                legendEnabled: false,
+                url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/" + period + "Boundary/MapServer/"
+            })
+            heatmap.add(boundary_layer);
+        }
         mapview.map = heatmap;
         changePeriodLayerById(parseInt(id)); //需要将路由中的string型id转化为int型
         // 添加图例
