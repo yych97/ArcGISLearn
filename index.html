@@ -35,10 +35,10 @@
             <div>
                 <!--下拉列表框导航栏元素-->
                 <ul class="nav navbar-nav">
-                    <!--图层控制下拉框-->
+                    <!--底图切换下拉框-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle kaiti-17" data-toggle="dropdown">
-                            图层控制
+                            切换底图
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
@@ -127,10 +127,26 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
+                                <p style="margin-left: 10px">著名作者</p>
+                            </li>
+                            <li>
                                 <router-link to="/road/wangwei" href="#">王维</router-link>
                             </li>
                             <li>
                                 <router-link to="/road/menghaoran" href="#">孟浩然</router-link>
+                            </li>
+                            <li>
+                                <a href="#">李白</a>
+                            </li>
+                            <li>
+                                <a href="#">白居易</a>
+                            </li>
+                            <li>
+                                <a href="#">杜甫</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <router-link to="/list/poet" href="#" style="padding-left: 10px">全部作者...</router-link>
                             </li>
                         </ul>
                     </li>
@@ -159,6 +175,7 @@
                         </ul>
                     </li>
                 </ul>
+                <a v-on:click="$router.go(-1)" style="float: right; margin-top: 15px; margin-right: 5px" href="#">返回</a>
             </div>
         </div>
     </nav>
@@ -401,6 +418,16 @@
     <div>
         <div class="panel panel-title-custom">
             <h5 class="kaiti-25 text-center">欢迎来到诗意中国</h5>
+        </div>
+        <div class="panel">
+            <div>
+                <p class="kaiti-17" style="padding: 10px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;古诗词是我国文学宝库中的瑰宝，也是我们民族的文化精髓。
+                    我们将GIS技术与古典诗词相结合，契合目前人们依赖电子设备的阅读习惯，
+                    为诗词中描述的地点进行地理编码，选择以WebGIS提供从时间和空间多维度分析诗词与诗人的新视角，
+                    增强大众从地理学角度对诗词时空分布的宏观认识，更好地推广中国经典文化，创新传统诗词教育模式。
+                </p>
+            </div>
         </div>
     </div>
 </script>

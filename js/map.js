@@ -149,7 +149,7 @@ function zoomByPlaceId(id) {
     });
 }
 
-//高亮方法
+//高亮点方法
 function highlight (x, y) {
     require([
         "esri/Map",
@@ -213,7 +213,7 @@ function layerChange() {
         FeatureLayer
     ) {
         if(map != null){
-            map.basemap = initData.base_layer;
+            mapview.map.basemap = initData.base_layer;
             map.remove(period_ImageLayer);
             map.remove(place_layer);
             map.remove(place_ImageLayer);
