@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5633a093-da8b-4bd5-b3bc-8f00b8a2565e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/map.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -142,14 +141,14 @@
         <counts>
           <entry key="css" value="7" />
           <entry key="html" value="575" />
-          <entry key="js" value="1506" />
+          <entry key="js" value="1535" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="7" />
           <entry key="HTML" value="575" />
-          <entry key="JavaScript" value="1506" />
+          <entry key="JavaScript" value="1535" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -231,15 +230,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="361" column="36" lean-forward="true" selection-start-line="361" selection-start-column="36" selection-end-line="361" selection-end-column="36" />
+            <state relative-caret-position="413">
+              <caret line="270" column="47" lean-forward="true" selection-start-line="270" selection-start-column="47" selection-end-line="270" selection-end-column="47" />
               <folding>
+                <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
                 <element signature="n#!!block;n#loadMap#0" />
                 <element signature="n#!!block;n#zoomByPlaceId#0" />
                 <element signature="n#!!block;n#highlight#0" />
                 <element signature="n#!!block;n#changePeriodLayerById#0" />
                 <element signature="n#!!block;n#layerChange#0" />
-                <element signature="n#!!block;n#loadHeatMapByPeriodId#0" />
+                <element signature="n#!!block;n#loadRoadMapById#0" />
+                <element signature="n#style#0;n#h5#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#2;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -391,7 +393,7 @@
       <workItem from="1537670135581" duration="2615000" />
       <workItem from="1537700370128" duration="4039000" />
       <workItem from="1537754805579" duration="3279000" />
-      <workItem from="1537779883911" duration="1952000" />
+      <workItem from="1537779883911" duration="2687000" />
     </task>
     <task id="LOCAL-00001" summary="修改url">
       <created>1536285128623</created>
@@ -411,7 +413,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113092000" />
+    <option name="totallyTimeSpent" value="113827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -515,15 +517,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="361" column="36" lean-forward="true" selection-start-line="361" selection-start-column="36" selection-end-line="361" selection-end-column="36" />
+        <state relative-caret-position="413">
+          <caret line="270" column="47" lean-forward="true" selection-start-line="270" selection-start-column="47" selection-end-line="270" selection-end-column="47" />
           <folding>
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
             <element signature="n#!!block;n#loadMap#0" />
             <element signature="n#!!block;n#zoomByPlaceId#0" />
             <element signature="n#!!block;n#highlight#0" />
             <element signature="n#!!block;n#changePeriodLayerById#0" />
             <element signature="n#!!block;n#layerChange#0" />
-            <element signature="n#!!block;n#loadHeatMapByPeriodId#0" />
+            <element signature="n#!!block;n#loadRoadMapById#0" />
+            <element signature="n#style#0;n#h5#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#2;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

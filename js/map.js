@@ -255,18 +255,20 @@ function loadHeatMapByPeriodId(id) {
             type: "heatmap",
             blurRadius: 15,
             colorStops: [
-                //{ color: "rgba(254, 251, 179, 0)", ratio: 0 },//透明
-                { color: "rgba(0, 0, 0, 0)", ratio: 0 },//透明
-                { color: "#fefbb3", ratio: 0.1 },
-                { color: "#fef182", ratio: 0.2 },
-                { color: "#fee670", ratio: 0.3 },
-                { color: "#fed378", ratio: 0.4 },
-                { color: "#fec569", ratio: 0.5 },
-                { color: "#feb54e", ratio: 0.6 },
-                { color: "#fea534", ratio: 0.7 },
-                { color: "#fe941e", ratio: 0.8 },
-                { color: "#fe9100", ratio: 0.9 },
-                { color: "#fe7b00", ratio: 1 }
+                { color: "rgba(254, 251, 179, 0)", ratio: 0 },//透明
+                //{ color: "rgba(0, 0, 0, 0)", ratio: 0 },//透明
+                //{ color: "#fefbb3", ratio: 0.1 },
+                //{ color: "#fef182", ratio: 0.1 },
+                { color: "#fee670", ratio: 0.1 },
+                { color: "#fed378", ratio: 0.2 },
+                { color: "#fec569", ratio: 0.3 },
+                { color: "#feb54e", ratio: 0.4 },
+                { color: "#fea534", ratio: 0.5 },
+                { color: "#fe941e", ratio: 0.6 },
+                { color: "#fe9100", ratio: 0.7 },
+                { color: "#fe7b00", ratio: 0.8 },
+                { color: "#fe6a00", ratio: 0.9 },
+                { color: "#fe5900", ratio: 1 },
             ],
             maxPixelIntensity: 140,
             minPixelIntensity: 0
