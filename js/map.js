@@ -350,7 +350,9 @@ function loadRoadMapById(id) {
             pTemplate = {
                 title: "{StartEndCity}",
                 content: "<p>{mood}</p>" +
-                    "<p>公元{RoadTime}</p>"
+                    "<p>公元{time_}</p>" +
+                    "<h5 style='text-align: center'>{thetitle}</h5>" +
+                    "<p style='text-align: center; line-height: 22px; font-size: 14px'>{thepoem}</p>"
             };
             road_layer = new FeatureLayer({
                 title: "诗人轨迹",
@@ -379,7 +381,7 @@ function loadRoadMapById(id) {
                 graphics.forEach(function(result, index) {
                     const attributes = result.attributes;
                     //const name = index + ": " + attributes.StartEndCity; //带序号
-                    const name = "公元" + attributes.RoadTime + " " + attributes.StartEndCity;
+                    const name = "公元" + attributes.time_ + " " + attributes.StartEndCity;
 
                     // Create a list zip codes in NY
                     const ul = document.createElement("ul");
