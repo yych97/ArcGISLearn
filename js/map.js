@@ -11,7 +11,9 @@ var place_ImageLayer;
 var boundary_layer;
 var heatMap_layer;
 var road_layer;
-var serviceUrl = 'http://106.12.27.212/dotnetcore/';
+//const mapSeviceUrl = 'https://trail.arcgisonline.cn/server/rest/'
+const mapSeviceUrl = 'http://192.168.222.128:8080/arcgis/rest/'
+const serviceUrl = 'http://106.12.27.212/dotnetcore/';
 
 var initData = {
     point_layer: '诗人',
@@ -76,11 +78,11 @@ function initMapApp() {
             text: "<a href='#/place/{placeId}' style='float: right'>点击查看详情</a>" // 实现点击temple中content内容的跳转
         });
         place_layer = new FeatureLayer({
-            url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer/0",
+            url: mapSeviceUrl + "services/SYZG/places/MapServer/0",
             popupTemplate: pTemplate
         });
         place_ImageLayer = new MapImageLayer({
-            url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/places/MapServer"
+            url: mapSeviceUrl + "services/SYZG/places/MapServer"
         });
         map.add(place_layer);
         map.add(place_ImageLayer);
@@ -221,7 +223,7 @@ function layerChange() {
             if (initData.period_layer != "Empty") {
                 //添加时期图层
                 period_ImageLayer = new MapImageLayer({
-                    url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/" + initData.period_layer + "/MapServer"
+                    url: mapSeviceUrl + "services/SYZG/" + initData.period_layer + "/MapServer"
                 });
                 map.add(period_ImageLayer);
             }
@@ -286,7 +288,7 @@ function loadHeatMapByPeriodId(id) {
             }
             boundary_layer = new MapImageLayer({
                 legendEnabled: false,
-                url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/" + period + "Boundary/MapServer/"
+                url: mapSeviceUrl + "services/SYZG/" + period + "Boundary/MapServer/"
             })
             heatmap.add(boundary_layer);
         }
@@ -327,7 +329,7 @@ function loadRoadMapById(id) {
             period_ImageLayer = new MapImageLayer({
                 title: "盛唐行省图",
                 legendEnabled: false,
-                url: "http://trail.arcgisonline.cn/server/rest/services/SYZG/Shengtang/MapServer"
+                url: mapSeviceUrl + "services/SYZG/Shengtang/MapServer"
             });
             roadmap.add(period_ImageLayer);
             //加城市点
@@ -340,7 +342,7 @@ function loadRoadMapById(id) {
             road_layer = new FeatureLayer({
                 title: "城市",
                 legendEnabled: false,
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/0",
+                url: mapSeviceUrl + "services/SYZG/" + id + "/MapServer/0",
                 popupTemplate: pTemplate
             })
             roadmap.add(road_layer);
@@ -352,7 +354,7 @@ function loadRoadMapById(id) {
             };
             road_layer = new FeatureLayer({
                 title: "诗人轨迹",
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer/2",
+                url: mapSeviceUrl + "services/SYZG/" + id + "/MapServer/2",
                 popupTemplate: pTemplate
             })
             roadmap.add(road_layer);
@@ -431,7 +433,7 @@ function loadRoadMapById(id) {
             //加标注
             road_layer = new MapImageLayer({
                 legendEnabled: false,
-                url: "https://trail.arcgisonline.cn/server/rest/services/SYZG/" + id + "/MapServer"
+                url: mapSeviceUrl + "services/SYZG/" + id + "/MapServer"
             })
             roadmap.add(road_layer);
             roadmap.add(highlight_layer2);
